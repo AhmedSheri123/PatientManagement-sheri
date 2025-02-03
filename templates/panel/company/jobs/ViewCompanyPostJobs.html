@@ -1,0 +1,210 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load jobs_tags %}
+{% load messenger_tags %}
+
+{% block sheri %}
+<style>
+    h1, h2 {font-size: 1.6em;}
+
+    .title-box {
+        display: flex;
+        justify-content: space-between;
+        padding-left:10px;
+        align-items: flex-start;
+    }
+    .main {
+        background-color: unset;
+        /* max-width: 992px; */
+        padding: 10px;
+        margin: auto;
+    }
+
+        .job-card-main {
+        background-color: #ffffff;
+        padding: 20px 10px;
+        margin-bottom: 30px;
+    }
+
+    .job-desc{
+        text-align: justify;
+    }
+
+    .job-details {
+        display: flex;
+    }
+
+    .job-details i{
+        /* margin-right: 10px; */
+    }
+
+    .job-details p{
+        margin-left: 6px;
+        margin-top: 6px;
+        padding: 5px 10px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: .8em;
+    }
+
+    .apply-btn {
+        margin: auto;
+        display: block;
+        max-width: 200px;
+    }
+
+    .applyer-profile {
+        display: flex; align-items: center;
+    }
+    .applyer-profile p{
+        margin: 0;
+        margin-right: 10px;
+    }
+
+    .custom-text-truncate {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
+
+<div style="margin-top: 20px;"></div>
+<div class="container" dir="rtl">
+    <form action="" method="post" style="display: table; margin: auto;">
+    
+    {% csrf_token %}
+    <p>الرئيسية/ الوظائف / اضافة</p>
+
+    
+    <h1 class="mt-3">إضافة وظيفة او مشروع</h1>
+
+
+    <div class="main mt-5">
+        <div class="job-card-main">
+            <h2>عنوان الوظيفة</h2>
+            <hr>
+            {{form.job_title}}
+            <h2 class="mt-3">وصف الوظيفة</h2>
+            <hr>
+            {{form.about_job}}
+
+            <h2 class="mt-3">الخبرات</h2>
+            <hr>
+            {{form.experiences}}
+
+        </div>
+
+        <div class="job-card-main">
+            <h2>المتطلبات</h2>
+            <hr>
+            <div class="job-details" style="flex-wrap: wrap;">
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-patch-check-fill"></i></span>
+                    {{form.cert_type}}
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-gender-ambiguous"></i></span>
+                        {{form.gender}}
+                </div>
+
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">من</span>
+                    {{form.age_from}}
+                <span class="input-group-text">الى</span>
+                    {{form.age_to}}
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="job-card-main">
+            <h2>بيانات الوظيفة</h2>
+            <hr>
+            <div class="job-details">
+
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-coin"></i></span>
+                        {{form.monthly_salary}}
+                    </div>
+
+            </div>
+        </div>
+
+        <!-- <a href="" class="btn btn-primary apply-btn">
+            <i class="bi bi-joystick"></i>
+            تقديم
+            </a> -->
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon1">حفظ</button>
+                <select name="state" class="form-control" id="">
+                    {% for city in JobStateChoices %}
+                    <option {%if city.0 == state %} selected {% endif %} value="{{city.0}}">{{city.1}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+
+        </form>
+
+
+        <div class="job-card-main mt-5">
+            <h2>المتقدمين</h2>
+            <hr>
+            {% for applier in appliers %}
+            {% get_user_profile_img applier.user.id as profile_image %}
+            <div>
+                <div class="title-box">
+                    <div class="applyer-profile">
+                        {% if profile_image.1 == 0 %}
+                        <img src="{{profile_image.0}}" alt="" style="width: 50px; border-radius: 100%;">
+                        {% else %}
+                        <img src="{% static '/img/default-profile-img-2.png' %}" alt="" style="width: 50px; border-radius: 100%;">
+                        {% endif %}
+                    <p>{{applier.user.username}}</p>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column;">
+                        <a href="{% url 'Profile' applier.user.id %}" class="btn btn-warning mt-1">
+                                
+                            <i class="bi bi-eye-fill"></i>
+                        تواصل
+                        </a>
+                        <a href="{% url 'adminDeleteAppier' applier.id %}" class="btn btn-danger mt-1">
+                                
+                            <i class="bi bi-trash-fill"></i>
+                        حذف
+                        </a>
+                    </div>
+                </div>
+                    
+                
+                <div class="job-details">
+                    <p class="btn btn-light"><i class="bi bi-stopwatch-fill"></i>
+                        {{applier.whenpublished}}
+                    </p>
+    
+                    <p class="btn btn-light">
+                        <i class="bi briefcase-fill"></i>
+                        {{applier.user.userprofile.employeeprofile.job_title}}
+                    </p>
+                </div>
+
+                <p class="custom-text-truncate">                    
+                    {{applier.msg}}
+                </p>
+
+            </div>
+            <hr>
+            {% empty %}
+                <p style="text-align: center; padding: 10px 10px;">لا يوجد متقدمين</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="mt-5"></div>
+{% endblock sheri %}

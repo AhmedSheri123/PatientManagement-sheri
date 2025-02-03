@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load messenger_tags %}
+
+{% block sheri %}
+<style>
+    .msg-main-box {
+        padding: 5px;
+        display: flex;align-items: center;
+        border-radius: 6px;
+    }
+
+    .msg-main-content:hover {
+        background-color: #f1f1f1;
+    }
+
+    .msg-main-content {
+        text-decoration: none;
+        margin-right: 6px; width: 100%;
+        color: #464646;
+        border-radius: 6px;
+        padding: 6px;
+    }
+
+    .msg-msg-box {display: grid;grid-template-columns: auto auto; justify-content: space-between; }
+    .msg-msg-time {text-wrap: nowrap; width: 100%; margin: 0; padding-right: 10px; text-align: left;}
+
+
+    .msgs-main-box {
+        padding:20px;
+        max-height: 400px;
+        padding-left: 10px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+</style>
+
+
+
+
+
+
+
+{% if request.user.userprofile.hospital_profile.subscription.subscription.one_to_one_chat %}
+{% get_messengers request.user.id as messengers %}
+{% get_favorite_users request.user.id as favorite_users %}
+{% get_blocked_users request.user.id as blocked_users %}
+
+<div dir="rtl" class="msgs-main-box">
+
+
+    <button class="btn btn-danger mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <i class="bi bi-ban"></i>
+    </button>
+
+    <button class="btn btn-warning mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+        <i class="bi bi-star-fill"></i>
+    </button>
+
+
+    <div class="collapse" id="collapseExample">
+
+        <div class="card card-body">
+        <p class="mb-2" style="text-align: center; font-weight: bold; font-size: 18px;">قائمة الحظر</p>
+          <hr>
+
+            {% for messenger in blocked_users %}
+            {% get_user_profile_img messenger.user.id as profile_image %}
+        
+            <div class="msg-main-box block-user-{{messenger.id}}">
+            {% if profile_image.1 == 0 %}
+            <img src="{{profile_image.0}}" alt="" style="width: 50px; border-radius: 100%;">
+            {% else %}
+            <img src="{% static '/img/default-profile-img-2.png' %}" alt="" style="width: 50px; border-radius: 100%;">
+            {% endif %}
+        
+                <div  class="msg-main-content">
+                    
+                        
+                    <a href="{% url 'Profile' messenger.user.id %}" style="position: relative; text-decoration: none;">
+                        {% get_user_full_name messenger.user.id as receiver_full_name %}
+                        <h6 style="margin: 0;">{{receiver_full_name}}</h6>
+                    </a>
+        
+                    <div class="msg-msg-box">
+                        <div class="row" style="display: grid;" >
+                            <div class="text-truncate" style="width:100%;min-width: 200px;">
+
+                            </div>
+                        </div>
+                        <a onclick="deleteBlock({{messenger.id}})" style="color: #222;">
+                        <i class="bi bi-x" style="font-size: 30px; width: 100%;"></i>
+
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+      </div>
+      <div class="collapse mt-2" id="collapseExample2">
+
+        <div class="card card-body">
+            <p class="mb-2" style="text-align: center; font-weight: bold; font-size: 18px;">قائمة المفضلة</p>
+            <hr>
+            {% for messenger in favorite_users %}
+
+            {% get_user_profile_img messenger.user.id as profile_image %}
+
+        
+            <div class="msg-main-box favorite-user-{{messenger.id}}">
+            {% if profile_image.1 == 0 %}
+            <img src="{{profile_image.0}}" alt="" style="width: 50px; border-radius: 100%;">
+            {% else %}
+            <img src="{% static '/img/default-profile-img-2.png' %}" alt="" style="width: 50px; border-radius: 100%;">
+            {% endif %}
+        
+                <div  class="msg-main-content">
+                    
+        
+                    <a href="{% url 'Profile' messenger.user.id %}" style="position: relative; text-decoration: none;">
+                        {% get_user_full_name messenger.user.id as receiver_full_name %}
+                        <h6 style="margin: 0;">{{receiver_full_name}}</h6>
+
+                        </a>
+        
+                    <div class="msg-msg-box">
+                        <div class="row" style="display: grid;" >
+                            <div class="text-truncate" style="width:100%;min-width: 200px;">
+
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column-reverse; justify-content: center; align-items: center;">
+                            <p dir="rtl" class="msg-msg-time">
+
+                              </p>
+                            <a onclick="deleteFav({{messenger.id}})" style="color: #222;">
+                            <i class="bi bi-x" style="font-size: 30px; width: 100%;"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+      </div>
+
+
+
+    {% for receiver in users %}
+
+    {% get_user_profile_img receiver.id as profile_image %}
+    {% get_last_msg_by_sender_receiver request.user.id receiver.id as last_msg %}
+
+    <div class="msg-main-box">
+    {% if profile_image.1 == 0 %}
+    <img src="{{profile_image.0}}" alt="" style="width: 50px; border-radius: 100%;">
+    {% else %}
+    <img src="{% static '/img/default-profile-img-2.png' %}" alt="" style="width: 50px; border-radius: 100%;">
+    {% endif %}
+
+        <a href="{% url 'createMessager' receiver.id %}" class="msg-main-content">
+            
+
+            <div style="position: relative;">
+                {% get_user_full_name receiver.id as receiver_full_name %}
+                <h6 style="margin: 0;">{{receiver_full_name}}</h6>
+                {% get_not_readed_msg_by_sender_receiver request.user.id receiver.id as not_readed_msg %}
+                {% if not_readed_msg %}
+                    <span class="position-absolute top-0 end-0 translate-middle p-2 badge rounded-pill bg-danger">
+                        <span class="visually-hidden">New alerts</span>
+                        <span>{{not_readed_msg.count}}</span>
+                    </span>
+                {% endif %}
+            </div>
+
+            <div class="msg-msg-box">
+                <div class="row" style="display: grid;" >
+                    <div class="text-truncate" style="width:100%;min-width: 200px;">
+                        {{last_msg.msg}}
+                    </div>
+                </div>
+                  <p dir="rtl" class="msg-msg-time">
+                    {{last_msg.whenpublished}}
+                  </p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+function deleteFav(id) {
+    fetch(`/messenger/DeleteFavorite/${id}`)
+    .then((response) => {
+        if (response.status) {
+            let favObj = document.querySelectorAll(`.favorite-user-${id}`)
+            favObj.forEach(element => {
+                element.remove()
+            });
+        }
+        return response.json();
+    })
+    .then((myJson) => {
+        console.log(myJson);
+
+    });
+}
+
+
+function deleteBlock(id) {
+    fetch(`/messenger/DeleteBlockUser/${id}`)
+    .then((response) => {
+        if (response.status) {
+            let blockObj = document.querySelectorAll(`.block-user-${id}`)
+            blockObj.forEach(element => {
+                element.remove()
+            });
+        }
+        return response.json();
+    })
+    .then((myJson) => {
+        console.log(myJson);
+
+    });
+}
+    
+</script>
+{% else %}
+<p class="text-center form-text">
+    هذه الاجراء ليس ضمن مميزات الاشتراك الخاص بك يرجى ترقية الاشتراك حتى تتمكن من استخدام هذه الميزة
+</p>
+{% endif %}
+{% endblock sheri %}

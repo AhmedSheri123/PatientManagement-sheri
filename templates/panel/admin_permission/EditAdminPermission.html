@@ -1,0 +1,79 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css\employee\employeePortal.css' %}">
+{% endblock %}
+
+{% block sheri %}
+
+<div class="container" style="max-width: 600px;">
+
+    <form method='post'>
+        {% csrf_token %}
+        <div class="row g-3 mt-2">
+            {{user_form}}
+            {{userprofile_form}}
+
+
+            <div class="mb-3">
+                <label for="pwd">{% trans "Password" %}</label>
+                <input type="text" name="password" id="pwd" placeholder="{% trans "Password" %}">
+                <div id="emailHelp" class="form-text">{% trans "If you do not want to change the password, leave the password field blank." %}</div>
+            </div>
+    <button class="btn btn-primary mt-4" type="button" onclick="checkAll()">{% trans "Select all" %}</button>
+
+            {{form}}
+
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 mb-5">{% trans "Edit" %}</button>
+      </form>
+</div>
+
+
+<style>
+    .form-switch {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    .form-switch label {
+        margin-right: 7px;
+    }
+    </style>
+    
+    <script>
+        let Forminputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="datetime-local"], input[type="number"], select, textarea')
+        Forminputs.forEach(element => {
+            element.classList.add('form-control')
+        }); 
+    
+        let Formchecks = document.querySelectorAll('input[type="checkbox"]')
+        Formchecks.forEach(element => {
+            let label = document.querySelector(`label[for="${element.id}"]`)
+    
+            element.classList.add('form-check-input')
+            element.insertAdjacentHTML("beforebegin", `<div class="mb-3 col-sm-6"><div class="form-check form-switch">${label.outerHTML.replace(':','')}${element.outerHTML}</div></div>`)
+            element.remove()
+            label.remove()
+        });
+
+        let all_selected = false
+        function checkAll() {
+            let Formchecks = document.querySelectorAll('input[type="checkbox"]')
+            if (!all_selected){
+                
+                Formchecks.forEach(element => {
+                    element.checked = 'yes'
+                });
+                all_selected = true
+            } else {
+                Formchecks.forEach(element => {
+                    element.checked = ''
+                });
+                all_selected = false
+            }
+        }
+    </script>
+{% endblock %}

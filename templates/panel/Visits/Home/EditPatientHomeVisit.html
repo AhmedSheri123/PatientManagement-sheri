@@ -1,0 +1,105 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+
+<div class="ui center aligned icon header">
+    <i class="circular edit icon"></i>
+
+</div>
+
+<form method="post" class="ui container">
+    {% csrf_token %}
+<div class="mt-5">
+    <h2 class="ui center aligned icon header bg-primary text-light p-2 rounded-top" >
+        {% trans "Edit Visit" %}
+    </h2>
+</div>
+<div style="background-color: white;">
+
+<div class="m-3">
+
+    <div class="row g-3">
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+
+                <select required name="patient_user" id="" class="form-control">
+                    {% for i in patients %}
+                    <option value="{{i.user.id}}" {% if patient_user == i.user.id %} selected {% endif %}>{{i.user.first_name}} {{i.user.last_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="user md icon"></i></span>
+
+                <select required name="doctor_user" id="" class="form-control">
+                    {% for i in doctors %}
+                    <option value="{{i.user.id}}" >{{i.user.first_name}} {{i.user.last_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-coin"></i></span>
+                <input type="text" pattern="^\d*(\.\d{0,2})?$" step="0.00" name="visitor_pay_amount" value="{{visitor_pay_amount}}" class="form-control" placeholder="{% trans "The payment amount for the visit" %}">
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-sign-merge-right-fill"></i></span>
+                <select name="visit_distance" id="" class="form-control">
+                    {% for visit_distanc in visit_distance_choices %}
+                    <option value="{{visit_distanc.0}}" {% if visit_distance == visit_distanc.0 %} selected {% endif %}>{{visit_distanc.1}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-sticky-fill"></i></span>
+                <textarea class="form-control" placeholder="{% trans "Note" %}" name="note" aria-label="With textarea">{{note}}</textarea>
+            </div>
+    
+        </div>
+
+
+</form>
+
+
+
+</div>
+<div class="ui center aligned icon header bg-white text-light p-2 rounded-bottom " >
+    <button type="submit" class="btn btn-dark mb-3">
+        <i class="bi bi-pencil-square"></i>
+        {% trans "Save" %}</button>
+</div>
+</div>
+
+</div>
+
+<!-- <script>
+    let Forminputs = document.querySelectorAll('input[type="text"], input[type="datetime-local"], input[type="number"], select, textarea')
+    Forminputs.forEach(element => {
+        element.classList.add('form-control')
+    }); 
+
+    let Formchecks = document.querySelectorAll('input[type="checkbox"]')
+    Formchecks.forEach(element => {
+        element.classList.add('form-check-input')
+        element.insertAdjacentHTML("afterend", '<div class="mt-3"></div>')
+    }); 
+</script> -->
+{% endblock %}

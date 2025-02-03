@@ -1,0 +1,98 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" {% if LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'he' %}dir="rtl"{% endif %}>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PatientManagement</title>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css'>
+
+    {% comment %} <link href="{% static 'bootstrap-5.3.3/css/bootstrap.min.css'%}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    {% block links %}
+    {% endblock links %}
+
+  </head>
+  <body>
+
+
+
+    {% block sheri %}
+    {% endblock sheri %}
+
+
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js'></script>
+
+      <div class="toast-container start-0 p-3" style="position: fixed; bottom: 40px;" id="toast-box" dir="rtl">
+      </div>
+    
+      <script>
+        function randomGen() {
+          let min = 100000
+          let max = 1000000
+          return (Math.floor((Math.random())*(max-min+1))+min).toString();
+         }
+
+
+
+
+        const default_img_profile = `{% static 'img/default-profile-img-2.png' %}`
+        const toastBox = document.querySelector('#toast-box')
+
+
+        function showToast(toastID, username, msg, img) {
+            if (img == '') {
+              img = default_img_profile
+            }
+          html = `
+    
+            {% comment %} <!-- Then put toasts within -->
+            <div class="toast" role="alert" id="toast${toastID}" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <img src="${img}" class="rounded me-2" alt="..." width="50" style="border-radius: 100% !important;">
+                <strong class="me-auto">${username}</strong>
+                <small class="text-body-secondary">الان</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                ${msg}
+              </div>
+            </div> {% endcomment %}
+
+
+            <div class="toast" role="alert" id="toast${toastID}" aria-live="assertive" aria-atomic="true" data-delay="5000">
+              <div class="toast-header">
+                <img src="${img}" class="rounded mr-2" alt="..." width="50" style="border-radius: 100% !important;">
+                <strong class="mr-auto">${username}</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="toast-body">
+                ${msg}
+              </div>
+            </div>
+          `
+    
+    
+          toastBox.insertAdjacentHTML("beforeend", html)
+          $(`#toast${toastID}`).toast('show');
+    
+        };
+    
+
+        $(document).ready(function() {
+          {% for message in messages %}
+        showToast(randomGen(), 'نظام', '{{message|safe}}', '')
+        {% endfor %}
+          })
+
+        </script>
+      
+    
+  </body>
+</html>

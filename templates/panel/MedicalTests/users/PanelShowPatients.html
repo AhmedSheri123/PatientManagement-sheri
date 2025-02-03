@@ -1,0 +1,228 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load panel_tags %}
+{% load i18n %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css\employee\employeePortal.css' %}">
+{% endblock %}
+
+{% block sheri %}
+<style>
+  td,
+  th {
+    text-align: right !important;
+  }
+
+  .post_state {
+    color: rgb(255, 255, 255);
+    background-color: rgb(85, 83, 83);
+    font-weight: bold;
+
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .filter-input-grid select, .filter-input-grid input{
+    margin-top: 30px;
+    border: solid 1px rgba(0, 0, 0, 0.181) !important;
+    color: rgba(0, 0, 0, 0.608) !important;
+  }
+  
+
+</style>
+
+
+
+<div style="margin: 20px 0px;">
+
+  <form id="filter-form" class="ui vertical menu" style="margin-left: 10px; text-align: right; width: 100%; padding-bottom: 20px;">
+    <p style="padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid rgb(194, 194, 194);">
+      {% trans "Search" %}</p>
+
+      <div class="filter-input-grid">
+
+    <input type="text" value="{{first_name}}" name="first_name" class="form-control item" placeholder="{% trans "first name" %}">
+    <input type="text" value="{{last_name}}" name="last_name" class="form-control item" placeholder="{% trans "last name" %}">
+    <input type="text" value="{{id_number}}" name="id_number" class="form-control item" placeholder="{% trans "ID Number" %}">
+    <input type="text" value="{{search_email}}" name="search_email" class="form-control item" placeholder="{% trans "Email" %}">
+    <input type="text" value="{{search_phone}}" name="search_phone" class="form-control item" placeholder="{% trans "Phone" %}">
+    <select class="form-select item" aria-label="Default select example" name="gender">
+      <option selected value="">{% trans "Gender" %}</option>
+      {% for city in GenderFields %}
+      <option {%if city.0 == gender %} selected {% endif %} value="{{city.0}}">{{city.1}}</option>
+      {% endfor %}
+    </select>
+    <input dir="ltr" value="{{publish_date}}" type="date" name="publish_date" class="form-control item" >
+    
+
+    <div style="display: flex; align-items: center; justify-content: center;    margin-top: 30px;">
+      <input type="submit" name="" id="" value="{% trans "Search" %}" class="btn btn-primary" style="background-color: purple; color: white !important; margin: 0; margin-left: 10px;">
+
+{% comment %} 
+      <button class="btn btn-primary" type="button"
+      onclick="{document.getElementById('is_ExportExcel').value = '1';document.getElementById('FormPortal').submit()}">اكسل</button>
+    
+          <button class="btn btn-primary" onclick="selectAll()" style="margin: 10px;" type="button">تحديد الكل</button>
+     {% endcomment %}
+    
+    </div>
+
+    </div>
+    <!-- <div class="ui icon input item">
+      <input type="text" name="search" placeholder="البحث عن שם פרטי">
+
+      <i onclick="{document.getElementById('filter-form').submit()}"
+        class="inverted circular search link icon left"></i>
+    </div> -->
+
+  </form>
+
+
+</div>
+{% comment %} 
+<a href="{% url 'AddPatients' %}" class="btn btn-primary mb-3">
+  <i class="bi bi-person-fill-add"></i>
+  הוספת מטופל</a>
+   {% endcomment %}
+<div class="table-box">
+  <div style="display: contents;">
+    <table class="table mytable table-striped table-hover table-bg">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{% trans "Full name" %}</th>
+          <th scope="col">{% trans "Gender" %}</th>
+          <th scope="col">{% trans "Phone" %}</th>
+          <th scope="col">{% trans "Email" %}</th>
+          <th scope="col">{% trans "ID Number" %}</th>
+          <th scope="col">{% trans "Options" %}</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <form action="{% url 'PanelHome' %}" id="FormPortal" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="is_ExportExcel" id="is_ExportExcel" value="0">
+
+          {% for job in userprofiles %}
+        <tr >
+          <th scope="row" style="position: relative; padding-right: 20px;">
+            <div style="display: flex;">
+              <input type="checkbox" class="chkbox" name="selected-items" value="{{job.id}}"
+                style="margin-left: 7px;">
+            {{forloop.counter}}
+        </div>
+          </th>
+          <td>{{job.user.first_name}} {{job.user.last_name}}</td>
+          <td>{{job.get_gender_display}}</td>
+          <td>{{job.phone}}</td>
+          <td>{{job.user.email}}</td>
+          <td>{{job.id_number}}</td>
+
+          <td>
+            {% temp_get_permission_state request.user.id 'add' 'medical_tests' as has_permission%}
+            {% if has_permission %}
+            <a class="ui inverted blue button" data-bs-toggle="modal" data-bs-target="#exampleModal{{job.id}}">
+            <i class="bi bi-plus-circle-fill"></i>
+            {% trans "Add" %}</a>
+              {% endif %}
+            {% temp_get_permission_state request.user.id 'show' 'medical_tests' as has_permission%}
+            {% if has_permission %}
+            <a href="{% url 'ManageMedicalTests' job.user.id %}" class="ui inverted blue button">
+            <i class="bi bi-eye-fill"></i>
+            {% trans "View" %}</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </form>
+      </tbody>
+    </table>
+
+
+
+    {% for job in userprofiles %}
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal{{job.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{job.id}}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <form class="modal-content" action="{% url 'AddMedicalTests' job.user.id %}" method="get">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel{{job.id}}">{% trans "Add test report" %}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <label for="" class="form-label">{% trans "test form" %}</label>
+                  <select name="custom_medical_test" id="" class="form-control" required>
+                      {% for medical_test in medical_tests %}
+                        <option value="{{medical_test.id}}">{{medical_test.name}}</option>
+                        {% empty %}
+                        <option value disabled selected>{% trans "There is no test form" %}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                  <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+                </div>
+              </form>
+            </div>
+          </div>
+  
+          {% endfor %}
+  
+  
+        </div>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    var $chkboxes = $('.chkbox');
+    var lastChecked = null;
+
+    $chkboxes.click(function (e) {
+      if (!lastChecked) {
+        lastChecked = this;
+        return;
+      }
+
+      if (e.shiftKey) {
+        var start = $chkboxes.index(this);
+        var end = $chkboxes.index(lastChecked);
+
+        $chkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).prop('checked', lastChecked.checked);
+      }
+
+      lastChecked = this;
+    });
+  });
+
+  let is_checked = false
+  
+  function selectAll() {
+    let chkboxs = document.querySelectorAll('.chkbox')
+
+    if (!is_checked){
+
+      chkboxs.forEach(chkbox => {
+        chkbox.checked = true
+              
+        });
+        
+        is_checked = true
+      } else {
+
+        chkboxs.forEach(chkbox => {
+          chkbox.checked = false
+              
+        });
+        
+        is_checked = false
+      }
+
+
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+.form {
+    margin: 20px auto;
+    padding: 20px 20px;
+    border: 1px rgb(222, 222, 222) solid;
+    box-shadow: rgb(211, 211, 211) 1px 2px 3px;
+    width: min(500px, 100%);
+    background-color: #fff;
+}
+
+.form label {
+    color: #8f3685;
+    display: block;
+    margin-right: auto;
+    margin-top: 40px;
+}
+
+.form label::after {
+    content: "*";
+  }
+
+.form-check label::after {
+    content: none;
+}
+.form input, select {
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(209, 209, 209);
+    color: rgb(96, 96, 96);
+}

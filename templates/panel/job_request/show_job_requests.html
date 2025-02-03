@@ -1,0 +1,525 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+
+<style>
+    .styled-box {
+        padding: 30px 20px !important; overflow: hidden; position: relative; background-color: #fff;  box-shadow: inset #d4d4d4 0px 0px 5px 3px; max-width: 800px; margin: auto !important; border-radius: 20px;
+    }
+
+    .styled-box .item {
+        margin-top: 30px !important;
+        margin-right: 20px !important;
+        border: solid 1px rgba(0, 0, 0, 0.288);
+        border-radius: 25px;
+        padding: 20px !important;
+    }
+
+    .styled-box .item .header {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 10px !important;
+
+    }
+
+    .styled-box .item p {
+        background-color: #f1f1f1;
+        padding: 10px;
+        border-radius: 25px;
+    }
+
+    .styled-box .item .header::after {
+        content: ':';
+    }
+</style>
+
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+        <i class="circular user icon"></i>
+        الموظف
+    </h2>
+
+    <div class="ui list styled-box" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+        <div class="item">
+            <div class="header">שם פרטי الرباعي</div>
+            <p>{{employee.name}}</p>
+        </div>
+        <div class="item">
+            <div class="header">מספר טלפון</div>
+            <p>{{employee.phone}}</p>
+        </div>
+        <div class="item">
+            <div class="header">البريد الإلكتروني</div>
+            <p>{{employee.email}}</p>
+        </div>
+        <div class="item">
+            <div class="header">الحالة الإجتماعية</div>
+            <p>{{employee.get_state_display}}</p>
+        </div>
+
+
+        <div class="item">
+            <div class="header">العمر</div>
+            <p>{{employee.age}}</p>
+        </div>
+        <div class="item">
+            <div class="header">من ذوي الإعاقة</div>
+            <p>{{employee.get_is_disability_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">المدينة</div>
+            <p>{{employee.get_employee_city_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">الحي</div>
+            <p>{{employee.district}}</p>
+        </div>
+
+
+        <div class="item">
+            <div class="header">מספר טלפון</div>
+            <p>{{employee.get_gender_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">كيف سمع عن قادرون</div>
+            {% if not employee.how_hear_other %}
+            <p>{{employee.get_how_hear_display}}</p>
+            {% else %}
+            <p>{{employee.how_hear_other}}</p>
+            {% endif %}
+
+        </div>
+        <div class="item">
+            <div class="header">يمتلك سيارة ورخصة قيادة</div>
+            <p>{{employee.get_have_car_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">نوع الإعاقة</div>
+            <p>{{employee.get_disability_type_display}}</p>
+        </div>
+        {% if employee.disability_type == '1' %}
+        <div class="item">
+            <div class="header">نوع الإعاقة الحركية</div>
+            <p>{{employee.get_disability_movement_display}}</p>
+        </div>
+
+        {% if employee.disability_movement == '5' %}
+        <div class="item">
+            <div class="header">نوع البتر</div>
+            <p>{{employee.get_disability_amputation_type_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">تفاصيل اكثر عن البتر</div>
+            <p>{{employee.disability_idntify_amputation}}</p>
+        </div>
+
+        {% endif %}
+        {% elif employee.disability_type == '2' %}
+        <div class="item">
+            <div class="header">مستوى الاعاقة العقلية</div>
+            <p>{{employee.get_disability_mind_display}}</p>
+        </div>
+
+        {% elif employee.disability_type == '3' %}
+        <div class="item">
+            <div class="header">نوع الإنفعال</div>
+            <p>{{employee.disability_Disturbances}}</p>
+        </div>
+
+        {% elif employee.disability_type == '4' %}
+        <div class="item">
+            <div class="header">نوع إعاقة السمعية</div>
+            <p>{{employee.get_disability_hear_display}}</p>
+        </div>
+
+
+        {% elif employee.disability_type == '5' %}
+        <div class="item">
+            <div class="header">نوع إعاقة البصرية</div>
+            <p>{{employee.get_disability_eays_display}}</p>
+        </div>
+
+        {% elif employee.disability_type == '6' %}
+
+        {% elif employee.disability_type == '7' %}
+        <div class="item">
+            <div class="header">نوع الإعاقة الجسمية</div>
+            <p>{{employee.disability_body}}</p>
+        </div>
+
+        {% elif employee.disability_type == '8' %}
+        <div class="item">
+            <div class="header">مستوى التوحد</div>
+            <p>{{employee.get_disability_alone_display}}</p>
+        </div>
+
+        {% elif employee.disability_type == '9' %}
+        <div class="item">
+            <div class="header">نوع صعوبات التعلم</div>
+            <p>{{employee.disability_learn}}</p>
+        </div>
+
+        {% elif employee.disability_type == '10' %}
+        <div class="item">
+            <div class="header">نوع الإضطرابات السلوكية</div>
+            <p>{{employee.disability_atrabat}}</p>
+        </div>
+
+
+        {% elif employee.disability_type == '11' %}
+        <div class="item">
+            <div class="header">نوع صعوبات النطق والكلام</div>
+            <p>{{employee.get_disability_speak_display}}</p>
+        </div>
+        {% endif %}
+
+
+        <div class="item">
+            <div class="header">الترتيبات التيسيرية لصناعة بيئة مناسبة حسب الإعاقة</div>
+            <p>{{employee.employee_environment}}</p>
+        </div>
+        <div class="item">
+            <div class="header">نوع الشهادة</div>
+            <p>{{employee.get_cert_type_display}}</p>
+        </div>
+        {% if employee.cert_type != '1' %}
+        <div class="item">
+            <div class="header">المجال التعليمي</div>
+            <p>{{employee.get_learning_domain_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">التخصص الدراسي</div>
+            <p>{{employee.major}}</p>
+        </div>
+        {% endif %}
+
+
+
+        <div class="item">
+            <div class="header">نوع الوظيفة المرغوب بها</div>
+            <p>{{employee.get_job_type_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">خصائص العمل التي المرغوب بها</div>
+            <p>{{employee.get_job_properties_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">يوجد خبرة عمل سابقة</div>
+            <p>{{employee.get_have_experience_display}}</p>
+        </div>
+
+
+
+
+        {% if employee.have_experience == '1' %}
+        <div class="item">
+            <div class="header">عدد سنوات الخبرة المهنية</div>
+            <p>{{employee.have_experience_years}}</p>
+        </div>
+        <div class="item">
+            <div class="header">المنشئة التي تم العمل بها</div>
+            <p>{{employee.have_experience_work}}</p>
+        </div>
+        <div class="item">
+            <div class="header">الدور الوظيفي السابق</div>
+            <p>{{employee.have_experience_last_work}}</p>
+        </div>
+        {% endif %}
+
+        <div class="item">
+            <div class="header">آخر راتب شهري</div>
+            <p>{{employee.last_salary}}</p>
+        </div>
+
+
+
+        <div class="item">
+            <div class="header">اللغة الانجليزية</div>
+            <p>{{employee.get_baisc_experience_english_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">اللغة العربية</div>
+            <p>{{employee.get_baisc_experience_arabic_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">الحاسب الالي</div>
+            <p>{{employee.get_baisc_experience_computer_display}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">مستندات</div>
+            <a href="{{employee.cv.url}}" target="_blank">السيرة الذاتية</a>
+            <div style="padding-top: 10px;"></div>
+            <a href="{{employee.district_cert.url}}" target="_blank">مشهد الإعاقة</a>
+        </div>
+
+
+    </div>
+
+    <h2 class="ui center aligned icon header">
+
+        كود التقديم: {{obj.id_code}}
+    </h2>
+</div>
+
+<hr style="margin: 30px 0px;">
+
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+        <i class="circular users icon"></i>
+        الشركة
+    </h2>
+
+    <div class="ui list styled-box" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+
+
+        <div class="item">
+            <div class="header">اسم المنشئة</div>
+            <p>{{company.company_name}}</p>
+        </div>
+        <div class="item">
+            <div class="header">السجل التجاري</div>
+            <p>{{job.company_history}}</p>
+        </div>
+        <div class="item">
+            <div class="header">مقر المنشئة</div>
+            <p>{{job.get_company_city_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">حجم المنشئة</div>
+            <p>{{job.get_company_size_display}}</p>
+        </div>
+
+
+
+
+        <div class="item">
+            <div class="header">قطاع المنشئة</div>
+            <p>{{job.get_company_section_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">هل المنشئة حاصلة على شهادة المواءمة</div>
+            <p>{{job.get_company_have_cert_display}}</p>
+        </div>
+
+    </div>
+    <h2 class="ui center aligned icon header">
+
+        بيانات مسؤول التوظيف
+    </h2>
+
+    <div class="ui list styled-box" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+        <div class="item">
+            <div class="header">اسم مقدم الطلب</div>
+            <p>{{company.complite_name}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">البريد الإلكتروني</div>
+            <p>{{job.userprofile.user.email}}</p>
+        </div>
+        <div class="item">
+            <div class="header">מספר טלפון</div>
+            <p>{{company.phone}}</p>
+        </div>
+
+
+
+    </div>
+
+    <h2 class="ui center aligned icon header">
+
+        بيانات الوظيفة
+    </h2>
+
+    <div class="ui list styled-box" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+        <div class="item">
+            <div class="header">نوع الإعاقة غير المرغوب بتوظيفها</div>
+            <p>{{job.unwanted_disability}}</p>
+        </div>
+        <div class="item">
+            <div class="header">نوع الإعاقة المرغوب بتوظيفها</div>
+            <p>{{job.wanted_disability}}</p>
+        </div>
+        <div class="item">
+            <div class="header">المسمى الوظيفي</div>
+            <p>{{job.job_title}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">وصف الوظيفي</div>
+            <p>{{job.job_desc}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">المهارات المطلوبة</div>
+            <p>{{job.job_skils}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">عدد ساعات العمل</div>
+            <p>{{job.work_hours}}</p>
+        </div>
+
+
+
+        <div class="item">
+            <div class="header">عدد أيام الراحة الإسبوعية</div>
+            <p>{{job.rest_days}}</p>
+        </div>
+        <div class="item">
+            <div class="header">فئة التأمين الطبي</div>
+            <p>{{job.medical_insurance}}</p>
+        </div>
+        <div class="item">
+            <div class="header">عدد الشواغر المتاحة للمسمى الوظيفي</div>
+            <p>{{job.available_jobs}}</p>
+        </div>
+        <div class="item">
+            <div class="header">متطلبات الوظيفة الأساسية</div>
+            <p>{{job.job_requirements}}</p>
+        </div>
+
+
+
+        <div class="item">
+            <div class="header">مجال العمل</div>
+            <p>{{job.work_domain}}</p>
+        </div>
+        <div class="item">
+            <div class="header">المؤهل العلمي للمرشح</div>
+            <p>{{job.get_cert_type_display}}</p>
+        </div>
+        <div class="item">
+            <div class="header">التخصص المرشح للوظيفة</div>
+            <p>{{job.major}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">الراتب الاساسي</div>
+            <p>{{job.basic_salary}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">بدل السكن</div>
+            <p>{{job.housing_allowance}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">بدلات أخرى</div>
+            <p>{{job.other_allowances}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">إجمالي الراتب بعد خصم التأمينات</div>
+            <p>{{job.total_salary}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">מספר טלפון</div>
+            <p>{{job.get_gender_display}}</p>
+        </div>
+
+
+        <div class="item">
+            <div class="header">اوقات العمل</div>
+            <p>{{job.get_worktime_display}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">نوع الوظيفة</div>
+            <p>{{job.get_job_type_display}}</p>
+        </div>
+        
+        <div class="item">
+            <div class="header">ما الذي ترغب بإضافته لتسهيل عملنا؟</div>
+            <p>{{job.last_txt}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">ايقونة الشركة</div>
+            {% if job.company_ico.url %}
+            <img src="{{job.company_ico.url}}" width="150" alt="ss">
+            {% else %}
+            <img src="{{job.company_ico.url}}" width="150" alt="لا يوجد">
+            {%endif%}
+        </div>
+    </div>
+    <h2 class="ui center aligned icon header">
+
+        كود الإعلان: {{job.id_code}}
+    </h2>
+</div>
+<br><br>
+
+
+<div>
+
+<br>
+<div style="text-align: center; display: flex;text-align: center; display: flex; align-items: center; justify-content: center; align-content: center; flex-wrap: nowrap;" dir="ltr">
+    <!-- <div class="ui buttons">
+        <button class="ui red button">رفض</button>
+        <div class="or"></div>
+        <button class="ui positive button">قبول</button>
+    </div> -->
+    <button class="ui primary button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        تطبيق
+    </button>
+    <form id="state-form" action="" method="post">
+        {% csrf_token %}
+
+        <select class="ui dropdown" name="state">
+            {% for i in EmployeeJobStateFields %}
+            <option {% if obj.post_state == i.0 %} selected {% endif %} value="{{i.0}}">{{i.1}}</option>
+            {% endfor %}
+        </select>
+
+
+
+
+
+
+
+        
+        <!-- Modal -->
+        <div dir="rtl" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">هل انت متأكد</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="exampleFormControlTextarea1" class="form-label">الرسالة</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="msg" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" onclick="{document.getElementById('state-form').submit()}" class="btn btn-primary">إرسال</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+    </form>
+
+      <!-- <button class="ui button">
+        رفض
+      </button> -->
+</div>
+<br>
+
+</div>
+
+
+<br>
+<hr>
+<br>
+
+{% endblock %}

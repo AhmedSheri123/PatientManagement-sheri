@@ -1,0 +1,303 @@
+{% load static %}
+<style>
+  /* .instagram {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    border-radius: 8px;
+    color: #fff;
+    margin-bottom: 6px;
+    vertical-align: middle;
+    background: #d6249f;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, .25);
+    padding-top: .5px;
+  } */
+
+  .icons-box{
+    /* padding: 10px; */
+    background-color: #f1f1f1;
+    border-radius: 100%;
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    display: inline-block;
+    
+  }
+  .icons-box i {
+    /* display: none; */
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    top: 6px;
+    right: 7px;
+  }
+
+  .nav-spliter {
+    display: flex;justify-content: center;    align-items: center;
+  }
+
+  .navbar li a:hover{
+    border-bottom: #7d7ddd solid 2px;
+    background-color: rgba(var(--bs-tertiary-bg-rgb),var(--bs-bg-opacity))!important;
+    color: inherit;
+  }
+
+  .qa-ico:hover {
+    background-color: unset;
+  }
+
+  .bi-facebook:hover {
+    color: blue;
+  }
+
+  .bi-youtube:hover {
+    color: red;
+  }
+
+  .bi-instagram:hover {
+    color: orange;
+  }
+
+  .bi-linkedin:hover {
+    color: #0077b5;
+  }
+
+  .bi-twitter-x:hover {
+    color: #242424;
+  }  
+</style>
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" id="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand qa-ico" href="{% url 'index' %}" style="color: #7d7ddd; font-weight: bold;">
+
+      <img class="" width="350px" src="{% static 'img\12f846_ad82a95cb1dd4daa9b36a48a8b71861d~mv2.png' %}" alt="Card image cap">
+
+
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin: auto;margin-top: 0; flex-wrap: wrap; justify-content: center; flex-direction: column !important;">
+
+        <div class="nav-spliter">
+
+
+          <li class="nav-item">
+            <a class="nav-link " onclick="check_nav(this)" aria-current="page" href="{% url 'index' %}">ראשית</a>
+          </li>
+
+  
+<!--   
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'AvailableJobs' %}">جميع الوظائف</a>
+          </li>
+
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Portal' %}">حسابي</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'SignOut' %}">تسجيل الיציאה</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'employeePortal' %}">بوابة التوظيف</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'CompanySignup' %}">بوابة المنظمات</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'SignIn' %}">تسجيل الدخول</a>
+          </li> 
+          {% endif %}
+  -->
+          <li class="nav-item">
+            <a class="nav-link" onclick="check_nav(this)" href="{% if '/' != request.path %}/{%endif%}#AvailableJobs">الوظائف المتاحة</a>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="check_nav(this)" href="{% if '/' != request.path %}/{%endif%}#certal">شهادة مواءمة</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="check_nav(this)" href="{% if '/' != request.path %}/{%endif%}#about-us">من نحن</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="check_nav(this)" href="{% if '/' != request.path %}/{%endif%}#contact-us">تواصل معنا</a>
+          </li>
+
+          <div class="nav-item lang-box" style="margin-right: 15px;">
+            <div id="google_translate_element"></div>
+            <div style="display: flex;">
+              <a class="lang-cercule" href="{% url 'SetLanguage' 'ar' %}">AR</a>
+              <a class="lang-cercule" href="{% url 'SetLanguage' 'en' %}">EN</a>
+            </div>
+          </div>          
+        </div>
+        
+        <style>
+          .lang-cercule {
+            margin-left: 10px;
+            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50px;
+            padding: 10px;
+            background-color: #0466af;
+            color: white;
+            border: none;
+            text-decoration: none;
+          }
+          .lang-cercule:hover {
+            background-color: #00477e !important;
+            
+         
+            
+          }
+        </style>
+
+        <script>
+
+          function setCookie(key, value, expiry) {
+            var expires = new Date();
+            expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
+            document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+            console.log(document.cookie)
+          }
+
+          
+          {% if request.session.lang == 'en' %}
+          function googleTranslateElementInit() {
+              setCookie('googtrans', '/ar/en',1);
+              new google.translate.TranslateElement(
+            {pageLanguage: 'ar', includedLanguages : 'en,de', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
+            
+            'google_translate_element'
+        );
+          }
+
+          {% endif %}
+        </script>
+        <!-- 
+
+        <div class="nav-spliter" {% if '/' != request.path %} style="display: none;" {%endif%}>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="#AvailableJobs">الوظائف المتاحة</a>
+          </li>
+  
+  
+
+          <li class="nav-item">
+            <a class="nav-link" href="#certal">شهادة مواءمة</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#about-us">من نحن</a>
+          </li>
+
+
+  
+
+        </div> 
+      -->
+
+
+      </ul>
+
+
+      
+      <div style="margin:auto; width: 289px; display: flex;flex-direction: column; align-content: center; flex-wrap: wrap;" class="nav-login">
+        <div dir="ltr">
+          {% if user.is_authenticated %}
+          <a class="btn btn-primary qa-btn-blu-color" style="width:130px;" href="{% url 'SignOut' %}">تسجيل الיציאה</a>
+          <a class="btn btn-primary qa-btn-pin-color" style="width:130px;" href="{% url 'Portal' %}">حسابي</a>
+          {% else %}
+
+          <a class="btn btn-primary " style="width:130px;" href="{% url 'SignIn' %}">تسجيل الدخول</a>
+          <button class="btn btn-primary qa-btn-pin-color" style="width:130px;" href="{% url 'SignIn' %}" data-bs-toggle="modal"  data-bs-target="#exampleModalaaaa">تسجيل جديد</button>
+          
+          {% endif %}
+
+
+        </div>
+        <div  style="display: block; justify-content: space-around; align-items: center; margin-top: 10px;">
+          
+            <a class="icons-box" target="_blank" href="https://www.youtube.com/channel/UCPuoRVXTq93_CBW2JbsAsBw">
+              <i  class="bi bi-youtube"></i>
+            </a>
+          <a   class="icons-box" target="_blank" href="https://www.facebook.com/QaderoonSA">
+            <i  class="bi bi-facebook"></i>
+          </a>
+          <a   class="icons-box" target="_blank" href="https://www.instagram.com/qaderoonsa/" class="instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+
+          <a class="icons-box" target="_blank" href="https://www.linkedin.com/company/qaderoon/">
+            <i  class="bi bi-linkedin"></i>
+          </a>
+
+          <a class="icons-box" target="_blank" href="https://twitter.com/QaderoonSA">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+    
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalaaaa" tabindex="-1" aria-labelledby="exampleModalLabelaaaaa" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabelaaaaa" style="    margin: auto;">نوع التسجيل</h1>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body" style="display: flex; align-items: center; justify-content: center;">
+                    <a href="{% url 'employeePortal' %}" style="margin: 7px;" type="button" class="btn btn-primary qa-btn-pin-color">باحث عن عمل</a>
+    
+                    <a href="{% url 'CompanySignup' %}" style="margin: 7px;" type="button" class="btn btn-primary qa-btn-blu-color" >تسجيل منشئة</a>
+                </div>
+                <button style="margin: auto; padding: 10px;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    
+            </div>
+            </div>
+        </div>
+
+
+        <script>
+          document.querySelectorAll(".nav-link").forEach((link) => {
+            if (link.href === window.location.href) {
+                link.classList.add("active");
+                // link.setAttribute("aria-current", "page");
+            }
+        });
+          function check_nav(obj) {
+            document.querySelectorAll(".nav-link").forEach((link) => {
+        
+                link.classList.remove("active");
+                // link.setAttribute("aria-current", "page");
+            
+              
+            
+        });
+        obj.classList.add("active");
+          }
+        
+        </script>

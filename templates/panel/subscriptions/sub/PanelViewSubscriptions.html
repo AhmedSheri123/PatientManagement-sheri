@@ -1,0 +1,194 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load jobs_tags %}
+
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css\employee\employeePortal.css' %}">
+{% endblock %}
+
+{% block sheri %}
+<style>
+
+
+    .post_state {
+        color: rgb(255, 255, 255);
+        background-color: rgb(85, 83, 83);
+        font-weight: bold;
+        display: inline;
+        padding: 5px;
+        border-radius: 4px;
+      }
+    
+      .filter-input-grid select, .filter-input-grid input{
+        margin-top: 30px;
+        border: solid 1px rgba(0, 0, 0, 0.181) !important;
+        color: rgba(0, 0, 0, 0.608) !important;
+      }
+      
+</style>
+<div>
+    <form id="filter-form" class="ui vertical menu" style="margin-left: 10px; text-align: right; width: 100%; padding-bottom: 20px;">
+
+        <p style="padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid rgb(194, 194, 194);">
+            تصفية
+            البحث</p>
+      
+            <div class="filter-input-grid" >
+      
+
+
+      
+        
+          <input type="text" value="{{search}}" name="search" class="form-control item" placeholder="اسم الشركة">
+          {% comment %} <input type="text" value="{{complite_name}}" name="complite_name" class="form-control item" placeholder="اسم الممثل">
+          <input type="text" value="{{job_title}}" name="job_title" class="form-control item" placeholder="כתובת"> {% endcomment %}
+
+
+          {% comment %} <select class="form-select item" aria-label="Default select example" name="state">
+            <option selected value="">מצב</option>
+            {% for city in JobStateChoices %}
+            <option {%if city.0 == state %} selected {% endif %} value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+          </select> {% endcomment %}
+{% comment %} 
+
+          <input type="text" value="{{search_email}}" name="search_email" class="form-control item" placeholder="البريد الإلكتروني">
+           <input type="text" value="{{search_phone}}" name="search_phone" class="form-control item" placeholder="מספר טלפון"> 
+          <input dir="ltr" value="{{publish_date}}" type="date" name="publish_date" class="form-control item" >
+      
+           {% endcomment %}
+      
+          <div style="display: flex; align-items: center; justify-content: center;    margin-top: 30px;">
+            <input type="submit" name="" id="" value="חיפוש" class="btn btn-primary" style="background-color: purple; color: white !important; margin: 0; margin-left: 10px;">
+      
+      
+            {% comment %} <button class="btn btn-primary" type="button"
+            onclick="{document.getElementById('is_ExportExcel').value = '4';document.getElementById('FormPortal').submit()}">اكسل</button>
+          
+            <button class="btn btn-primary" onclick="selectAll()" style="margin: 10px;" type="button">تحديد الكل</button>
+           {% endcomment %}
+          </div>
+      
+          </div>
+
+       
+    </form>
+
+
+</div>
+<a href="{% url 'PanelAddSubscriptions' %}" class="btn btn-primary" style="margin: 10px;" type="button">اضافة اشتراك جديد</a>
+
+<div class="table-box">
+    
+    <div style="display: contents;">
+
+              <table class="table mytable table-striped table-hover table-bg">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">عنوان</th>
+                    <th scope="col">العنوان الفرعي</th>
+                    {% comment %} <th scope="col">מספר טלפון</th> {% endcomment %}
+                    {% comment %} <th scope="col">بريد الإلكتروني</th> {% endcomment %}
+                    <th scope="col">صالحة لمدى</th>
+                    <th scope="col">السعر</th>
+                    <th scope="col">هل هي الافضراضية</th>
+
+                    <th scope="col">עדכון</th>
+                    <th scope="col">מחיקה</th>
+          
+          
+                  </tr>
+                </thead>
+                <tbody>
+                  <form action="{% url 'index' %}" id="FormPortal" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="is_ExportExcel" id="is_ExportExcel" value="0">
+          
+                    {% for job in subscriptions %}
+
+                  <tr >
+                    <th scope="row" style="position: relative; padding-right: 20px;">
+                      <div style="display: flex;">
+                        <input type="checkbox" class="chkbox" name="selected-items" value="{{job.id}}"
+                          style="margin-left: 7px;">
+                      {{forloop.counter}}
+                  </div>
+                    </th>
+                    <td>{{job.title}}</td>
+                    <td>{{job.subtitle}}</td>
+                    <td>{{job.number_of_days}} يوم</td>
+                    <td>{{job.price}}</td>
+                    <td>{% if job.is_default_Subscription %}نعم{% else %}لا{% endif %}</td>
+
+                    {% comment %} <td>{{job.user.userprofile.companyprofile.phone}}</td> {% endcomment %}
+                    {% comment %} <td>{{job.user.email}}</td> {% endcomment %}
+
+                    <td><a href="{% url 'PanelEditSubscriptions' job.id %}" class="ui inverted blue button">עדכון</a></td>
+                    <td><a href="{% url 'adminDeleteJob' job.id %}" class="ui  red button">מחיקה</td>
+                  </tr>
+                  {% endfor %}
+                </form>
+                </tbody>
+              </table>
+
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+      var $chkboxes = $('.chkbox');
+      var lastChecked = null;
+  
+      $chkboxes.click(function (e) {
+        if (!lastChecked) {
+          lastChecked = this;
+          return;
+        }
+  
+        if (e.shiftKey) {
+          var start = $chkboxes.index(this);
+          var end = $chkboxes.index(lastChecked);
+  
+          $chkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).prop('checked', lastChecked.checked);
+        }
+  
+        lastChecked = this;
+      });
+    });
+  
+
+
+
+
+    
+  let is_checked = false
+  
+  function selectAll() {
+    let chkboxs = document.querySelectorAll('.chkbox')
+
+    if (!is_checked){
+
+      chkboxs.forEach(chkbox => {
+        chkbox.checked = true
+              
+        });
+        
+        is_checked = true
+      } else {
+
+        chkboxs.forEach(chkbox => {
+          chkbox.checked = false
+              
+        });
+        
+        is_checked = false
+      }
+
+
+  }
+  </script>
+{% endblock %}

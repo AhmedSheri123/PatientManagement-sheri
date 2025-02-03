@@ -1,0 +1,58 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load panel_tags %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css\employee\employeePortal.css' %}">
+{% endblock %}
+
+{% block sheri %}
+
+<style>
+td, th {
+    text-align: right !important;
+}
+.post_state {
+    color: rgb(255, 255, 255); background-color: rgb(85, 83, 83); font-weight: bold; display: inline; padding: 10px 5px; border-radius: 4px;
+}
+</style>
+
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>שם פרטי</th>
+            <th>
+                <p>الشركة</p>
+                <p>كود الإعلان</p>
+            </th>
+            <th>المسمى الوظيفي</th>
+            <th>المدينة</th>
+            <th>عدد المقدمين</th>
+            <th>المقبولين</th>
+            <th>عرض</th>
+            <th>מחיקה</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+        {% NumberOfPresenters job.id as Presenters %}
+        {% AcceptedOfPresenters job.id as AcceptedPresenters %}
+            <tr>
+                <td data-label="#">{{forloop.counter}}</td>
+                <td data-label="Name">{{job.userprofile.companyprofile.complite_name}}</td>
+                <td data-label="Age">
+                    <p>{{job.userprofile.companyprofile.company_name}}</p>
+                    <p>{{job.id_code}}</p>
+                </td>
+                <td data-label="Job">{{job.job_title}}</td>
+                <td data-label="Job" >{{job.get_company_city_display}}</td>
+                <td data-label="Job">{{Presenters}}</td>
+                <td data-label="Job">{{AcceptedPresenters}}</td>
+                <td data-label="Job" ><a href="{% url 'ShowJobs' job.id %}" class="ui inverted blue button" >הצגה</a></td>
+                <td data-label="Job" ><button href="{% url 'DeleteCompanyPostJobs' job.id %}" class="ui  red button" >حذف</button></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

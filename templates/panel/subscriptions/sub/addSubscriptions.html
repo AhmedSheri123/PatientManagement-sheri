@@ -1,0 +1,36 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load jobs_tags %}
+
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css\employee\employeePortal.css' %}">
+{% endblock %}
+
+{% block sheri %}
+
+<div class="container" style="max-width: 600px;">
+
+    <form method='post'>
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary mt-3 mb-5">انشاء وحفظ</button>
+      </form>
+
+</div>
+
+
+
+<script>
+    let Forminputs = document.querySelectorAll('input[type="text"], input[type="datetime-local"], input[type="number"], select, textarea')
+    Forminputs.forEach(element => {
+        element.classList.add('form-control')
+    }); 
+
+    let Formchecks = document.querySelectorAll('input[type="checkbox"]')
+    Formchecks.forEach(element => {
+        element.classList.add('form-check-input')
+        element.insertAdjacentHTML("afterend", '<div class="mt-3"></div>')
+    }); 
+</script>
+{% endblock %}

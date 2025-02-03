@@ -1,0 +1,829 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load panel_tags %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+<style>
+    .min-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+    }
+
+    .main-card {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin: 20px 10px !important;
+        min-width: 300px;
+        height: 150px;
+        color: rgb(71, 71, 71);
+        border-radius: 5px;
+        {% comment %} border: solid 1px bisque; {% endcomment %}
+        
+    }
+
+    .main-card i {
+        font-size: 50px;
+    }
+
+    .min-chart-box {
+        box-shadow: rgb(204, 204, 204) 1px 2px 3px;
+        background-color: white;
+    }
+
+    .box {
+        box-shadow: rgb(204, 204, 204) 1px 2px 3px;
+        background-color: white;
+    }
+</style>
+
+<!-- Button trigger modal -->
+<button style="margin-bottom: 20px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    الملخص الشهري
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">الملخص الشهري</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{% url 'AdminAnalyticCompanysExportExcelByMonth' %}" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+            
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">اختر الشهر</label>
+                        <input type="month" required class="form-control" name="str_year_month" id="exampleFormControlInput1" placeholder="">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+            <button type="submit" class="btn btn-primary">سحب</button>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+<!-- Button trigger modal -->
+<button style="margin-bottom: 20px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+    سحب تقرير
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade " id="exampleModal2" tabindex="-1"  aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel2">الملخص الشهري</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{% url 'WithdrawReport' %}" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">اختر نوع التقرير</label>
+                    <select type="month" required class="form-control" onchange="ReportCheckSetupTwo(this)" name="report_type" id="exampleFormControlInput1" placeholder="">
+                        <option value="0" disabled selected>--اختر--</option>
+                        <option value="1">عدد الذكور والإناث</option>
+                        <option value="2">عدد الوظائف لكل منطقة</option>
+                        <option value="3">عدد الوظائف الجزئية والدوام الكامل</option>
+                    </select>
+                </div>
+
+                <div class="mb-3" id="time-box">
+                    <label for="exampleFormControlInput1" class="form-label">اختر نوع الوقت</label>
+                    <select type="month" required class="form-control" onchange="ReportCheckSetupOne(this)" name="time_type_chooese" id="exampleFormControlInput1" placeholder="">
+                        <option value="0" disabled selected>--اختر--</option>
+                        <option value="1">حسب الايام في الشهر</option>
+                        <option value="2">حسب الاشهر في السنة</option>
+                        <option value="3">حسب الشهر من الى</option>
+                    </select>
+                </div>
+                <div id="TimeSelection">
+
+                    <div id="by-month-day" class="mb-3" style="display: none;" >
+                        <label for="exampleFormControlInput1" class="form-label">اختر الشهر</label>
+                        <input type="month" class="form-control" name="type_a" id="exampleFormControlInput1" placeholder="">
+                    </div>
+
+                    <div id="by-year-month" class="mb-3" style="display: none;">
+                        <label for="exampleFormControlInput1" class="form-label">السنة</label>
+                        <input type="number" value="2024" class="form-control" name="type_b" id="exampleFormControlInput1" placeholder="2024">
+                    </div>
+
+                    <div id="from-to-month" class="mb-3" style="display: none;">
+                        <label for="exampleFormControlInput1" class="form-label">من</label>
+                        <input type="month" class="form-control" name="type_c_a" id="exampleFormControlInput1" placeholder="">
+
+                        <label for="exampleFormControlInput1" class="form-label">الى</label>
+                        <input type="month" class="form-control" name="type_c_b" id="exampleFormControlInput1" placeholder="">
+                    </div>
+                </div>
+
+
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">شكل التقرير</label>
+                    <select type="month" required class="form-control" name="report_view_type" id="exampleFormControlInput1" placeholder="">
+                        <option value="0" disabled selected>--اختر--</option>
+                        <option value="1">خط</option>
+                        <option value="2">دائري</option>
+                        <option value="3">مستطيل</option>
+                        <!-- <option value="4">دائري رادار</option>
+                        <option value="5">نقاط</option> -->
+
+                    </select>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+            <button type="submit" class="btn btn-primary">سحب</button>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+<script>
+    function ReportCheckSetupOne(obj) {
+        const byMonthDay = document.getElementById('by-month-day')
+        const byYearMonth = document.getElementById('by-year-month')
+        const fromToMonth = document.getElementById('from-to-month')
+        if (obj.value == '1') {
+            byMonthDay.style.display = 'block'
+            byYearMonth.style.display = 'none'
+            fromToMonth.style.display = 'none'
+        }
+
+        if (obj.value == '2') {
+            byMonthDay.style.display = 'none'
+            byYearMonth.style.display = 'block'
+            fromToMonth.style.display = 'none'
+        }
+
+
+        if (obj.value == '3') {
+            byMonthDay.style.display = 'none'
+            byYearMonth.style.display = 'none'
+            fromToMonth.style.display = 'block'
+        }
+    }
+
+    function ReportCheckSetupTwo(obj) {
+        let timebox = document.getElementById('time-box')
+        let TimeSelection = document.getElementById('TimeSelection')
+        if (obj.value == '2') {
+            timebox.style.display = 'none'
+            TimeSelection.style.display = 'none'
+        } else {
+            timebox.style.display = 'block'
+            TimeSelection.style.display = 'block'
+        }
+    }
+</script>
+
+<form id="viewsers_count_days_form" action="" method="get" >
+
+
+
+
+<div class="box">
+    <h2 style="padding: 20px 10px; text-align: center;">الملخص التفاعلي</h2>
+
+<div class="min-box ">
+
+        <div style="width: min(400px, 100%);  padding: 50px 0px;">
+            <p style="text-align: center; margin-bottom: 20px;">عدد الزوار</p>
+            <canvas  id="myChart5"></canvas>
+                <select class="form-select" name="viewsers_count_days"  onchange="{document.getElementById('viewsers_count_days_form').submit()}">
+                    <option {% if viewsers_count_days == 7 %} selected {%endif%} value="7">اسبوع</option>
+                    <option {% if viewsers_count_days == 14 %} selected {%endif%} value="14">اسبوعين</option>
+                    <option {% if viewsers_count_days == 30 %} selected {%endif%} value="30">شهر</option>
+                    <option {% if viewsers_count_days == 60 %} selected {%endif%} value="60">3 اشهر</option>
+                </select>
+                <!-- <input type="text" class="btn btn-primary" style="width: 100px;" value="تصفية"> -->
+        </div>
+
+
+
+        <div style="width: min(400px, 100%);  padding: 50px 0px;">
+            <p style="text-align: center; margin-bottom: 20px;">فرص العمل المعلنة وإجمالي عدد المتقدمين</p>
+            <canvas  id="myChart6"></canvas>
+                <select class="form-select" name="announced_count_days"  onchange="{document.getElementById('viewsers_count_days_form').submit()}">
+                    <option {% if announced_count_days == 7 %} selected {%endif%} value="7">اسبوع</option>
+                    <option {% if announced_count_days == 14 %} selected {%endif%} value="14">اسبوعين</option>
+                    <option {% if announced_count_days == 30 %} selected {%endif%} value="30">شهر</option>
+                    <option {% if announced_count_days == 60 %} selected {%endif%} value="60">3 اشهر</option>
+                </select>
+                <!-- <input type="text" class="btn btn-primary" style="width: 100px;" value="تصفية"> -->
+        </div>
+
+</div>
+</div>
+</form>
+<br>
+
+
+<style>
+    .now-numbers-box {
+        width: 200px; border: 1px solid rgba(0, 0, 0, 0.307); border-radius: 25px; padding: 20px 10px;
+        
+    }
+    .now-numbers-box .now-numbers-title {
+        text-align: center;font-size: 20px;
+    }
+
+    .now-numbers-box .now-numbers-section {
+        display: flex; background-color: #f1f1f1; border-radius: 25px;
+        margin-top: 10px;
+        padding-right: 10px;
+    }
+
+    .now-numbers-box .now-numbers-section p {
+        margin: 0;
+        padding: 10px 5px;
+    }
+
+    .now-numbers-box .now-numbers-section .now-numbers-section-title {
+        font-size: 16px;
+    }
+
+    .now-numbers-box .now-numbers-section .now-numbers-section-value {
+        color: purple;
+    } 
+</style>
+<div class="box">
+    <h2 style="padding: 20px 10px; text-align: center;">الأرقام الحالية</h2>
+
+    <div class="min-box" style="align-items: flex-start;">
+
+        <div class="now-numbers-box">
+            <p class="now-numbers-title" >الوظائف</p>
+            <div>
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">المعلنة:</p>
+                    <p class="now-numbers-section-value">{{all_announced}}</p>
+                </div>
+
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">المقبولة:</p>
+                    <p class="now-numbers-section-value">{{all_accepted_jobs}}</p>
+                </div>
+
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">قيد المراجعة:</p>
+                    <p class="now-numbers-section-value">{{all_under_review_jobs}}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="now-numbers-box">
+            <p class="now-numbers-title" >الأفراد</p>
+            <div>
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">عدد:</p>
+                    <p class="now-numbers-section-value">{{all_users_count}}</p>
+                </div>
+
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">الموظف:</p>
+                    <p class="now-numbers-section-value">54</p>
+                </div>
+
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">الذكور/الأناث:</p>
+                    <p class="now-numbers-section-value">{{all_employee_female_count}}/{{all_employee_male_count}}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="now-numbers-box">
+            <p class="now-numbers-title" >المنظمات</p>
+            <div>
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">عدد:</p>
+                    <p class="now-numbers-section-value">{{all_companys}}</p>
+                </div>
+
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">الراغبة بالتوظيف:</p>
+                    <p class="now-numbers-section-value">{{company_want_publish_job}}</p>
+                </div>
+
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">منتهية الخدمة:</p>
+                    <p class="now-numbers-section-value">54</p>
+                </div>
+
+                <div class="now-numbers-section">
+                    <p class="now-numbers-section-title">غير مكتمل:</p>
+                    <p class="now-numbers-section-value">54</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+<br>
+
+
+<div class="box">
+    <h2 style="padding: 20px 10px; text-align: center;">الأرقام الحالية</h2>
+
+<div class="min-box">
+    <div class="main-card">
+        <i class="circular green building outline icon"></i>
+        <div style="margin-right: 10px;">
+            <p class="ui header">عدد المنشئات</p>
+            <p style="text-align: center;">{{all_companys_count}}</p>
+        </div>
+    </div>
+
+
+    <div class="main-card">
+        <i class="circular blue user icon"></i>
+        <div style="margin-right: 10px;">
+            <p class="ui header">عدد المستخدمين</p>
+            <p style="text-align: center;">{{all_users_count}}</p>
+        </div>
+    </div>
+
+
+    <div class="main-card">
+        <i class="circular teal suitcase icon"></i>
+        <div style="margin-right: 10px;">
+            <p class="ui header">عدد الموظفين</p>
+            <p style="text-align: center;">{{accepted_employee_count}}</p>
+        </div>
+    </div>
+
+    <div class="main-card">
+        <i class="circular violet male icon"></i>
+        <div style="margin-right: 10px;">
+            <p class="ui header">عدد الموظفين الذكور</p>
+            <p style="text-align: center;">{{accepted_employee_male_count}}</p>
+        </div>
+    </div>
+
+    <div class="main-card">
+        <i class="circular purple female icon"></i>
+        <div style="margin-right: 10px;">
+            <p class="ui header">عدد الموظفين الاناث</p>
+            <p style="text-align: center;">{{accepted_employee_female_count}}</p>
+        </div>
+    </div>
+
+    <div class="main-card">
+        <i class="circular pink street view icon"></i>
+        <div style="margin-right: 10px;">
+            <p class="ui header">الحالة الاجتماعية</p>
+            <p style="text-align: center;">اعزب: {{accepted_employee_unmarried_count}}</p>
+            <p style="text-align: center;">متزوج: {{accepted_employee_married_count}}</p>
+        </div>
+    </div>
+
+
+    <div class="main-card">
+        <i class="circular yellow american sign language interpreting view icon"></i>
+        <div style="margin-right: 10px;">
+            <p class="ui header">מספר טלפון المطلوب لدى المنظمات</p>
+            <p style="text-align: center;">זכר: {{wanted_male_gender}}</p>
+            <p style="text-align: center;">נקבה: {{wanted_female_gender}}</p>
+            <p style="text-align: center;">لا افضلية: {{wanted_no_preference_gender}}</p>
+        </div>
+    </div>
+
+    <div class="main-card">
+        <i class="circular thumbs down red icon"></i>
+        <div style="margin-right: 10px;">
+            <p class="ui header">عدد الموظفين المستبعدين</p>
+            <p style="text-align: center;">{{unaccepted_employee}}</p>
+        </div>
+    </div>
+
+</div>
+</div>
+
+    <br><br>
+    <div class="min-chart-box">
+        <br>
+        <h2 class="ui center aligned icon header">
+            <!-- <i class="circular users icon"></i> -->
+            تحليلات عدد المنشئات والأفراد
+        </h2>
+                
+        <select class="form-select" style="max-width: 300px; margin: auto;" name="viewsers_count_days" onchange="doWhatYouWantDo(this)">
+
+            <option value="30">شهر</option>
+            <option value="365">سنة</option>
+        </select>
+
+
+        <div style="width: min(960px, 100%); margin: auto; padding: 50px 0px;">
+            <canvas  id="myChart2"></canvas>
+
+            
+        </div>
+
+
+        
+        <br>
+        <h2 class="ui center aligned icon header">
+            <!-- <i class="circular users icon"></i> -->
+            تحليلات عدد المنشئات والمستفيدين
+        </h2>
+        <select class="form-select" style="max-width: 300px; margin: auto;" name="viewsers_count_days" onchange="doWhatYouWantDo2(this)">
+
+            <option value="30">شهر</option>
+            <option value="365">سنة</option>
+        </select>
+        <div style="width: min(960px, 100%); margin: auto; padding: 50px 0px;">
+            <canvas  id="myChart"></canvas>
+        </div>
+
+
+        <h2 class="ui center aligned icon header">
+            <!-- <i class="circular users icon"></i> -->
+            تحليلات اخرى
+        </h2>
+
+        <div style="display: flex; justify-content: space-evenly; align-items: flex-start; flex-wrap: wrap;">
+            <div style="width: min(400px, 100%);  padding: 50px 0px;">
+            <p style="text-align: center; margin-bottom: 20px;">مقارنة بين عدد المنظمات والافراد</p>
+
+                <canvas  id="myChart3"></canvas>
+            </div>
+    
+            <div style="width: min(400px, 100%);  padding: 50px 0px;">
+                <p style="text-align: center; margin-bottom: 20px;">مقارنة بين عدد الموظفين الذكور والاناث</p>
+                <canvas  id="myChart4"></canvas>
+            </div>
+            
+
+        </div>
+        
+    </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+  <script>
+
+
+    const ctx6 = document.getElementById('myChart6');
+
+    const labels6 = [{% for i in announced_count_by_day %} "{{i.0}}", {% endfor %}]
+    const data6 = {
+    labels: labels6,
+    datasets: [
+        {
+            label: 'الوظائف المعلنة',
+            data: [{% for i in announced_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+        },
+        {
+            label: 'عدد المقدمين',
+            data: [{% for i in presenters_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }
+    ]
+    };
+    const config6 = {
+        type: 'line',
+        data: data6,
+    };
+    new Chart(ctx6, config6);
+  </script>
+
+
+
+  <script>
+
+
+    const ctx5 = document.getElementById('myChart5');
+
+    const labels5 = [{% for i in viewsers_count_by_day %} "{{i.0}}", {% endfor %}]
+    const data5 = {
+    labels: labels5,
+    datasets: [
+        {
+            label: 'الزوار',
+            data: [{% for i in viewsers_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+        }
+    ]
+    };
+    const config5 = {
+        type: 'line',
+        data: data5,
+    };
+    new Chart(ctx5, config5);
+  </script>
+
+
+
+
+
+  <script>
+
+    const ctx4 = document.getElementById('myChart4');
+
+    const labels4 =  [ 'الاناث', 'الذكور',]
+    const data4 = {
+    labels: labels4,
+    datasets: [{
+        label: 'مقارنة بين عدد الموظفين الذكور والاناث',
+        data: [{{accepted_employee_female_count}}, {{accepted_employee_male_count}},],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)'
+        ],
+      }]
+    
+    };
+    const config4 = {
+        type: 'polarArea',
+        data: data4,
+        options: {}
+    };
+    new Chart(ctx4, config4);
+  </script>
+
+
+
+  <script>
+
+    const ctx3 = document.getElementById('myChart3');
+
+    const labels3 =  [ 'عدد المنظمات', 'عدد الافراد',]
+    const data3 = {
+    labels: labels3,
+    datasets: [{
+        label: 'مقارنة بين عدد المنظمات والافراد',
+        data: [{{all_companys_count}}, {{all_users_count}},],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+
+        ],
+        hoverOffset: 4
+      }]
+    
+    };
+    const config3 = {
+        type: 'doughnut',
+        data: data3,
+    };
+    new Chart(ctx3, config3);
+  </script>
+  
+  
+
+  <script>
+    const js_data_day = JSON.parse('{{tow_by_day_json|safe}}')
+    const js_data_month = JSON.parse('{{tow_by_month_json|safe}}')
+
+    const accepted_js_data_day = JSON.parse('{{accepted_tow_by_day_json|safe}}')
+    const accepted_js_data_month = JSON.parse('{{accepted_tow_by_month_json|safe}}')
+    
+    console.log(js_data_day)
+    function doWhatYouWantDo(obj) {
+        if (obj.value == '30') {
+            let label_day_list = []
+            let label_company_list = []
+            let label_user_list = []
+            let ssss = js_data_day['companys_creation_count_by_day']
+            for (let i = 0; i < ssss.length; i++) {
+                label_day_list.push(ssss[i][0]);
+                label_company_list.push(ssss[i][1]);
+                label_user_list.push(js_data_day['companys_creation_count_by_day'][i][1])
+            }
+            
+            myChart2.data.labels = label_day_list
+            myChart2.data.datasets[0].data = label_company_list
+            myChart2.data.datasets[1].data = label_company_list
+            myChart2.update()
+            console.log(label_day_list)
+
+        } else if (obj.value == '365') {
+
+            let label_day_list = []
+            let label_company_list = []
+            let label_user_list = []
+            let ssss = js_data_month['companys_creation_count_by_month']
+            for (let i = 0; i < ssss.length; i++) {
+                label_day_list.push(ssss[i][0]);
+                label_company_list.push(ssss[i][1]);
+                label_user_list.push(js_data_month['users_creation_count_by_month'][i][1])
+            }
+            
+            myChart2.data.labels = label_day_list
+            myChart2.data.datasets[0].data = label_company_list
+            myChart2.data.datasets[1].data = label_company_list
+            myChart2.update()
+            console.log(label_day_list)
+    }
+    } 
+
+    function doWhatYouWantDo2(obj) {
+        if (obj.value == '30') {
+            let label_day_list = []
+            let label_company_list = []
+            let label_user_list = []
+            let ssss = accepted_js_data_day['companys_creation_count_by_day']
+            for (let i = 0; i < ssss.length; i++) {
+                label_day_list.push(ssss[i][0]);
+                label_company_list.push(ssss[i][1]);
+                label_user_list.push(accepted_js_data_day['accepted_users_creation_count_by_day'][i][1])
+            }
+            
+            myChart.data.labels = label_day_list
+            myChart.data.datasets[0].data = label_company_list
+            myChart.data.datasets[1].data = label_company_list
+            myChart.update()
+            console.log(label_day_list)
+
+        } else if (obj.value == '365') {
+
+            let label_day_list = []
+            let label_company_list = []
+            let label_user_list = []
+            let ssss = accepted_js_data_month['companys_creation_count_by_month']
+            for (let i = 0; i < ssss.length; i++) {
+                label_day_list.push(ssss[i][0]);
+                label_company_list.push(ssss[i][1]);
+                label_user_list.push(accepted_js_data_month['accepted_users_creation_count_by_month'][i][1])
+            }
+            
+            myChart.data.labels = label_day_list
+            myChart.data.datasets[0].data = label_company_list
+            myChart.data.datasets[1].data = label_company_list
+            myChart.update()
+            console.log(label_day_list)
+    }
+    } 
+
+    function getvals(theUrl){
+        return fetch(theUrl,
+        {
+            method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        })
+        .then((response) => response.json())
+        .then((responseData) => {
+        console.log(responseData);
+        return responseData;
+        })
+        .catch(error => console.warn(error));
+    }
+  
+    // function doWhatYouWantDo(obj) {
+    //     if (obj.value == '30') {
+    //         getvals('http://127.0.0.1:8000/panel/company_and_user_creation_count_by_day').then(response => 
+    //         {
+    //             let label_day_list = []
+    //             let label_company_list = []
+                
+    //             let ssss = response['companys_creation_count_by_day']
+    //             for (let i = 0; i < ssss.length; i++) {
+    //                 label_day_list.push(ssss[i][0]);
+    //                 label_company_list.push(ssss[i][1]);
+    //             }
+                
+    //             data.labels = label_day_list
+    //             data.datasets[0].data = label_company_list
+    //             console.log(label_day_list)
+    //         }
+    //         );
+    //     } else if (obj.value == '365') {
+    //         getvals('http://127.0.0.1:8000/panel/company_and_user_creation_count_by_day').then(response => 
+    //         {
+    //             let label_day_list = []
+    //             let label_company_list = []
+    //             let ssss = response['companys_creation_count_by_day']
+    //             for (let i = 0; i < ssss.length; i++) {
+    //                 label_day_list.push(ssss[i][0]);
+    //                 label_company_list.push(ssss[i][1]);
+    //             }
+                
+    //             data.labels = label_day_list
+    //             data.datasets[0].data = label_company_list
+    //             console.log(label_day_list)
+    //         }
+    //         );
+    //     }
+    // }
+
+
+</script>
+  <script>
+
+
+
+
+
+
+    const ctx = document.getElementById('myChart');
+
+    const labels = [{% for i in companys_creation_count_by_day %} {{i.0}}, {% endfor %}]
+    const data = {
+    labels: labels,
+    datasets: [
+        {
+            label: 'المنشئات',
+            data: [{% for i in companys_creation_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+        },
+        {
+            label: 'الافراد',
+            data: [{% for i in accepted_users_creation_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }
+    ]
+    };
+    const config = {
+        type: 'line',
+        data: data,
+    };
+    const myChart = new Chart(ctx, config);
+  </script>
+
+
+
+<script>
+
+
+
+
+
+
+    const ctx2 = document.getElementById('myChart2');
+
+    const labels2 = [{% for i in companys_creation_count_by_day %} {{i.0}}, {% endfor %}]
+    const data2 = {
+    labels: labels2,
+    datasets: [
+        {
+            label: 'المنشئات',
+            data: [{% for i in companys_creation_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+        },
+        {
+            label: 'الافراد',
+            data: [{% for i in users_creation_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }
+    ]
+    };
+    const config2 = {
+        type: 'line',
+        data: data2,
+    };
+    const myChart2 = new Chart(ctx2, config2);
+  </script>
+
+
+
+
+{% endblock %}

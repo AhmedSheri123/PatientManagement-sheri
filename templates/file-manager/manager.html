@@ -1,0 +1,410 @@
+{% extends "base_filemanager.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/file-manager.css' %}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css" integrity="sha512-0/rEDduZGrqo4riUlwqyuHDQzp2D1ZCgH/gFIfjMIL5az8so6ZiXyhf1Rg8i6xsjv+z/Ubc4tt1thLigEcu6Ug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock links %}
+
+
+{% block sheri %}
+  
+  <!-- Modal create folder-->
+  <div class="modal fade" id="createFolder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="createFolderLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form action="{% url 'CreateFolder' secret %}" method="get" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createFolderLabel">{% trans "Create folder" %}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <label for="" class="label-control">{% trans "Folder name" %}</label>
+                <input type="hidden" class="form-control" value="{{current_path}}" name="path">
+                <input type="text" class="form-control" name="folder_name">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+          <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+        </div>
+        </form>
+    </div>
+  </div>
+  
+  <!-- Modal Upload Files-->
+  <div class="modal fade" id="uploadFormModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="uploadFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadFormModalLabel">{% trans "File uploader" %}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="wrapper">
+                <!-- <header>File Uploader</header> -->
+                <form action="UploadFiles" id="uploadForm">
+                    <input type="hidden" class="form-control" value="{{current_path}}" name="path">
+                    <input class="file-input" type="file" name="file" multiple hidden>
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>{% trans "Browse file to upload" %}</p>
+                </form>
+                <section class="progress-area"></section>
+                <section class="uploaded-area"></section>
+              </div>
+                
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="{document.location.reload()}" data-dismiss="modal">{% trans "Close" %}</button>
+          <!-- <button type="submit" class="btn btn-primary">create</button> -->
+        </div>
+    </div>
+    </div>
+  </div>
+
+
+
+  <form action="{% url 'Remove' secret %}?path={{current_path}}" method="post" id="RemoveForm">
+    {% csrf_token %}
+  </form>
+
+
+
+<div class="container flex-grow-1 light-style container-p-y">
+    <div class="container-m-nx container-m-ny bg-lightest mb-3">
+        <ol class="breadcrumb text-big container-p-x py-3 m-0">
+            <!-- <li class="breadcrumb-item">
+                <a href="javascript:void(0)">home</a>
+            </li> -->
+            {% for path in splited_current_path %}
+            <li class="breadcrumb-item active">{{path}}</li>
+            {% empty %}
+            <li class="breadcrumb-item active">/</li>
+            {%endfor%}
+        </ol>
+
+        <hr class="m-0" />
+
+        <div class="file-manager-actions container-p-x py-2">
+            <div>
+                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#uploadFormModal"><i class="ion ion-md-cloud-upload"></i>&nbsp; {% trans "Upload" %}</button>
+                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#createFolder"><i class="fa fa-plus-circle"></i>&nbsp; {% trans "Folder" %}</button>
+                <a type="button" class="btn btn-primary mr-2" href="{% url 'PanelHome' %}"><i class="fa fa-home"></i>&nbsp; {% trans "Panel" %}</a>
+                <button type="button" class="btn btn-secondary icon-btn mr-2" disabled=""><i class="ion ion-md-cloud-download"></i></button>
+                <div class="btn-group mr-2">
+                    <button type="button" class="btn btn-default md-btn-flat dropdown-toggle px-2" data-toggle="dropdown"><i class="ion ion-ios-settings"></i></button>
+                    <div class="dropdown-menu">
+                        <!-- <a class="dropdown-item" href="javascript:void(0)">Move</a> -->
+                        <!-- <a class="dropdown-item" href="javascript:void(0)">Copy</a> -->
+                        <button class="dropdown-item" onclick="SelectAll()" type="button">{% trans "Select all" %}</button>
+                        <button class="dropdown-item" onclick="DeSelectAll()" type="button">{% trans "Deselect all" %}</button>
+                        <button class="dropdown-item" onclick="RemoveFiles()" type="button">{% trans "Delete" %}</button>
+                    </div>
+                </div>
+
+                <div style="display: flex;align-items: center;">
+                    <span class="m-0 mx-2">
+                        {{hospital_used_storage}}MB
+                    </span>
+                    <div class="progress ms-1 me-1" role="progressbar" aria-label="Warning example" style="width:200px;" aria-valuenow="{{hospital_used_storage}}" aria-valuemin="0" aria-valuemax="{{hospital_max_storage}}">
+                        <div class="progress-bar bg-warning text-dark" style="width: {{percentage_used_storage}}%">{{percentage_used_storage}}%</div>
+                    </div>
+                    <span class="mx-2">
+                        {{hospital_max_storage}}MB
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-default icon-btn md-btn-flat active"> <input type="radio" name="file-manager-view" value="file-manager-col-view" checked="" /> <span class="ion ion-md-apps"></span> </label>
+                    <label class="btn btn-default icon-btn md-btn-flat"> <input type="radio" name="file-manager-view" value="file-manager-row-view" /> <span class="ion ion-md-menu"></span> </label>
+                </div>
+            </div>
+        </div>
+
+        <hr class="m-0" />
+    </div>
+
+    <div class="file-manager-container file-manager-col-view">
+        <div class="file-manager-row-header">
+            <div class="file-item-name pb-2">Filename</div>
+            <div class="file-item-changed pb-2">Changed</div>
+        </div>
+
+        <div class="file-item">
+            <a href="?path={{back_path}}" class="file-item-icon file-item-level-up fas fa-level-up-alt text-secondary"></a>
+            <a href="?path={{back_path}}" class="file-item-name">
+                ..
+            </a>
+        </div>
+
+
+
+
+        {% for content in contents %}
+        <div class="file-item" {% if content.type == 'file' %} data-format="{{content.format}}" {% endif %} data-type="{{content.type}}" data-full_name="{{content.full_name}}">
+            <div class="file-item-select-bg bg-primary"></div>
+            <label class="file-item-checkbox custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="selecteCheckbox{{forloop.counter}}" />
+                <span class="custom-control-label"></span>
+            </label>
+            {% if content.type == 'img' %}
+            <div class="file-item-img" style="background-image: url('{{content.url}}');"></div>
+            {% else %}
+            <div class="file-item-icon far text-secondary"></div>
+            {% endif %}
+            <a {% if content.type == 'folder' %} href="?path={{current_path}}{{content.name}}/" {% else %} href="{{content.url}}" target="_blank"{% endif %} class="file-item-name">
+                {{content.name}}
+            </a>
+            <div class="file-item-changed">{{content.m_datetime|date:'Y-m-d'}}</div>
+            <div class="file-item-actions btn-group">
+                <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="ion ion-ios-more"></i></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#rename{{forloop.counter}}">{% trans "Rename" %}</a>
+                    <!-- <a class="dropdown-item" href="javascript:void(0)">Move</a> -->
+                    <!-- <a class="dropdown-item" href="javascript:void(0)">Copy</a> -->
+                    <a class="dropdown-item" type="button" onclick="{document.getElementById('selecteCheckbox{{forloop.counter}}').checked = true;RemoveFiles()}">{% trans "Delete" %}</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="rename{{forloop.counter}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="renameLabel{{forloop.counter}}" aria-hidden="true">
+    <div class="modal-dialog">
+      <form action="{% url 'Rename' secret %}" method="get" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="renameLabel{{forloop.counter}}">{% trans "Rename" %}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <label for="" class="label-control">{% trans "New name" %}</label>
+                <input type="hidden" class="form-control" value="{{current_path}}" name="path">
+                <input type="hidden" class="form-control" value="{{content.full_name}}" name="old_name">
+                <input type="text" class="form-control" value="{{content.full_name}}" name="new_name">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+          <button type="submit" class="btn btn-primary">{% trans "Rename" %}</button>
+        </div>
+        </form>
+    </div>
+  </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+
+<script>
+    const UploadURL = "{% url 'UploadFiles' secret %}"
+</script>
+<script src="{% static 'js/file-manager.js' %}"></script>
+<script>
+    format_ico = {
+        "folder":"fa-folder",
+        ".html":"fa-html5",
+        ".zip":"fa-file-archive",
+        ".js":"fa-js",
+        ".doc":"fa-file-word",
+        ".docx":"fa-file-word",
+        ".xlsx":"fa-file-excel",
+        ".pdf":"fa-file-pdf",
+        ".txt":"fa-file-alt",
+        ".css":"fa-css3",
+        ".mp3":"fa-file-audio",
+        ".mp4":"fa-file-video",
+        ".avi":"fa-file-video",
+        "":"fa-file"
+    }
+
+    const current_path = '{{current_path}}'
+    const fileItems = document.querySelectorAll('.file-item')
+
+    fileItems.forEach(element => {
+        let type = element.dataset.type
+        let ELico = element.querySelector('.file-item-icon')
+
+        if (type == 'file') {
+            let format = element.dataset.format
+            
+            if (ELico) {
+                if (format in format_ico) {
+                    ELico.classList.add(format_ico[format])
+                } else {
+                    ELico.classList.add(format_ico[''])
+                }
+            }
+        } else if (type == 'folder') {
+            if (ELico) {
+                ELico.classList.add(format_ico['folder'])
+            }
+        }
+
+    });
+
+
+    function GetCheckedItems() {
+        let checkedList = []
+        
+        fileItems.forEach(el=>{
+            let checkbox = el.querySelector('.file-item-checkbox input[type="checkbox"]')
+            if (checkbox) {
+                if (checkbox.checked) {
+                    checkedList.push({"type":el.dataset.type, "full_name":el.dataset.full_name})
+                }
+            }
+            
+        })
+        return checkedList
+    }
+
+
+    function RemoveFiles() {
+        let RemoveForm = document.querySelector('#RemoveForm')
+        RemoveForm.querySelectorAll('input[name="items"]').forEach(el=>{
+            el.remove()
+        })
+
+        let checkedList = GetCheckedItems()
+        checkedList.forEach(el=>{
+            RemoveForm.insertAdjacentHTML('afterbegin', `<input type="hidden" name="items" value="${el.full_name}">`)
+        })
+
+        RemoveForm.submit()
+    }
+
+    let input_to_check = document.querySelectorAll('input[name="folder_name"], input[name="new_name"]')
+    input_to_check.forEach(el=>{
+        el.addEventListener('input', inputChecker)
+    })
+
+    let blocked_char = '/\\=*+!@#$%^&*(){}:"|<>?'
+
+    function inputChecker() {
+        input_to_check.forEach(el=>{
+        let old_val = el.value
+        let new_val = ''
+        for (let i = 0; i < old_val.length; i++) {
+            if (!blocked_char.includes(old_val[i])) {
+                new_val = new_val+old_val[i]
+            }            
+        }
+        el.value = new_val
+    })
+    }
+
+
+    function SelectAll() {
+        fileItems.forEach(el=>{
+            let checkbox = el.querySelector('.file-item-checkbox input[type="checkbox"]')
+            if (checkbox) {
+                checkbox.checked = true
+            }
+        })
+    }
+
+    function DeSelectAll() {
+        fileItems.forEach(el=>{
+            let checkbox = el.querySelector('.file-item-checkbox input[type="checkbox"]')
+            if (checkbox) {
+                checkbox.checked = false
+            }
+        })
+    }
+</script>
+
+<!-- drag drop files script -->
+<script>
+    const placeholderIcon = '{% static "img/file.png" %}';
+    const hospital_max_storage = {{hospital_max_storage}};
+    const hospital_used_storage = {{hospital_used_storage}}
+
+
+    $(document).ready(function(){
+        const uploadDropArea = document.querySelector('form#uploadForm');
+
+        // const uploadDropArea = document.querySelector('form#uploadForm');
+        let fileInput = document.querySelector('.file-input');
+        
+        // Utility function to prevent default browser behavior
+        function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        }
+        
+        // Preventing default browser behavior when dragging a file over the container
+        uploadDropArea.addEventListener('dragover', preventDefaults);
+        uploadDropArea.addEventListener('dragenter', preventDefaults);
+        uploadDropArea.addEventListener('dragleave', preventDefaults);
+        
+        // Handling dropping files into the area
+        uploadDropArea.addEventListener('drop', handleDrop);
+        
+        // We’ll discuss `handleDrop` function down the road
+        function handleDrop(e) {
+            e.preventDefault();
+
+            // Getting the list of dragged files
+            const files = e.dataTransfer.files;
+
+            // Checking if there are any files
+            if (files.length) {
+            // Assigning the files to the hidden input from the first step
+            fileInput.files = files;
+            uploadFile(files)
+            // Processing the files for previews (next step)
+            handleFiles(files);
+            }
+        }
+
+        function handleFiles(files) {
+            for (const file of files) {
+                // Initializing the FileReader API and reading the file
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+
+                // Once the file has been loaded, fire the processing
+                reader.onloadend = function (e) {
+
+                };
+            }
+            }
+
+        // We’ll discuss `isValidFileType` function down the road
+        function isValidFileType(file) {
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            return allowedTypes.includes(file.type);
+        }
+
+        uploadDropArea.addEventListener('dragover', () => {
+            uploadDropArea.classList.add('drag-over');
+        });
+        
+        uploadDropArea.addEventListener('dragleave', () => {
+        uploadDropArea.classList.remove('drag-over');
+        });
+
+    });
+
+
+</script>
+
+
+{% endblock sheri %}

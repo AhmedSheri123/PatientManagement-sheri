@@ -1,0 +1,116 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+
+<div class="ui center aligned icon header">
+    <i class="circular edit icon"></i>
+
+</div>
+
+<form method="post" class="ui container">
+    {% csrf_token %}
+<div class="mt-5">
+    <h2 class="ui center aligned icon header bg-primary text-light p-2 rounded-top" >
+        {% trans "Edit Patient" %}
+    </h2>
+</div>
+<div style="background-color: white;">
+
+<div class="m-3">
+
+    <div class="row g-3">
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                <input type="text" value="{{first_name}}" required class="form-control" name="first_name" placeholder="שם פרטי" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+    
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-passport-fill"></i></span>
+                <input type="text" value="{{last_name}}" required class="form-control" name="last_name" placeholder="שם משפחה" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+    
+        </div>
+{% comment %}     
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-fill"></i></span>
+                <input type="email" value="{{email}}" name="email" class="form-control" placeholder="البريد الالكتروني" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+        </div> {% endcomment %}
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-vcard-fill"></i></span>
+                <input type="text" value="{{id_number}}" name="id_number" class="form-control" placeholder="ת.ז" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-fill"></i></span>
+                <input type="text" value="{{phone}}" name="phone" class="form-control" placeholder="رقم الهاتف" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+    
+        </div>
+    
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-geo-alt-fill"></i></span>
+                <input type="text" value="{{address}}" name="address" class="form-control" placeholder="כתובת" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+    
+        </div>
+
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-gender-ambiguous"></i></span>
+                <select required name="gender" id="" class="form-control">
+                    {% for i in GenderFields %}
+                    <option value="{{i.0}}" {% if gender == i.0 %}selected{% endif %}>{{i.1}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+    
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-cake2-fill"></i></span>
+                <input required type="date" value="{{birth_date}}" name="birth_date" class="form-control" placeholder="ת.לידה" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+    
+        </div>
+</form>
+
+
+
+</div>
+<div class="ui center aligned icon header bg-white text-light p-2 rounded-bottom " >
+    <button type="submit" class="btn btn-dark mb-3">
+        <i class="bi bi-pencil-square"></i>
+        {% trans "Save" %}</button>
+</div>
+</div>
+
+</div>
+
+<!-- <script>
+    let Forminputs = document.querySelectorAll('input[type="text"], input[type="datetime-local"], input[type="number"], select, textarea')
+    Forminputs.forEach(element => {
+        element.classList.add('form-control')
+    }); 
+
+    let Formchecks = document.querySelectorAll('input[type="checkbox"]')
+    Formchecks.forEach(element => {
+        element.classList.add('form-check-input')
+        element.insertAdjacentHTML("afterend", '<div class="mt-3"></div>')
+    }); 
+</script> -->
+{% endblock %}

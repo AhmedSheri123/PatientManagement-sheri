@@ -1,0 +1,456 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load messenger_tags %}
+
+{% block sheri %}
+
+
+<div >
+
+
+    <div  id="main" style=" padding: 0; height: 100vh;">
+        <div  class="bg-primary text-white fixed-top" style="padding:10px 20px;  box-shadow: rgb(177, 177, 177) 0px 0px 3px; margin: auto;">
+            {% get_user_full_name receiver.id as receiver_full_name %}
+    
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center;">
+                    {% if profile_image.1 == 0 %}
+                        <img src="{{profile_image.0}}" alt="" style="width: 50px; border-radius: 100%;">
+                    {% else %}
+                    <img src="{% static '/img/default-profile-img-2.png' %}" alt="" style="width: 50px; border-radius: 100%;">
+                    {% endif %}
+                    <h5 style="margin-right: 10px;">{{receiver_full_name}}</h5>
+            
+                </div>
+    
+                <a id="MsgSettings" tabindex="0" role="button" data-bs-toggle="popover" title="الرسائل" class="btn btn-primary" style="font-size: 25px;"><i class="bi bi-three-dots-vertical"></i></a>
+            </div>
+        </div>
+    
+        <div id="msg-container-box">
+            <div id="msg-container-box2" style="padding-top: 100px;">
+                {% for messages in messages_list %}
+                <p style="padding: 25px 0px; display: block; margin: auto;text-align: center;">{{messages.0|date:'Y-m-d'}}</p>
+                {% for message in messages.1 %}
+                {% if message.sender == request.user %}
+                <div class="sender">
+                    <div class="btn btn-primary">
+                        <p>{{message.msg}}</p>
+                        <span>{{message.creation_date|date:'H:i'}}</span>
+
+                        <i id="msg-status-{{message.id}}" class="bi {% if message.is_readed%}bi-check2-all{%else%}bi-check2{%endif%}"></i>
+
+                    </div>
+                </div>
+                {% else %}
+                <div class="receiver">
+                    <div class="btn btn-light">
+                        <p class="">{% if message.is_receiver_subscription_passed %}{{message.msg}}{% else %}نفذ عدد استقبال الرسائل يرجى ترقية او تجديد العضوية لاظهار الرسالة{% endif %}</p>
+                        <span>{{message.creation_date|date:'H:i'}}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+
+                <div class="is-typing btn btn-light rounded-5">
+                    <div class="jump1"></div>
+                    <div class="jump2"></div>
+                    <div class="jump3"></div>
+                    <div class="jump4"></div>
+                    <div class="jump5"></div>
+                 </div>
+                <div class="sender-form-box fixed-bottom bg-primary">
+                    <form id="form" onsubmit="event.preventDefault();" style="display: contents;">
+                        <input type="text" class="form-control" oninput="send_is_typing()" placeholder="اكتب رسالة" id="senderMsg">
+        
+        
+                        <button class="btn btn-info">
+                            <i style="font-size: 20px;" class="bi bi-send-fill"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>    
+    
+
+
+        </div>
+    
+        
+    </div>
+
+</div>
+
+<div data-name="popover-content-msg-settings" id="popover-content-msg-settings" class="d-none" style="width: min(100%, 400px);">
+    <a href="#" class="btn btn-info " style="display: block; width: 100%;">عرض الملف الشخصي</a>
+    
+    {% if not is_favorite %}
+    <a href="{% url 'AddFavorite' receiver.id %}?redir=True" class="btn btn-warning mt-1" style="display: block; width: 100%;">اضافة الى مفضلة</a>
+    {% else %}
+    <a href="{% url 'DeleteFavorite' receiver.id %}?redir=True" class="btn btn-warning mt-1" style="display: block; width: 100%;">ازالة من المفضلة</a>
+    {% endif %}
+
+    {% if not is_blocked %}
+    <a href="{% url 'BlockUserMessenger' receiver.id %}?redir=True" class="btn btn-danger mt-1" style="display: block; width: 100%;">حظر</a>
+    {% else %}
+    <a href="{% url 'DeleteBlockUser' receiver.id %}?redir=True" class="btn btn-danger mt-1" style="display: block; width: 100%;">الغاء الحظر</a>
+    {% endif %}
+</div>
+
+
+
+
+
+<script type='text/javascript'>
+    
+            
+    $(document).ready(function() {
+        
+
+        var optionsMsgSettings = {
+            sanitize: false,
+            html: true,
+            title: "خيارات",
+            customClass: 'MessagesPopover',
+            //html element
+            //content: $("#popover-content")
+            content: $('[data-name="popover-content-msg-settings"]').html(),
+            //Doing below won't work. Shows title only
+            //content: $("#popover-content").html()
+            fallbackPlacements : ['right', 'left']
+        }
+
+
+
+
+        var exampleElMsgSettings = document.getElementById('MsgSettings')
+        var popover = new bootstrap.Popover(exampleElMsgSettings, optionsMsgSettings)
+
+
+    })
+
+    // $(function () {
+    //         $('[data-bs-toggle="popover"]').popover()
+    //     })
+</script>
+
+
+
+
+
+<style>
+    /* css wave animation for on typing chat messages */
+        .show-el {
+            display: flex !important;
+        }
+
+      .is-typing {
+         width: 75px;
+         height: 30px;
+         display: none;
+         justify-content: space-around;
+         align-items: center;
+         position: absolute;
+         z-index: 999;
+         bottom: 80px;
+      }
+
+      .jump1,
+      .jump2,
+      .jump3,
+      .jump4,
+      .jump5 {
+         width: 3px;
+         height: 3px;
+         border-radius: 100%;
+         background-color: rgb(0, 0, 0);
+      }
+
+      .jump1 {
+         animation: typing 1.5s linear infinite;
+         animation-delay: 01.1s;
+      }
+
+      .jump2 {
+         animation: typing 1.5s linear infinite;
+         animation-delay: 01.2s;
+      }
+
+      .jump3 {
+         animation: typing 1.5s linear infinite;
+         animation-delay: 01.3s;
+      }
+
+      .jump4 {
+         animation: typing 1.5s linear infinite;
+         animation-delay: 01.4s;
+      }
+
+      .jump5 {
+         animation: typing 1.5s linear infinite;
+         animation-delay: 1.5s;
+      }
+
+    @keyframes typing {
+     0% {
+        transform: translateY(0px);
+     }
+
+     25% {
+        transform: translateY(0px);
+     }
+
+     35% {
+        transform: translateY(7px);
+     }
+
+     45% {
+        transform: translateY(0px);
+     }
+
+     60% {
+        transform: translateY(-7px);
+     }
+
+     75% {
+          background-color: rgb(126, 126, 126);
+        transform: translateY(0px);
+     }
+
+     100% {
+        transform: translateY(0px);
+     }
+  }
+</style>
+
+
+<style>
+.popover-header {text-align: right;}
+* {
+            font-family: Arial, Helvetica, sans-serif !important;
+            letter-spacing: .3px;
+          }
+
+    .sender {display: flex; flex-direction: row; padding: 4px;}
+    .receiver p {border-radius: 15px; padding: 10px; margin: 0 !important;}
+
+    .sender div, .receiver div{
+        border-radius: 15px;
+        display: flex;
+        align-items: flex-end;
+    }
+    .sender p {
+        margin: 0 !important;
+        padding: 10px;
+        word-break:break-all;
+    }
+
+    .sender span{
+        font-size: 12px;
+        padding: 3px 0px;
+        text-wrap: nowrap;
+    }
+
+    .receiver span {
+        font-size: 12px;
+        padding: 6px;
+    }
+    .sender-form-box button {border-radius: 100%; transform: rotateZ(225deg); margin: 10px 0;}
+
+    {% if LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'he' %}
+    .sender i {padding: 3px; padding-left: 6px;}
+    .sender-form-box button {margin-right: 6px;}
+    .sender p, .receiver p {text-align: right;}
+    .is-typing {left: 27px;}
+    {% else %}
+    .is-typing {right: 27px;}
+    .sender i {padding: 3px; padding-right: 6px;}
+    .sender-form-box button {margin-left: 6px;}
+    .sender p, .receiver p {text-align: left;}
+    {% endif %}
+
+    .receiver {display: flex; flex-direction: row-reverse; padding: 4px;}
+
+    .sender-form-box {width: min(100%, 768px);padding: 2px 20px; margin: auto;
+         /* bottom: 0; right: 0;position: absolute; */
+        /* right: -17px !important; */
+        display: flex; align-items: center; justify-content: space-between;flex-direction: row;
+    }
+
+    #msg-container-box {box-shadow: inset #6a6a6a 0px 15px 15px -13px !important; background-color: #f1f1f1; box-shadow: rgb(177, 177, 177) 0px 0px 3px;height: 100%; display: contents;}
+    #msg-container-box2 {
+        box-shadow: rgb(177, 177, 177) 0px 0px 3px; background-color: #f1f1f1; width: min(100%, 768px);position: relative;padding: 20px;margin: auto;display: block; 
+        /* padding-bottom: 75px; */
+        padding-bottom: 115px;
+        min-height: 100vh;
+    }
+    body {
+        margin-bottom:0 !important;
+    }
+
+</style>
+{% get_ws_type 1 as ws_type %}
+
+<script>
+    const user_id = '{{request.user.id}}'
+
+
+
+
+    function scrollToBottom(){
+        let msgBox = document.querySelector('#msg-container-box2')
+        window.scrollTo(0, msgBox.scrollHeight);
+    }
+
+
+scrollToBottom()
+  window.addEventListener("load",init);
+  function init() { 
+    document.getElementById("form").addEventListener("submit",function(e) {
+      e.preventDefault();
+      SendMsg()
+    });
+  }
+
+
+
+
+    let url = `{{ws_type}}://${window.location.host}/ws/socket-server/{{room_id}}/`
+    const chatSocket = new WebSocket(url)
+    function send(query){
+        chatSocket.send(
+            JSON.stringify(query)
+        )
+    }
+
+    chatSocket.onmessage = function(e){
+        let data = JSON.parse(e.data)
+        console.log(data)
+        console.log(data.user_id, user_id)
+        if (data.user_id != user_id) {
+            if (data.method == 'send_msg') {
+
+                if (!data.receiver_subscription_passed) {
+                    data.message = data.receiver_subscription_end_msg
+                    showToast(data.toastID, 'النظام', data.receiver_subscription_end_msg, '')
+                }
+                let msg_obj = document.querySelector(`.is-typing`)
+                msg_obj.classList.remove('show-el')
+                ReceiveMsg(data);
+                
+                send({
+                    'method': 'msg_readed',
+                    'msg_id':data.msg_id
+                });
+            }
+
+
+            else if (data.method == 'msg_readed') {
+                let msg_obj = document.querySelector(`#msg-status-${data.msg_id}`)
+                msg_obj.classList.remove('bi-check2')
+                msg_obj.classList.add('bi-check2-all')
+            }
+
+            else if (data.method == 'typing') {
+                let msg_obj = document.querySelector(`.is-typing`)
+                if (!msg_obj.classList.contains('show-el')) {
+                    msg_obj.classList.add('show-el')
+
+                    setTimeout(function() { 
+                    msg_obj.classList.remove('show-el')
+                    }, 5800);
+                }
+
+            }
+
+
+            else if (data.method == 'msg_read_all') {
+                let msg_objs = document.querySelectorAll(`.sender i`)
+                msg_objs.forEach(msg_obj => {
+                    if (!msg_obj.classList.contains('bi-check2-all')) {
+                        msg_obj.classList.remove('bi-check2')
+                        msg_obj.classList.add('bi-check2-all')
+                    
+                    }
+                })
+
+            }
+        }
+
+        else if (data.user_id == user_id) {
+            if (data.method == 'send_msg') {
+                let msg_html = `
+
+
+                    <div class="sender" >
+                        <div class="btn btn-primary">
+                            <p>${data.message}</p>
+                            <span>${data.creation_date}</span>
+                            <i id="msg-status-${data.msg_id}" class="bi bi-check2"></i>
+
+                        </div>
+                    </div>
+                `
+                let msgBox = document.querySelector('#msg-container-box2')
+                msgBox.insertAdjacentHTML('beforeend', msg_html)
+                scrollToBottom()
+
+                
+            } else if (data.method == 'subscription'){
+                console.log(data.method == 'subscription')
+                
+                showToast(data.toastID, 'النظام', data.msg, '')
+            }
+
+
+        }
+    }
+
+
+
+    function SendMsg(){
+        let msg = document.querySelector('#senderMsg')
+
+        if (!msg.value) {return false}
+
+        
+        send({
+                'method': 'send_msg',
+                'message': msg.value
+            })
+
+        msg.value = ""
+        return false
+    }
+
+
+    function ReceiveMsg(data){
+        let msgBox = document.querySelector('#msg-container-box2')
+        let msg_html = `
+                <div class="receiver">
+                    <div class="btn btn-light">
+                        <p>${data.message}</p>
+                        <span>${data.creation_date}</span>
+                    </div>
+                </div>
+        `
+        msgBox.insertAdjacentHTML('beforeend', msg_html)
+        scrollToBottom()
+    }
+
+
+
+
+    function send_is_typing(){
+        send({
+            'type': 'typing',
+            'method':'typing',
+        })
+    }
+
+</script>
+
+
+{% endblock sheri %}

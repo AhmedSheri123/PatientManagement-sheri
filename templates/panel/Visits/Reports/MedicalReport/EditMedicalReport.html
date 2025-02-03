@@ -1,0 +1,181 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block sheri %}
+
+<div class="ui center aligned icon header">
+    <i class="circular edit icon"></i>
+
+</div>
+
+<form method="post" class="ui container">
+    {% csrf_token %}
+<div class="mt-5">
+    <h2 class="ui center aligned icon header bg-primary text-light p-2 rounded-top" >
+        {% trans "Editing a medical report" %}
+    </h2>
+</div>
+<div style="background-color: white;">
+
+<div class="m-3">
+
+    <div>
+        <div class="row g-3">
+            <div class="col-sm-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+
+                    <select disabled name="patient_user" id="" class="form-control">
+                        <option value="{{visit.user.id}}">{{visit.user.first_name}} {{visit.user.last_name}}</option>
+                    </select>
+                </div>
+        
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-sticky-fill"></i></span>
+                    <textarea rows="3" class="form-control" disabled placeholder="{% trans "Note" %}" name="note" aria-label="With textarea"></textarea>
+                </div>
+        
+            </div>
+        </div>
+        <hr>
+
+
+
+        <div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="user md icon"></i></span>
+                {% if request.user.userprofile.profile_type == '2' %}
+                    <input type="hidden" class="form-control" name="doctor_user" value="{{doctor.id}}">
+                    <input type="text" disabled class="form-control" value="{{doctor.userprofile.get_account_alias_name_display}} - {{doctor.first_name}} {{doctor.last_name}}">
+                {% else %}
+                    <select name="doctor_user" class="form-control">
+                        {% for i in doctors %}
+                        <option value="{{i.user.id}}" {% if doctor.id ==  i.user.id %} selected {% endif %}>{{i.user.userprofile.get_account_alias_name_display}} - {{i.user.first_name}} {{i.user.last_name}}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </div>
+    
+        </div>
+        <div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi-file-medical-fill"></i></span>
+                <textarea rows="6" class="form-control" placeholder="{% trans "Reason for visit" %}" name="reason_for_visit" aria-label="With textarea">{{reason_for_visit}}</textarea>
+            </div>
+        </div>
+
+
+        <div class="row g-3">
+            <div class="col-sm-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-heart-pulse-fill"></i></span>
+                    <input type="number" value="{{pulse}}" class="form-control" placeholder="{% trans "Pulse" %}" name="pulse" aria-label="With textarea">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-droplet-fill"></i></span>
+                    <input type="number" value="{{pressure}}" class="form-control" placeholder="{% trans "Pressure" %}" name="pressure" aria-label="With textarea">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-lungs-fill"></i></span>
+                    <input type="number" value="{{oxygen}}" class="form-control" placeholder="{% trans "Oxygen" %}" name="oxygen" aria-label="With textarea">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-grid-3x2-gap-fill"></i></span>
+                    <input type="number" value="{{sugar}}" class="form-control" placeholder="{% trans "Sugar" %}" name="sugar" aria-label="With textarea">
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class=" stethoscope icon"></i></span>
+                <textarea rows="6" class="form-control" placeholder="{% trans "Clinical examination" %}"  name="clinical_examination" aria-label="With textarea">{{clinical_examination}}</textarea>
+            </div>
+        </div>
+        <div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-heart-fill"></i></span>
+                <textarea rows="6" class="form-control" placeholder="{% trans "Treatment" %}" name="treatment" aria-label="With textarea">{{treatment}}</textarea>
+            </div>
+        </div>
+
+
+
+        <div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-patch-plus-fill"></i></span>
+                <textarea rows="6" class="form-control" placeholder="{% trans "Recommendations" %}" name="recommendations" aria-label="With textarea">{{recommendations}}</textarea>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6">
+            <div class="input-group mb-3" style="flex-wrap: nowrap;align-items: center;">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-heart-fill"></i></span>
+                <select name="diagnosis" id="diagnosis">
+                    {% for diagnosis in diagnosises %}
+                    <option value="{{diagnosis.code}}" {% if diagnosis_code ==  diagnosis.code %} selected {% endif %}>{{diagnosis.descr}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" {% if report.is_custom_diagnosis %} checked {% endif %} type="checkbox" name="is_custom_diagnosis" onchange="custom_diagnosis_check()" role="switch" id="is_custom_diagnosis">
+                    <label class="form-check-label" name="is_custom_diagnosis" for="is_custom_diagnosis">{% trans "Custom diagnosis" %}</label>
+                </div>
+                <input type="text" class="form-control" disabled name="custom_diagnosis" value="{{report.custom_diagnosis}}" placeholder="{% trans "Write diagnosis" %}" id="custom_diagnosis">
+            </div>
+        </div>
+</form>
+
+
+<script>
+    function custom_diagnosis_check() {
+        let diagnosis = document.querySelector('#diagnosis')
+        let is_custom_diagnosis = document.querySelector('#is_custom_diagnosis')
+        let custom_diagnosis = document.querySelector('#custom_diagnosis')
+        if (is_custom_diagnosis.checked) {
+            custom_diagnosis.disabled = false
+            diagnosis.disabled = true
+        } else {
+            custom_diagnosis.disabled = true
+            diagnosis.disabled = false
+        }
+    }
+    custom_diagnosis_check()
+</script>
+
+
+</div>
+<div class="ui center aligned icon header bg-white text-light p-2 rounded-bottom " >
+    <button type="submit" class="btn btn-dark mb-3">
+        <i class="bi bi-pencil-square"></i>
+        {% trans "Save" %}</button>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+
+$(document).ready(function () {
+    $("#diagnosis").select2({ width: '100%' });
+});
+</script>
+{% endblock %}

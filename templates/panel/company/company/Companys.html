@@ -1,0 +1,318 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css\employee\employeePortal.css' %}">
+{% endblock %}
+
+{% block sheri %}
+<style>
+
+
+    .post_state {
+        color: rgb(255, 255, 255);
+        background-color: rgb(85, 83, 83);
+        font-weight: bold;
+        display: inline;
+        padding: 5px;
+        border-radius: 4px;
+      }
+    
+      .filter-input-grid select, .filter-input-grid input{
+        margin-top: 30px;
+        border: solid 1px rgba(0, 0, 0, 0.181) !important;
+        color: rgba(0, 0, 0, 0.608) !important;
+      }
+      
+</style>
+<div>
+    <form id="filter-form" class="ui vertical menu" style="margin-left: 10px; text-align: right; width: 100%; padding-bottom: 20px;">
+
+        <p style="padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid rgb(194, 194, 194);">
+            تصفية
+            البحث</p>
+      
+            <div class="filter-input-grid" >
+      
+
+
+      
+        
+          <input type="text" value="{{search}}" name="search" class="form-control item" placeholder="اسم الشركة">
+          <input type="text" value="{{complite_name}}" name="complite_name" class="form-control item" placeholder="اسم الممثل">
+        
+          <select class="form-select item" aria-label="Default select example" name="country">
+            <option selected value="">الدولة</option>
+            {% for country in countrys %}
+            <option {%if country.id|stringformat:"i" == country_id %} selected {% endif %} value="{{country.id}}">{{country.name}}</option>
+            {% endfor %}
+          </select>
+
+          <select class="form-select item" aria-label="Default select example" name="state">
+            <option selected value="">מצב</option>
+            {% for city in CompanySignupProcessChoices %}
+            <option {%if city.0 == state %} selected {% endif %} value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+          </select>
+
+
+          <input type="text" value="{{search_email}}" name="search_email" class="form-control item" placeholder="البريد الإلكتروني">
+          <input type="text" value="{{search_phone}}" name="search_phone" class="form-control item" placeholder="מספר טלפון">
+          <input dir="ltr" value="{{publish_date}}" type="date" name="publish_date" class="form-control item" >
+      
+          
+      
+          <div style="display: flex; align-items: center; justify-content: center;    margin-top: 30px;">
+            <input type="submit" name="" id="" value="חיפוש" class="btn btn-primary" style="background-color: purple; color: white !important; margin: 0; margin-left: 10px;">
+      
+      
+            {% comment %} <button class="btn btn-primary" type="button"
+            onclick="{document.getElementById('is_ExportExcel').value = '4';document.getElementById('FormPortal').submit()}">اكسل</button>
+          
+            <button class="btn btn-primary" onclick="selectAll()" style="margin: 10px;" type="button">تحديد الكل</button>
+           {% endcomment %}
+          </div>
+      
+          </div>
+
+        {% comment %} <p
+            style="padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid rgb(194, 194, 194);">
+            تصفية
+            البحث</p>
+        <select class="form-select item" aria-label="Default select example" name="company_size">
+            <option selected value="">حجم المنشئة</option>
+            {% for city in CompanySizeFields %}
+            <option value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+        </select>
+
+
+        <select class="form-select item" aria-label="Default select example" name="city">
+            <option selected value="">المدينة</option>
+            {% for city in citys %}
+            <option value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+        </select>
+
+        <select class="form-select item" aria-label="Default select example" name="company_have_cert">
+            <option selected value="">شهادة المواءمة</option>
+            {% for city in CompanyHaveCertFields %}
+            <option value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+        </select>
+
+
+        <select class="form-select item" aria-label="Default select example" name="cert_type">
+            <option selected value="">المؤهل العلمي</option>
+            {% for city in LearningDomainFields %}
+            <option value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+        </select>
+
+
+        <select class="form-select item" aria-label="Default select example" name="gender">
+            <option selected value="">מספר טלפון</option>
+            {% for city in CompanyGenderFields %}
+            <option value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+        </select>
+
+        <select class="form-select item" aria-label="Default select example" name="worktime">
+            <option selected value="">اوقات العمل</option>
+            {% for city in CompanyWorktimeFields %}
+            <option value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+        </select>
+
+        <select class="form-select item" aria-label="Default select example" name="job_type">
+            <option selected value="">نوع الوظيفة</option>
+            {% for city in JobTypeFields %}
+            <option value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+        </select>
+
+        <select class="form-select item" aria-label="Default select example" name="post_state">
+            <option selected value="">מצב</option>
+            {% for city in PostStateFields %}
+            <option value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+        </select>
+      
+
+
+        <input type="text" name="id_code" class="form-control item" placeholder="كود الإعلان">
+        <div class="ui icon input item">
+            <input type="text" name="search" placeholder="البحث عن שם פרטי">
+
+            <i onclick="{document.getElementById('filter-form').submit()}"
+                class="inverted circular search link icon left"></i>
+        </div>
+        <div style="padding: 10px;">
+            <input type="submit" name="" id="" value="חיפוש" class="btn btn-warning"
+                style="width: 100%; padding: 10px;">
+        </div> {% endcomment %}
+    </form>
+
+
+</div>
+
+<div class="table-box">
+    
+    <div style="display: contents;">
+{% comment %} 
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>اسم</th>
+                    <th>
+                        <p>الشركة</p>
+                        <p>كود الإعلان</p>
+                    </th>
+                    <th>المسمى الوظيفي</th>
+                    <th>المدينة</th>
+                    <th>
+                        الحالة
+
+                    </th>
+                    <th>عرض</th>
+                    <th>מחיקה</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td data-label="#">{{forloop.counter}}</td>
+                    <td data-label="Name">{{job.userprofile.companyprofile.complite_name}}</td>
+                    <td data-label="Age">
+                        <p>{{job.userprofile.companyprofile.company_name}}</p>
+                        <p>{{job.id_code}}</p>
+                    </td>
+                    <td data-label="Job">{{job.job_title}}</td>
+                    <td data-label="Job">{{job.get_company_city_display}}</td>
+                    <td data-label="Job">
+                        <div class="post_state">{{job.get_post_state_display}}</div>
+                        
+                    </td>
+                    <td data-label="Job"><a href="{% url 'ShowCompanyPostJobs' job.id %}"
+                            class="ui inverted blue button">הצגה</a></td>
+                    <td data-label="Job"><button href="{% url 'DeleteCompanyPostJobs' job.id %}"
+                            class="ui  red button">حذف</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> {% endcomment %}
+
+
+
+
+
+        {% comment %} <style>
+            .mytable>tbody>tr>td, .mytable>tbody>tr>th, .mytable>tfoot>tr>td, .mytable>tfoot>tr>th, .mytable>thead>tr>td, .mytable>thead>tr>th {
+              padding: 25px 5px;
+          }
+          </style> {% endcomment %}
+          
+              <table class="table mytable table-striped table-hover table-bg">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">أسم الشركة</th>
+                    <th scope="col">أسم الممثل</th>
+                    <th scope="col">מספר טלפון</th>
+                    <th scope="col">بريد الإلكتروني</th>
+                    <th scope="col">מצב</th>
+
+                    <th scope="col">عرض</th>
+                    <th scope="col">מחיקה</th>
+          
+          
+                  </tr>
+                </thead>
+                <tbody>
+                  <form action="{% url 'index' %}" id="FormPortal" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="is_ExportExcel" id="is_ExportExcel" value="0">
+          
+                    {% for job in jobs %}
+                  <tr >
+                    <th scope="row" style="position: relative; padding-right: 20px;">
+                      <div style="display: flex;">
+                        <input type="checkbox" class="chkbox" name="selected-items" value="{{job.id}}"
+                          style="margin-left: 7px;">
+                      {{forloop.counter}}
+                  </div>
+                    </th>
+                    <td>{{job.companyprofile.company_name}}</td>
+                    <td>{{job.companyprofile.complite_name}}</td>
+                    <td>{{job.companyprofile.phone}}</td>
+                    <td>{{job.user.email}}</td>
+                    <td>{{job.get_company_signup_process_display}}</td>
+
+                    <td><a href="{% url 'Company' job.id %}" class="ui inverted blue button">הצגה</a></td>
+                    <td><a href="{% url 'DeleteCompanys' job.id %}" class="ui  red button">מחיקה</td>
+                  </tr>
+                  {% endfor %}
+                </form>
+                </tbody>
+              </table>
+
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+      var $chkboxes = $('.chkbox');
+      var lastChecked = null;
+  
+      $chkboxes.click(function (e) {
+        if (!lastChecked) {
+          lastChecked = this;
+          return;
+        }
+  
+        if (e.shiftKey) {
+          var start = $chkboxes.index(this);
+          var end = $chkboxes.index(lastChecked);
+  
+          $chkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).prop('checked', lastChecked.checked);
+        }
+  
+        lastChecked = this;
+      });
+    });
+  
+
+
+
+
+    
+  let is_checked = false
+  
+  function selectAll() {
+    let chkboxs = document.querySelectorAll('.chkbox')
+
+    if (!is_checked){
+
+      chkboxs.forEach(chkbox => {
+        chkbox.checked = true
+              
+        });
+        
+        is_checked = true
+      } else {
+
+        chkboxs.forEach(chkbox => {
+          chkbox.checked = false
+              
+        });
+        
+        is_checked = false
+      }
+
+
+  }
+  </script>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% load panel_tags %}
+
+<style>
+  .footer-bold {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .footer-segment {
+    margin: 0px 15px;
+    margin-top: 15px;
+
+  }
+  .footer-segment li a:hover {
+    background-color: unset;
+    color: #333;
+  }
+
+  .footer-segment li a {
+    color: black;
+    text-decoration: none;
+  }
+
+
+
+  @media only screen and (max-width: 800px) {
+    .footer-box {
+        justify-content: flex-start !important;
+    }
+  }
+</style>
+
+<div class="border-top" style="background-color: rgb(255, 255, 255); margin-top: 70px; padding: 0px 20px; padding-top: 20px;">
+  {% GenFooter '1' as loaded %}
+  {{footer}}
+  <div class="footer-box" style="display: flex;flex-wrap: wrap; align-items: flex-start;justify-content: space-evenly; padding: 0px 20px;">
+
+    {% comment %} <div class="footer-segment">
+      <p class="footer-bold">القوانين</p>
+      <div>
+        <li><a href="{% url 'TermsConditions' %}">الشروط</a></li>
+        <li><a href="{% url 'PrivacyPolicy' %}">الخصوصية</a></li>
+      </div>
+    </div> {% endcomment %}
+
+
+    <div class="footer-segment">
+      <p class="footer-bold">روابط ذات صلة</p>
+      <div>
+        {% for i in loaded.1 %}
+        <li><a {% if i.link%} href="{{i.link}}" target="_blank" {%endif%} >{{i.title}}</a></li>
+
+        {% endfor %}
+
+      </div>
+    </div>
+
+
+    <div class="footer-segment">
+      <p class="footer-bold">روابط سريعة</p>
+      <div>
+        {% for i in loaded.2 %}
+        <li><a {% if i.link%} href="{{i.link}}" {%endif%} >{{i.title}}</a></li>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="footer-segment">
+      <p class="footer-bold">تواصل معنا</p>
+      <div>
+        {% for i in loaded.3 %}
+        <li><a {% if i.link%} href="{{i.link}}" target="_blank"{%endif%} >{{i.title}}</a></li>
+        {% endfor %}
+        {% comment %} <li><a href="http://www.qaderoon.sa/" target="_blank">www.qaderoon.sa</a></li> {% endcomment %}
+
+
+
+        
+    <ul class="" >
+      <div >
+        <div  style="display: block; justify-content: space-around; align-items: center; margin-top: 10px;">
+          
+            <a class="icons-box" target="_blank" href="https://www.youtube.com/channel/UCPuoRVXTq93_CBW2JbsAsBw">
+              <i  class="bi bi-youtube"></i>
+            </a>
+          <a   class="icons-box" target="_blank" href="https://www.facebook.com/QaderoonSA">
+            <i  class="bi bi-facebook"></i>
+          </a>
+          <a   class="icons-box" target="_blank" href="https://www.instagram.com/qaderoonsa/" class="instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+
+          <a class="icons-box" target="_blank" href="https://www.linkedin.com/company/qaderoon/">
+            <i  class="bi bi-linkedin"></i>
+          </a>
+
+          <a class="icons-box" target="_blank" href="https://twitter.com/QaderoonSA">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+        </div>
+        </div>
+
+    </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="d-flex flex-wrap justify-content-between align-items-center  " style='color:black;'>
+
+
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-body-secondary">© {% now "Y" %} by Qaderoon</span>
+    </div>
+
+  </footer>
+
+</div>

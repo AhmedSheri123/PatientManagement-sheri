@@ -1,0 +1,135 @@
+{% load static %}
+
+<!doctype html>
+<html lang="{{LANGUAGE_CODE}}" {% if LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'he' %}dir="rtl"{% endif %}>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PatientManagement</title>
+    {% if LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'he' %}
+    <link rel="stylesheet" href="{% static 'bootstrap-5.3.3/css/bootstrap.rtl.min.css'%}" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
+    {% else %}
+    <link rel="stylesheet" href="{% static 'bootstrap-5.3.3/css/bootstrap.min.css'%}">
+    {% endif %}
+    {% comment %} <link href="{% static 'bootstrap-5.3.3/css/bootstrap.min.css'%}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    {% block links %}
+    {% endblock links %}
+
+    <style>
+      @font-face {
+        font-family: GilroyBold;
+        src: url({% static 'fonts/Cairo-Black.woff2' %});
+      }
+
+      @font-face {
+        font-family: GilroyRegular;
+        src: url({% static 'fonts/Cairo-Regular.woff2' %});
+      }
+
+      h1, h2, h3, h4, h5, h6, nav .navbar-brand, label {
+        font-family: GilroyBold;
+        font-weight: bold;
+        letter-spacing: -1px;
+        
+      }
+
+      input, nav, select, span, button {
+        font-family: GilroyRegular;
+      }
+      
+      div {
+        letter-spacing: .5px;
+      }
+
+      nav * {
+        font-size: 1rem;
+      }
+
+      nav a:hover {
+        background-color: unset;
+        border-bottom: 1px solid #fff;
+      }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgb(179, 179, 179); 
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: grey; 
+    }
+
+
+      .tab-pane {text-align: justify;}
+    </style>
+  </head>
+  <body>
+
+
+
+    {% block sheri %}
+    {% endblock sheri %}
+
+    <script src="{% static 'bootstrap-5.3.3/js/bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> {% endcomment %}
+  
+
+    
+
+
+
+
+
+      <!-- Position it: -->
+      <!-- - `.toast-container` for spacing between toasts -->
+      <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
+      <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
+
+      <div class="toast-container start-0 p-3" style="position: fixed; bottom: 40px;" id="toast-box" dir="rtl">
+      </div>
+    
+      <script>
+        const default_img_profile = `{% static 'img/default-profile-img-2.png' %}`
+        const toastBox = document.querySelector('#toast-box')
+
+        function randomGen() {
+          let min = 100000
+          let max = 1000000
+          return (Math.floor((Math.random())*(max-min+1))+min).toString();
+         }
+
+        function showToast(toastID, username, msg, img) {
+            if (img == '') {
+              img = default_img_profile
+            }
+          html = `
+    
+            <!-- Then put toasts within -->
+            <div class="toast" role="alert" id="toast${toastID}" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <img src="${img}" class="rounded me-2" alt="..." width="50" style="border-radius: 100% !important;">
+                <strong class="me-auto">${username}</strong>
+                <small class="text-body-secondary">الان</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                ${msg}
+              </div>
+            </div>
+          `
+          toastBox.insertAdjacentHTML("beforeend", html)
+          $(`#toast${toastID}`).toast('show');
+    
+        };
+        </script>
+  </body>
+</html>

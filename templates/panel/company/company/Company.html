@@ -1,0 +1,160 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+<style>
+    .styled-box {
+        padding: 30px 20px !important; overflow: hidden; position: relative; background-color: #fff;  box-shadow: inset #d4d4d4 0px 0px 5px 3px; max-width: 800px; margin: auto !important; border-radius: 20px;
+    }
+
+    .styled-box .item {
+        margin-top: 30px !important;
+        margin-right: 20px !important;
+        border: solid 1px rgba(0, 0, 0, 0.288);
+        border-radius: 25px;
+        padding: 20px !important;
+    }
+
+    .styled-box .item .header {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 10px !important;
+
+    }
+
+    .styled-box .item p {
+        background-color: #f1f1f1;
+        padding: 10px;
+        border-radius: 25px;
+    }
+
+    .styled-box .item .header::after {
+        content: ':';
+    }
+</style>
+
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+        <div class="carousel-inner carousel">
+            <div class="carousel-item active">
+                {% if img.0 %}
+                <img src="{{img.0}}" class="d-block w-100" alt="..." style="width: 75px !important; border-radius: 100%; margin: auto;">
+                {% else %}
+                <img src="{% static '/img/default-profile-img-2.png' %}" style="width: 75px!important; border-radius: 100%; margin: auto;" class="d-block w-100" alt="...">
+                {% endif %}
+            </div>
+        </div>
+        الشركة
+    </h2>
+
+
+    <div class="ui list styled-box" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+
+
+        <div class="item">
+            <div class="header">اسم المنشئة</div>
+            <p>{{company.companyprofile.company_name}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">اسم الدولة</div>
+            <p>{{company.companyprofile.country.name}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">اسم المدينة</div>
+            <p>{{company.companyprofile.employee_city}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">اسم الحي</div>
+            <p>{{company.companyprofile.district}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">رقم ارضي</div>
+            <p>{{company.companyprofile.land_line_number}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">فيسبوك</div>
+            <p>{{company.companyprofile.facebook_profile}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">linkedin</div>
+            <p>{{company.companyprofile.linkedin}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">واتساب</div>
+            <p>{{company.companyprofile.whatsapp}}</p>
+        </div>
+
+
+
+
+    </div>
+    <h2 class="ui center aligned icon header">
+
+        نبذة عن الشركة
+    </h2>
+    <div class="ui list styled-box" style="display: grid; justify-content: space-around; grid-template-columns: auto;justify-content: normal">
+
+        <div class="item">
+            <div class="header" style="width: 100% !important;">نبذة</div>
+            <p>{{company.companyprofile.about_me}}</p>
+        </div>
+    </div>
+
+    <h2 class="ui center aligned icon header">
+
+        بيانات مسؤول التوظيف
+    </h2>
+    <div class="ui list styled-box" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+        <div class="item">
+            <div class="header">اسم مقدم الطلب</div>
+            <p>{{company.companyprofile.complite_name}}</p>
+        </div>
+
+        <div class="item">
+            <div class="header">البريد الإلكتروني</div>
+            <p>{{company.user.email}}</p>
+        </div>
+        <div class="item">
+            <div class="header">מספר טלפון</div>
+            <p>{{company.companyprofile.phone}}</p>
+        </div>
+
+
+
+    </div>
+
+<br>
+    <div class="ui list styled-box" style="display: grid; justify-content: space-around; grid-template-columns: auto;">
+        <p class="mt-5">מצב</p>
+        
+        <form method="post" class="input-group mb-3 ">
+
+            {% csrf_token %}
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon1">حفظ</button>
+            <select name="state" class="form-control" id="">
+                {% for city in CompanySignupProcessChoices %}
+                <option {%if city.0 == company.company_signup_process %} selected {% endif %} value="{{city.0}}">{{city.1}}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+<br>
+<hr>
+<br>
+    <div>
+
+
+
+
+        {% endblock %}

@@ -1,0 +1,210 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load panel_tags %}
+{% load i18n %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css\employee\employeePortal.css' %}">
+{% endblock %}
+
+{% block sheri %}
+<style>
+  td,
+  th {
+    text-align: right !important;
+  }
+
+  .post_state {
+    color: rgb(255, 255, 255);
+    background-color: rgb(85, 83, 83);
+    font-weight: bold;
+
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .filter-input-grid select, .filter-input-grid input{
+    margin-top: 30px;
+    border: solid 1px rgba(0, 0, 0, 0.181) !important;
+    color: rgba(0, 0, 0, 0.608) !important;
+  }
+  
+
+</style>
+
+
+
+<div style="margin: 20px 0px;">
+{% comment %} 
+  <form id="filter-form" class="ui vertical menu" style="margin-left: 10px; text-align: right; width: 100%; padding-bottom: 20px;">
+    <p style="padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid rgb(194, 194, 194);">
+      חיפוש</p>
+
+      <div class="filter-input-grid">
+
+    <input type="text" value="{{first_name}}" name="first_name" class="form-control item" placeholder="שם פרטי">
+    <input type="text" value="{{last_name}}" name="last_name" class="form-control item" placeholder="שם משפחה">
+    <input type="text" value="{{id_number}}" name="id_number" class="form-control item" placeholder="ת.ז">
+    <input type="text" value="{{search_email}}" name="search_email" class="form-control item" placeholder="البريد الإلكتروني">
+    <input type="text" value="{{search_phone}}" name="search_phone" class="form-control item" placeholder="מספר טלפון">
+    <select class="form-select item" aria-label="Default select example" name="gender">
+      <option selected value="">מספר טלפון</option>
+      {% for city in GenderFields %}
+      <option {%if city.0 == gender %} selected {% endif %} value="{{city.0}}">{{city.1}}</option>
+      {% endfor %}
+    </select>
+    <input dir="ltr" value="{{publish_date}}" type="date" name="publish_date" class="form-control item" >
+    
+
+    <div style="display: flex; align-items: center; justify-content: center;    margin-top: 30px;">
+      <input type="submit" name="" id="" value="חיפוש" class="btn btn-primary" style="background-color: purple; color: white !important; margin: 0; margin-left: 10px;">
+
+
+    
+    </div>
+
+    </div>
+    <!-- <div class="ui icon input item">
+      <input type="text" name="search" placeholder="البحث عن שם פרטי">
+
+      <i onclick="{document.getElementById('filter-form').submit()}"
+        class="inverted circular search link icon left"></i>
+    </div> -->
+
+  </form> {% endcomment %}
+
+
+</div>
+{% temp_get_permission_state request.user.id 'add' 'visit_medical_report' as has_permission%}
+{% if has_permission %}
+<a href="{% url 'AddMedicalReport' visit.id %}" class="btn btn-primary mb-3">
+  <i class="bi bi-person-fill-add"></i>
+  {% trans "Add report" %}</a>
+  {% endif %}
+
+<div class="table-box">
+  <div style="display: contents;">
+    <table class="table mytable table-striped table-hover table-bg">
+      <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">{% trans "Full name" %}</th>
+            <th scope="col">{% trans "Doctor" %}</th>
+            <th scope="col">{% trans "Added" %}</th>
+            <th scope="col">{% trans "Diagnosis code" %}</th>
+  
+            <th scope="col">{% trans "Options" %}</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <form action="{% url 'PanelHome' %}" id="FormPortal" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="is_ExportExcel" id="is_ExportExcel" value="0">
+
+          {% for job in reports %}
+        <tr >
+          <th scope="row" style="position: relative; padding-right: 20px;">
+            <div style="display: flex;">
+              <input type="checkbox" class="chkbox" name="selected-items" value="{{job.id}}"
+                style="margin-left: 7px;">
+            {{forloop.counter}}
+        </div>
+          </th>
+          <td>{{job.vistor.user.first_name}} {{job.vistor.user.last_name}}</td>
+          <td>{{job.doctor.first_name}} {{job.doctor.last_name}}</td>
+          <td>{{job.whenpublished}}</td>
+          <td>
+            {{job.diagnosis}}
+          </td>
+          
+          <td>
+            {% temp_get_permission_state request.user.id 'download' 'visit_medical_report' as has_permission%}
+            {% if has_permission %}
+            <a href="{% url 'MedicalReportToPDF' job.id %}?download=1" target="_blank" class="ui inverted blue button">
+              <i class="bi bi-cloud-arrow-down-fill"></i>
+              {% trans "Download" %}</a>
+
+            <a href="{% url 'MedicalReportToPDF' job.id %}" target="_blank" class="ui inverted blue button">
+              <i class="bi bi-file-earmark-pdf-fill"></i>
+              {% trans "Print" %}</a>
+              {% endif %}
+              {% temp_get_permission_state request.user.id 'view' 'visit_medical_report' as has_permission%}
+              {% if has_permission %}
+            <a href="{% url 'ViewMedicalReport' job.id %}" class="ui inverted blue button">
+            <i class="bi bi-eye-fill"></i>
+            {% trans "View" %}</a>
+            {% endif %}
+              {% temp_get_permission_state request.user.id 'edit' 'visit_medical_report' as has_permission%}
+              {% if has_permission %}
+            <a href="{% url 'EditMedicalReport' job.id %}" class="ui inverted blue button">
+            <i class="bi bi-pencil-square"></i>
+            {% trans "Edit" %}</a>
+            {% endif %}
+            {% temp_get_permission_state request.user.id 'delete' 'visit_medical_report' as has_permission%}
+            {% if has_permission %}
+          <a href="{% url 'DeleteMedicalReport' job.id %}" class="ui  red button">
+            <i class="bi bi-trash-fill"></i>
+            {% trans "Delete" %}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+      </form>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    var $chkboxes = $('.chkbox');
+    var lastChecked = null;
+
+    $chkboxes.click(function (e) {
+      if (!lastChecked) {
+        lastChecked = this;
+        return;
+      }
+
+      if (e.shiftKey) {
+        var start = $chkboxes.index(this);
+        var end = $chkboxes.index(lastChecked);
+
+        $chkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).prop('checked', lastChecked.checked);
+      }
+
+      lastChecked = this;
+    });
+  });
+
+  let is_checked = false
+  
+  function selectAll() {
+    let chkboxs = document.querySelectorAll('.chkbox')
+
+    if (!is_checked){
+
+      chkboxs.forEach(chkbox => {
+        chkbox.checked = true
+              
+        });
+        
+        is_checked = true
+      } else {
+
+        chkboxs.forEach(chkbox => {
+          chkbox.checked = false
+              
+        });
+        
+        is_checked = false
+      }
+
+
+  }
+</script>
+{% endblock %}

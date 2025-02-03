@@ -1,0 +1,137 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load panel_tags %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+<style>
+    .min-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+    }
+
+    .main-card {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin: 20px 10px !important;
+        min-width: 300px;
+        height: 150px;
+        color: rgb(71, 71, 71);
+        border-radius: 5px;
+        {% comment %} border: solid 1px bisque; {% endcomment %}
+        
+    }
+
+    .main-card i {
+        font-size: 50px;
+    }
+
+    .min-chart-box {
+        box-shadow: rgb(204, 204, 204) 1px 2px 3px;
+        background-color: white;
+    }
+
+    .box {
+        box-shadow: rgb(204, 204, 204) 1px 2px 3px;
+        background-color: white;
+    }
+</style>
+
+<div class="box container">
+    <h2 style="padding: 20px 10px; text-align: center;">رسالة بث</h2>
+    <div style="max-width: 300px; margin: auto;" >
+        <label for="">اختر نوع الإرسال</label>
+
+        <select onchange="CheckFormStatus(this)" class="form-select item"  aria-label="Default select example" name="company_have_cert">
+        <option selected value="1">الأفراد</option>
+        <option value="2">المنظمات</option>
+
+      </select>
+    </div>
+
+<div class=" ">
+    <form id="for_employee" action="" method="post" >
+        {% csrf_token %}
+    <input type="hidden" value="1" name="to">
+
+    <label for="">إختر القائمة</label>
+    <select class="form-select item" aria-label="Default select example" id="employeeChooseDIR" name="employeeChooseDIR">
+        <option selected value="" disabled>اختر</option>
+        {% for city in EmployeeJobStateFields %}
+        <option {%if city.0 == company_have_cert %} selected {% endif %} value="{{city.0}}">{{city.1}}</option>
+        {% endfor %}
+        <option  value="all">الكل</option>
+      </select><br>
+
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">عنوان الرسالة</label>
+        <input class="form-control" name="subject" id="exampleFormControlTextarea1" rows="3" placeholder="أكتب عنوان الرسالة">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">الرسالة</label>
+        <textarea class="form-control" name="msg" id="exampleFormControlTextarea1" rows="3" placeholder="أدخل الرسالة التي تريد إرسالها"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin: auto; display: block;" >إرسال</button>
+
+    </form>
+    
+
+    <form style="display: none;" id="for_companys" action="" method="post">
+
+        <input type="hidden" value="2" name="to">
+        {% csrf_token %}
+        <label for="">اختر الوجهة</label>
+        <select class="form-select item" aria-label="Default select example" id="companyChooseDIR" name="companyChooseDIR">
+            <option selected value="" disabled>اختر</option>
+            {% for city in PostStateFields %}
+            <option {%if city.0 == company_have_cert %} selected {% endif %} value="{{city.0}}">{{city.1}}</option>
+            {% endfor %}
+            <option  value="all">الكل</option>
+          </select><br>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">عنوان الرسالة</label>
+            <input class="form-control" name="subject" id="exampleFormControlTextarea1" rows="3placeholder="أكتب عنوان الرسالة">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">الرسالة</label>
+            <textarea class="form-control" name="msg" id="exampleFormControlTextarea1" rows="3" placeholder="أدخل الرسالة التي تريد إرسالها"></textarea>
+          </div>
+      <button type="submit" class="btn btn-primary" style="margin: auto; display: block;" >إرسال</button>
+
+        </form>
+</div>
+<br>
+</div>
+
+<br>
+
+<script>
+
+    function CheckFormStatus(obj){
+        let for_companys = document.getElementById('for_companys')
+        let for_employee = document.getElementById('for_employee')
+
+        let companyChooseDIR = document.getElementById('companyChooseDIR')
+        let employeeChooseDIR = document.getElementById('employeeChooseDIR')
+        companyChooseDIR.value = ''
+        employeeChooseDIR.value = ''
+        if (obj.value == 1) {
+            for_companys.style.display = 'none'
+            for_employee.style.display = 'block'
+            
+        } if (obj.value == 2) {
+            for_employee.style.display = 'none'
+            for_companys.style.display = 'block'
+        } 
+    }
+
+</script>
+
+
+{% endblock %}

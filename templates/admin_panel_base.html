@@ -1,0 +1,117 @@
+{% load static %}
+<!doctype html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Qaderoon</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/Semantic/semantic.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/css/bootstrap/bootstrap.rtl.min.css' %}" integrity="sha384-nU14brUcp6StFntEOOEBvcJm4huWjB0OcIeQ3fltAfSmuZFrkAif0T+UtNGlKKQv" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="icon" sizes="192x192" href="{% static 'img/5f2059_4a678cdf9fdf4a328e637e7dc842d6d9~mv2.png' %}" type="image/png">
+
+    <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static '/Semantic/semantic.min.js' %}"></script>
+    {% block links %}
+    {% endblock %}
+</head>
+
+<body style="background-color: #f1f1f1; ">
+    
+<style>
+  table td, table th {
+    text-align: center !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.155) ;
+    border-left: 1px solid rgba(0, 0, 0, 0.155);
+
+    
+}
+.table td {
+  vertical-align: middle;
+}
+.filter-input-grid{
+  padding: 0 20px; display: flex; justify-content: flex-start; flex-wrap: wrap;
+
+}
+
+h2 {
+  color:#65007ec4 !important;
+}
+
+.filter-input-grid select, .filter-input-grid input{
+  max-width: 150px; margin-left:10px ;
+}
+
+
+.table-box {
+  display: flex;align-items: flex-start; flex-wrap: nowrap;overflow-x: scroll;
+}
+
+table {
+  border-radius: 16px !important;
+  overflow: hidden;
+
+}
+
+        @font-face {
+        font-family: 'Bahij'; /*a name to be used later*/
+        src: url('{% static 'font/Bahij_TheSansArabic-Bold.ttf' %}'); /*URL to font*/
+    }
+    
+    p, div, h1, h2, h3 {
+        font-family: 'Bahij' !important;
+    }
+</style>
+  
+    <div class="ui menu fixed-top" style="overflow:scroll; margin: 0; background-color: #212529; border-radius: 0 !important; border-bottom: solid 1px rgba(255, 255, 255, 0.163);     height: 75px!important; z-index: 1500;">
+      
+        <div class="item">
+          <button id="offcanvasScrollingBTN" style="font-size: 40px; margin: 0px 50px; " class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i style="color: white ;" class="bi bi-list" ></i></button>
+
+          
+          <a href='{% url 'admin_panel_index' %}' class="ui primary button">الرئيسية</a>
+        </div>
+        <div class="item">
+          <a onclick="{location.reload()}" class="ui button">تحديث الصفحة</a >
+        </div>
+      </div>
+
+
+
+    <div style="display: flex; flex-wrap: nowrap;">
+
+        {% include 'parts/admin_panel_navbar.html' %}
+        <div style=" width: 100%; overflow:scroll;height: 100vh; padding:20px; padding-top: 80px;">
+        {%block sheri%}
+        {% endblock %}
+        </div>
+    </div>
+    
+
+    
+    <script src="{% static '/js/bootstrap/popper.min.js' %}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="{% static '/js/bootstrap/bootstrap.min.js' %}" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+    <script>
+        const myOffcanvas = document.getElementById('offcanvasScrolling')
+        myOffcanvas.addEventListener('hide.bs.offcanvas', event => {
+          // do something...
+          document.getElementById('offcanvasScrolling').style.width = '0'
+        })
+
+        myOffcanvas.addEventListener('show.bs.offcanvas', event => {
+          // do something...
+          document.getElementById('offcanvasScrolling').style.width = '400px'
+        })
+
+        if (screen.width <=768) {
+          document.getElementById('offcanvasScrollingBTN').click();document.getElementById('offcanvasScrollingBTN').click();
+        }
+    </script>
+</body>
+
+</html>

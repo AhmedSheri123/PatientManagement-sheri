@@ -1,0 +1,336 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load panel_tags %}
+{% load i18n %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+
+{% temp_get_permission_state request.user.id 'show' 'index' as has_permission%}
+{% if has_permission %}
+<style>
+    .min-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+    }
+
+    .main-card {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin: 20px 10px !important;
+        min-width: 300px;
+        height: 150px;
+        color: rgb(71, 71, 71);
+        border-radius: 5px;
+        {% comment %} border: solid 1px bisque; {% endcomment %}
+        
+    }
+
+    .main-card i {
+        font-size: 50px;
+    }
+
+    .min-chart-box {
+        box-shadow: rgb(204, 204, 204) 1px 2px 3px;
+        background-color: white;
+    }
+
+    .box {
+        box-shadow: rgb(204, 204, 204) 1px 2px 3px;
+        background-color: white;
+    }
+</style>
+<form id="viewsers_count_days_form" action="" method="get" >
+
+
+
+    <div class="container box" style="padding: 30px 15px;">
+        <h2 style="padding: 20px 10px; text-align: center; display: flex;justify-content: center; align-items: center;">{% trans "Summary" %}
+                <select name="analatic_count_days" id="" class="form-select ms-2" style="width: auto;" onchange="{document.querySelector('#viewsers_count_days_form').submit()}">
+                    <option {% if analatic_count_days == 1 %} selected {%endif%} value="1">{% trans "Today" %}</option>
+                    <option {% if analatic_count_days == 3 %} selected {%endif%} value="3">{% trans "3 days" %}</option>
+                    <option {% if analatic_count_days == 7 %} selected {%endif%} value="7">{% trans "week" %}</option>
+                    <option {% if analatic_count_days == 14 %} selected {%endif%} value="14">{% trans "2 weeks" %}</option>
+                    <option {% if analatic_count_days == 30 %} selected {%endif%} value="30">{% trans "month" %}</option>
+                    <option {% if analatic_count_days == 60 %} selected {%endif%} value="60">{% trans "3 months" %}</option>
+                </select>
+        </h2>
+        <div class="item-main-box">
+            <button class="btn btn-primary item-box">
+                <i class="circular white user icon"></i>
+                <div class="title-value-box">
+                    <p class="title">{% trans "Registered patients" %}</p>
+                    <p class="value">{{today_patient}}
+                        
+                        <i class="icon pencil alternate"></i>
+                    </p>
+                </div>
+            </button>
+    
+    
+            <button class="btn btn-dark item-box">
+                <i class="circular white random icon"></i>
+                <div class="title-value-box">
+                    <p class="title">{% trans "Local visits" %}</p>
+                    <p class="value">{{today_local_patient}}
+                        <i class="icon male"></i>
+                    </p>
+                </div>
+            </button>
+    
+    
+            <button class="btn btn-warning item-box">
+                <i class="circular white external alternate icon"></i>
+                <div class="title-value-box">
+                    <p class="title">{% trans "Home visits" %}</p>
+                    <p class="value">{{today_home_patient}}
+                        <i class="icon home"></i>
+                    </p>
+                </div>
+            </button>
+    
+    
+            <button class="btn btn-danger item-box">
+                <i class="circular white clipboard list icon"></i>
+                <div class="title-value-box">
+                    <p class="title">{% trans "Reports" %}</p>
+                    <p class="value">
+                        {{today_reports}}
+                        <i class="icon heartbeat"></i>
+                    </p>
+                </div>
+            </button>
+    
+    
+            <button class="btn btn-info item-box">
+                <i class="circular white boxes icon"></i>
+                <div class="title-value-box">
+                    <p class="title">{% trans "Total Payments" %}</p>
+                    <p class="value">{{today_money}} $</p>
+                </div>
+            </button>
+    
+    
+            <button class="btn btn-secondary item-box">
+                <i class="circular white dollar sign icon"></i>
+                <div class="title-value-box">
+                    <p class="title">{% trans "Local visits" %}</p>
+                    <p class="value">{{today_local_money}} $</p>
+                </div>
+            </button>
+    
+    
+            <button class="btn btn-success item-box">
+                <i class="circular white dollar sign icon"></i>
+                <div class="title-value-box">
+                    <p class="title">{% trans "Home visits" %}</p>
+                    <p class="value">{{today_home_money}} $</p>
+                </div>
+            </button>
+    
+    
+            <button class="btn btn-danger item-box">
+                <i class="circular white road icon"></i>
+                <div class="title-value-box">
+                    <p class="title">{% trans "Distance" %}</p>
+                    <p class="value">{{today_km_money.0}}<span style="opacity: .7;"> (0-30/Km)</span></p>
+                    <p class="value">{{today_km_money.1}}<span style="opacity: .7;"> (30-60/Km)</span></p>
+                </div>
+            </button>
+    
+        </div>
+    </div>
+</br>    
+
+<div class="box">
+    <h2 style="padding: 20px 10px; text-align: center;">{% trans "Summary" %}</h2>
+
+<div class="min-box ">
+
+        <div style="width: min(400px, 100%);  padding: 50px 0px;">
+            <p style="text-align: center; margin-bottom: 20px;">{% trans "The number of visitors" %}</p>
+            <canvas  id="myChart5"></canvas>
+                <select class="form-select" name="viewsers_count_days"  onchange="{document.getElementById('viewsers_count_days_form').submit()}">
+                    <option {% if viewsers_count_days == 7 %} selected {%endif%} value="7">{% trans "week" %}</option>
+                    <option {% if viewsers_count_days == 14 %} selected {%endif%} value="14">{% trans "2 weeks" %}</option>
+                    <option {% if viewsers_count_days == 30 %} selected {%endif%} value="30">{% trans "month" %}</option>
+                    <option {% if viewsers_count_days == 60 %} selected {%endif%} value="60">{% trans "3 months" %}</option>
+                </select>
+                <!-- <input type="text" class="btn btn-primary" style="width: 100px;" value="تصفية"> -->
+        </div>
+
+
+
+        <div style="width: min(400px, 100%);  padding: 50px 0px;">
+            <p style="text-align: center; margin-bottom: 20px;">{% trans "The number of reports" %}</p>
+            <canvas  id="myChart6"></canvas>
+                <select class="form-select" name="announced_count_days"  onchange="{document.getElementById('viewsers_count_days_form').submit()}">
+                    <option {% if announced_count_days == 7 %} selected {%endif%} value="7">{% trans "week" %}</option>
+                    <option {% if announced_count_days == 14 %} selected {%endif%} value="14">{% trans "2 weeks" %}</option>
+                    <option {% if announced_count_days == 30 %} selected {%endif%} value="30">{% trans "month" %}</option>
+                    <option {% if announced_count_days == 60 %} selected {%endif%} value="60">{% trans "3 months" %}</option>
+                </select>
+                <!-- <input type="text" class="btn btn-primary" style="width: 100px;" value="تصفية"> -->
+        </div>
+
+</div>
+</div>
+</form>
+<br>
+
+
+<style>
+    .now-numbers-box {
+        width: 200px; border: 1px solid rgba(0, 0, 0, 0.307); border-radius: 25px; padding: 20px 10px;
+        
+    }
+    .now-numbers-box .now-numbers-title {
+        text-align: center;font-size: 20px;
+    }
+
+    .now-numbers-box .now-numbers-section {
+        display: flex; background-color: #f1f1f1; border-radius: 25px;
+        margin-top: 10px;
+        padding-right: 10px;
+    }
+
+    .now-numbers-box .now-numbers-section p {
+        margin: 0;
+        padding: 10px 5px;
+    }
+
+    .now-numbers-box .now-numbers-section .now-numbers-section-title {
+        font-size: 16px;
+    }
+
+    .now-numbers-box .now-numbers-section .now-numbers-section-value {
+        color: purple;
+    }
+    
+    i.circular.icon {box-shadow: 0 0 0 .1em rgb(255 255 255 / 50%) inset;}
+    .item-box p {
+        margin: 0;
+        
+    }
+    .item-box {
+        width: min(100%, 250px);
+        display: flex;
+        padding: 25px 15px;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        margin-left: 20px;
+    }
+
+    .item-box i {
+        font-size: 30px;
+    }
+
+    .item-box .title {
+        font-size: 20px;
+    }
+    .item-box .value {
+        font-size: 18px;
+        direction: ltr;
+    }
+
+    .item-box .value i {
+        font-size: 15px;
+        margin-left: 3px;
+    }
+    .item-box .title-value-box {
+        display: flex; flex-direction: column; justify-content: space-between; height: 100%;
+    }
+
+  .item-main-box {
+    display: flex;flex-wrap: wrap;
+  }
+    @media (max-width: 768px) {
+  .item-main-box {
+    justify-content: center;
+  }
+}
+</style>
+
+<br>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+  <script>
+
+
+    const ctx6 = document.getElementById('myChart6');
+
+    const labels6 = [{% for i in announced_count_by_day %} "{{i.0}}", {% endfor %}]
+    const data6 = {
+    labels: labels6,
+    datasets: [
+        {
+            label: '{% trans "Local reports" %}',
+            data: [{% for i in announced_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+        },
+        {
+            label: '{% trans "Home reports" %}',
+            data: [{% for i in presenters_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }
+    ]
+    };
+    const config6 = {
+        type: 'line',
+        data: data6,
+    };
+    new Chart(ctx6, config6);
+  </script>
+
+
+
+  <script>
+
+
+    const ctx5 = document.getElementById('myChart5');
+
+    const labels5 = [{% for i in viewsers_count_by_day %} "{{i.0}}", {% endfor %}]
+    const data5 = {
+    labels: labels5,
+    datasets: [
+        {
+            label: '{% trans "Local visits" %}',
+            data: [{% for i in viewsers_count_by_day %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+        },
+        {
+            label: '{% trans "Home visits" %}',
+            data: [{% for i in viewsers_count_by_day2 %} {{i.1}}, {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }
+    ]
+    };
+    const config5 = {
+        type: 'line',
+        data: data5,
+    };
+    new Chart(ctx5, config5);
+  </script>
+
+
+
+
+{% endif %}
+{% endblock %}

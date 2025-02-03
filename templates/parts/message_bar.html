@@ -1,0 +1,117 @@
+{% load messenger_tags %}
+
+
+{% if user.is_authenticated %}
+{% if 'messageRoom' not in request.path %}
+
+{% get_count_of_not_readed_msg request.user.id as count_of_not_readed_msg %}
+
+<div style="position: fixed; z-index: 3000; bottom: 30px; left: 20px; padding: 0; height: 80px; width: 80px;"  class="rounded-circle bg-dark shadow-lg">
+        <a style="position: relative; color: white; padding: 0; display: flex; align-items: center; justify-content: center;" id="example" tabindex="0" class="btn" role="button" data-bs-toggle="popover" title="الرسائل" >
+          <span id="msg-main-badge" class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger">{{count_of_not_readed_msg}}</span>
+          <i class="bi bi-chat-dots-fill" style="text-shadow: 2px 2px 3px #727272; font-size: 50px;padding-top: 5px;"></i>
+        </a>
+</div>
+
+<div data-name="popover-content" id="popover-content" class="d-none frame" style="width: min(100%, 400px);">
+  <iframe src="/messenger/viewMessages" frameborder="0" style="height: 400px; width: 400px; padding: 0; margin: 0;"></iframe>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type='text/javascript'>
+    
+            
+    $(document).ready(function() {
+        
+      var options = {
+            sanitize: false,
+            html: true,
+            title: "الرسائل",
+            customClass: 'MessagesPopover',
+            //html element
+            //content: $("#popover-content")
+            content: $('[data-name="popover-content"]').html(),
+            //Doing below won't work. Shows title only
+            //content: $("#popover-content").html()
+            fallbackPlacements : ['top']
+        }
+
+
+
+
+
+
+        var exampleEl = document.getElementById('example')
+        var popover = new bootstrap.Popover(exampleEl, options)
+
+
+
+    })
+
+    // $(function () {
+    //         $('[data-bs-toggle="popover"]').popover()
+    //     })
+</script>
+
+
+
+
+
+<style>
+  .navbar {
+    border: unset;
+  }
+
+  #navbarSupportedContent2 i {
+    font-size: 22px;
+    text-shadow: #6097b4ce;
+    text-shadow: #00000094 1px 2px 5px;
+  }
+
+  .glass-eff {
+    /* From https://css.glass */
+  background: #6097b4ce;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.126);
+  transition: all .2s linear;
+  }
+
+
+  .MessagesPopover {
+  --bs-popover-max-width: min(100%, 400px);
+  margin: 0 20px !important;
+  
+  /* --bs-popover-border-color: var(--bd-violet-bg);
+  --bs-popover-header-bg: var(--bd-violet-bg);
+  --bs-popover-header-color: var(--bs-white);
+  --bs-popover-body-padding-x: 1rem;
+  --bs-popover-body-padding-y: .5rem; */
+}
+
+.popover-body {padding:0px;}
+.popover-header {text-align: right;}
+
+
+#msg-main-badge {
+    top: 10px !important;
+    right: 10px !important;
+    font-size: 15px;
+}
+</style>
+{% endif %}
+{% endif %}

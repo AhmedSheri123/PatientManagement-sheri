@@ -1,0 +1,48 @@
+
+.progress-box {
+    width: 500px; border-left:1px solid rgb(216, 216, 216) ;
+}
+.progress-steps {
+    display: flex;
+    align-items: center;
+}
+.progress-steps-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-steps-box i {
+    font-size: 20px;
+}
+.progress-steps i {
+    font-size: 30px;
+    margin-left: 10px;
+}
+.progress-steps-box p {
+    margin: 0;
+}
+
+.progress-content {
+    opacity: .5;
+}
+.progress-box-fixed{
+    position: fixed;
+}
+
+@media only screen and (max-width: 1000px) {
+    .main-box-flex {
+        flex-direction: column;
+    }
+
+    .progress-box-fixed{
+        position: relative;
+    }
+
+    .progress-box {
+        width: 100%;
+    }
+}
+
+.desiresButton {font-size: 20px; position: absolute; left: 10px; top: 4px; cursor: pointer;}
+.desires-box {position: relative;}

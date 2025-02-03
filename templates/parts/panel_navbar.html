@@ -1,0 +1,295 @@
+{% load panel_tags %}
+{% load i18n %}
+
+<style>
+    .nav-icon {
+        font-size: 20px;
+    }
+    .nav-strings {
+        font-size: 20px;
+        
+    }
+    
+    .offcanvas-body ul li i {
+      margin-left: 10px;
+      color: #e6e6e6;
+    }
+    .offcanvas {
+      min-height: 100vh;
+    }
+</style>
+
+<div class="offcanvas offcanvas-start bg-dark show" style="width: 400px; position: relative !important; display: block; transition: all .2s linear;padding-top: 80px;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <!-- <div class="offcanvas-header">
+
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div> -->
+
+  <div class="offcanvas-body" style="padding: 0 !important; margin: 15px; ">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="min-width:270px;">
+        <a href="{% url 'PanelHome' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+
+          <span class="fs-4">{% trans "List" %}</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="{% url 'PanelHome' %}" class="nav-link text-white nav-strings" aria-current="page">
+              <i class="bi bi-house-door-fill"></i>
+              {% trans "Home" %}
+            </a>
+          </li>
+          {% temp_get_permission_state request.user.id 'show' 'patient' as has_permission%}
+          {% if has_permission %}
+          <li>
+            <a href="{% url 'ManagePatients' %}" class="nav-link text-white nav-strings">
+              <i class="bi bi-person-fill"></i>
+              {% trans "Manage Patients" %}
+            </a>
+          </li>
+          {% endif %}
+          {% temp_get_permission_state request.user.id 'show' 'normal_visit' as has_permission%}
+          {% if has_permission %}
+          <li>
+            <a href="{% url 'ManagePatientVisits' %}" class="nav-link text-white nav-strings">
+              <i class="bi bi-shuffle"></i>
+              {% trans "Local Visit" %}
+            </a>
+          </li>
+          {% endif %}
+          {% temp_get_permission_state request.user.id 'show' 'home_visit' as has_permission%}
+          {% if has_permission %}
+          <li>
+            <a href="{% url 'ManagePatientHomeVisits' %}" class="nav-link text-white nav-strings">
+              <i class="bi bi-suitcase-lg-fill"></i>
+                {% trans "Home Visit" %}
+            </a>
+          </li>
+          {% endif %}
+          {% temp_get_permission_state request.user.id 'show' 'customize_medical_tests' as has_permission%}
+          {% if has_permission %}
+          <li>
+            <a href="{% url 'ManageCustomizeMedicalTests' %}" class="nav-link text-white nav-strings">
+              <i class="bi bi-building-fill"></i>
+              {% trans "customize medical tests" %}
+            </a>
+          </li>
+          {% endif %}
+          {% temp_get_permission_state request.user.id 'show' 'medical_tests' as has_permission%}
+          {% if has_permission %}
+          <li>
+            <a href="{% url 'MedicalTestsManagePatients' %}" class="nav-link text-white nav-strings">
+              <i class="bi bi-clipboard-data-fill"></i>
+              {% trans "medical test reports" %}
+            </a>
+          </li>
+          {% endif %}
+
+          <!-- <li>
+            <a href="{% url 'PanelHome' %}" class="nav-link text-white nav-strings">
+              <i class="bi bi-diagram-2-fill"></i>
+                الموقع الإلكتروني
+            </a>
+          </li> -->
+          
+
+          {% temp_get_permission_state request.user.id 'edit' 'settings' as has_permission%}
+          {% if has_permission %}
+          <li>
+            <a onclick="ShowSettingDrop()" style="cursor: pointer;" class="nav-link text-white nav-strings">
+              <i class="bi bi-gear-fill"></i>
+                {% trans "Settings" %}
+            </a>
+          </li>
+          {% endif %}
+          <div>
+            <ul class="dropdown-menu settings-drop settings-drop-hide" id="settings-dropdown" style="display: block; position: relative; overflow: hidden;">
+              <div>
+                <!-- <li><a class="dropdown-item" href="#">الإتصالات</a></li> -->
+                <li><a class="dropdown-item " href="{% url 'GeneralSettings' %}" aria-current="true">{% trans "Hospital profile" %}</a></li>
+              </div>
+            </ul>
+          </div>
+{% comment %} 
+          <li>
+            <a onclick="ShowConnDrop()" style="cursor: pointer;" class="nav-link text-white nav-strings">
+              <i class="bi-envelope-fill"></i>
+              الإتصالات
+            </a>
+          </li> {% endcomment %}
+          <style>
+            .settings-drop {
+              transition: all .3s;
+              background-color: unset;
+              border: unset !important;
+              
+            }
+
+            .settings-drop a{
+              color: white;
+              
+            }  
+            .settings-drop a:hover {
+              background-color: var(--bs-dropdown-link-active-bg);
+              color: #333;
+              background-color: white;
+            }
+
+            .settings-drop-show {
+              height: 40px;
+              padding: 7px 0px;
+              width: 100%;
+              border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
+            }
+
+            .conn-drop-show {
+              height: 150px;
+              padding: 7px 0px;
+              width: 100%;
+              border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
+            }
+
+            .admin-drop-show {
+              height: 35px;
+              padding: 7px 0px;
+              width: 100%;
+              border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
+            }
+
+
+            
+            .settings-drop-hide {
+              height: 0;
+              padding: 0;
+              width: 0;
+              border: 0;
+            }
+
+          </style>
+
+
+          <div>
+            <ul class="dropdown-menu settings-drop settings-drop-hide" id="conn-dropdown" style="display: block; position: relative; overflow: hidden;">
+              <div>
+                <li><a class="dropdown-item" href="{% url 'PanelHome' %}">رسالة بث</a></li>
+                <li><a class="dropdown-item " href="{% url 'PanelHome' %}" aria-current="true">مركز الرسائل</a></li>
+
+                <li><a class="dropdown-item " href="{% url 'PanelHome' %}" aria-current="true">سجل الأفراد</a></li>
+                <li><a class="dropdown-item " href="{% url 'PanelHome' %}" aria-current="true">سجل المنظمات</a></li>
+                <li><a class="dropdown-item" href="{% url 'PanelHome' %}">سجل مركز الرسائل </a></li>
+              </div>
+            </ul>
+          </div>
+
+
+
+
+          
+
+          <form hidden id="ChangeHeaderImageForm" action="{% url 'PanelHome' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input id="ChangeHeaderImage" onchange="{document.getElementById('ChangeHeaderImageForm').submit()}" type="file" name="img" accept=".jpg">
+          </form>
+          <li>
+            <a onclick="ShowAdminDrop()" style="cursor: pointer;" class="nav-link text-white nav-strings">
+              <i class="bi bi-tools"></i>
+                {% trans "Admin Tools" %}
+            </a>
+          </li>
+
+          <div>
+            <ul class="dropdown-menu settings-drop settings-drop-hide" id="admin-dropdown" style="display: block; position: relative; overflow: hidden;">
+              <div>
+                
+                {% temp_get_permission_state request.user.id 'show' 'admin' as has_permission%}
+                {% if has_permission %}
+                <li><a class="dropdown-item" href="{% url 'ManageAdminPermission' %}">{% trans "Managers accounts" %}</a></li>
+                {% endif %}
+                {% comment %} {% temp_get_permission_state request.user.id 'show' 'backup' as has_permission%}
+                {% if has_permission %}
+                <li><a class="dropdown-item" href="{% url 'PanelHome' %}">גיבוי</a></li>
+                {% endif %} {% endcomment %}
+              </div>
+            </ul>
+          </div>
+          <li>
+            <a href="{% url 'Logout' %}" class="nav-link text-white nav-strings">
+              <i class="bi bi-door-open-fill"></i>
+              {% trans "Logout" %}
+            </a>
+          </li>
+
+        </ul>
+        <hr>
+        <!-- <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong>mdo</strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </div> -->
+      </div>
+  </div>
+</div>
+
+<script>
+  function ShowAdminDrop(){
+    const settings_dropdown = document.getElementById('admin-dropdown')
+    if (settings_dropdown.classList.contains('settings-drop-hide')) {
+      settings_dropdown.classList.remove('settings-drop-hide')
+      settings_dropdown.classList.add('admin-drop-show')
+    } else {
+      settings_dropdown.classList.add('settings-drop-hide')
+      settings_dropdown.classList.remove('admin-drop-show')
+    }
+    console.log(settings_dropdown.classList)
+
+  }
+
+
+  function ShowSettingDrop(){
+    const settings_dropdown = document.getElementById('settings-dropdown')
+    if (settings_dropdown.classList.contains('settings-drop-hide')) {
+      settings_dropdown.classList.remove('settings-drop-hide')
+      settings_dropdown.classList.add('settings-drop-show')
+    } else {
+      settings_dropdown.classList.add('settings-drop-hide')
+      settings_dropdown.classList.remove('settings-drop-show')
+    }
+    console.log(settings_dropdown.classList)
+
+  }
+
+  function ShowConnDrop(){
+    const settings_dropdown = document.getElementById('conn-dropdown')
+    if (settings_dropdown.classList.contains('settings-drop-hide')) {
+      settings_dropdown.classList.remove('settings-drop-hide')
+      settings_dropdown.classList.add('conn-drop-show')
+    } else {
+      settings_dropdown.classList.add('settings-drop-hide')
+      settings_dropdown.classList.remove('conn-drop-show')
+    }
+    console.log(settings_dropdown.classList)
+
+  }
+
+
+  
+</script>
+
+
+<script>
+            document.querySelectorAll(".nav-link").forEach((link) => {
+            if (link.href === window.location.href) {
+                link.classList.add("active");
+                // link.setAttribute("aria-current", "page");
+            }
+        });
+</script>

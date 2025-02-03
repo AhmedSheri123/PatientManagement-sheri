@@ -1,0 +1,2181 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-12 22:06+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\accounts\fields.py:19
+msgid "Male"
+msgstr ""
+
+#: .\accounts\fields.py:20
+msgid "Female"
+msgstr ""
+
+#: .\accounts\libs.py:22
+msgid " second"
+msgstr ""
+
+#: .\accounts\libs.py:25
+msgid " seconds"
+msgstr ""
+
+#: .\accounts\libs.py:33
+msgid " minute"
+msgstr ""
+
+#: .\accounts\libs.py:36
+msgid " minutes"
+msgstr ""
+
+#: .\accounts\libs.py:44
+msgid " hour"
+msgstr ""
+
+#: .\accounts\libs.py:47
+msgid " hours"
+msgstr ""
+
+#: .\accounts\libs.py:54
+msgid " day"
+msgstr ""
+
+#: .\accounts\libs.py:57
+msgid " days"
+msgstr ""
+
+#: .\accounts\libs.py:64
+msgid " month"
+msgstr ""
+
+#: .\accounts\libs.py:67
+msgid " months"
+msgstr ""
+
+#: .\accounts\libs.py:74
+msgid " year"
+msgstr ""
+
+#: .\accounts\libs.py:77
+msgid " years"
+msgstr ""
+
+#: .\accounts\models.py:18
+msgid "Admin"
+msgstr ""
+
+#: .\accounts\models.py:19 .\accounts\models.py:26
+msgid "Employee"
+msgstr ""
+
+#: .\accounts\models.py:20
+msgid "Patient"
+msgstr ""
+
+#: .\accounts\models.py:27
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:255
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:97
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:93
+msgid "Doctor"
+msgstr ""
+
+#: .\accounts\models.py:28
+msgid "Analyst"
+msgstr ""
+
+#: .\accounts\models.py:29
+msgid "Reporter"
+msgstr ""
+
+#: .\accounts\models.py:49 .\accounts\models.py:125
+msgid "Profession"
+msgstr ""
+
+#: .\accounts\models.py:51 .\accounts\models.py:122
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:252
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:49
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:98
+#: .\templates\panel\Patients\AddPatients.html:60
+#: .\templates\panel\Patients\PanelShowPatients.html:49
+#: .\templates\panel\Patients\PanelShowPatients.html:114
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:49
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:99
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:49
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:99
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:259
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:50
+msgid "Phone"
+msgstr ""
+
+#: .\accounts\models.py:53
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:51
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:97
+#: .\templates\panel\Patients\PanelShowPatients.html:51
+#: .\templates\panel\Patients\PanelShowPatients.html:113
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:98
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:51
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:98
+msgid "Gender"
+msgstr ""
+
+#: .\accounts\models.py:54
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:247
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:47
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:100
+#: .\templates\panel\Patients\AddPatients.html:53
+#: .\templates\panel\Patients\PanelShowPatients.html:47
+#: .\templates\panel\Patients\PanelShowPatients.html:117
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:47
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:100
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:47
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:100
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:254
+msgid "ID Number"
+msgstr ""
+
+#: .\accounts\models.py:55
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:251
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:258
+msgid "Birth Date"
+msgstr ""
+
+#: .\accounts\models.py:121
+#: .\templates\panel\CustomizeMedicalTests\ManageCustomizeMedicalTests.html:91
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:245
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:252
+msgid "Name"
+msgstr ""
+
+#: .\accounts\models.py:123 .\templates\panel\Patients\AddPatients.html:68
+msgid "Address"
+msgstr ""
+
+#: .\accounts\models.py:124
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
+msgid "Image"
+msgstr ""
+
+#: .\accounts\models.py:126
+msgid "Language"
+msgstr ""
+
+#: .\dashboard\models.py:27
+msgid "Is the administrator enabled"
+msgstr ""
+
+#: .\dashboard\models.py:28
+msgid "Manage the main panel"
+msgstr ""
+
+#: .\dashboard\models.py:31
+msgid "Manage administrators"
+msgstr ""
+
+#: .\dashboard\models.py:32
+msgid "Add administrators"
+msgstr ""
+
+#: .\dashboard\models.py:33
+msgid "Delete administrators"
+msgstr ""
+
+#: .\dashboard\models.py:34
+msgid "Edit administrators"
+msgstr ""
+
+#: .\dashboard\models.py:37
+msgid "Manage patients"
+msgstr ""
+
+#: .\dashboard\models.py:38
+msgid "Add patient"
+msgstr ""
+
+#: .\dashboard\models.py:39
+msgid "Delete patient"
+msgstr ""
+
+#: .\dashboard\models.py:40
+msgid "Edit patient"
+msgstr ""
+
+#: .\dashboard\models.py:43
+msgid "Manage normal visits"
+msgstr ""
+
+#: .\dashboard\models.py:44
+msgid "Add normal visit"
+msgstr ""
+
+#: .\dashboard\models.py:45
+msgid "Delete normal visit"
+msgstr ""
+
+#: .\dashboard\models.py:46
+msgid "Edit normal visit"
+msgstr ""
+
+#: .\dashboard\models.py:49
+msgid "Manage home visits"
+msgstr ""
+
+#: .\dashboard\models.py:50
+#: .\templates\panel\Visits\Home\AddPatientHomeVisit.html:20
+msgid "Add home visit"
+msgstr ""
+
+#: .\dashboard\models.py:51
+msgid "Delete home visit"
+msgstr ""
+
+#: .\dashboard\models.py:52
+msgid "Edit home visit"
+msgstr ""
+
+#: .\dashboard\models.py:55
+msgid "Manage custom medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:56
+msgid "Add custom medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:57
+msgid "Delete custom medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:58
+msgid "Edit custom medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:61
+msgid "Manage medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:62
+msgid "View medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:63
+msgid "Add medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:64
+msgid "Delete medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:65
+msgid "Edit medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:66
+msgid "Download medical tests"
+msgstr ""
+
+#: .\dashboard\models.py:69
+msgid "Manage medical visit reports"
+msgstr ""
+
+#: .\dashboard\models.py:70
+msgid "View medical visit reports"
+msgstr ""
+
+#: .\dashboard\models.py:71
+msgid "Add medical visit reports"
+msgstr ""
+
+#: .\dashboard\models.py:72
+msgid "Delete medical visit reports"
+msgstr ""
+
+#: .\dashboard\models.py:73
+msgid "Edit medical visit reports"
+msgstr ""
+
+#: .\dashboard\models.py:74
+msgid "Download medical visit reports"
+msgstr ""
+
+#: .\dashboard\models.py:76
+msgid "Edit settings"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:19
+msgid "Create folder"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:25
+msgid "Folder name"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:31
+#: .\templates\file-manager\manager.html:64
+#: .\templates\file-manager\manager.html:187
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:106
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:168
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:194
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:192
+msgid "Close"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:32
+msgid "Create"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:43
+msgid "File uploader"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:55
+msgid "Browse file to upload"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:96
+msgid "Upload"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:97
+msgid "Folder"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:98
+msgid "Panel"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:105
+#: .\templates\panel\admin_permission\AddAdminPermission.html:22
+#: .\templates\panel\admin_permission\EditAdminPermission.html:25
+msgid "Select all"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:106
+msgid "Deselect all"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:107
+#: .\templates\file-manager\manager.html:160
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:102
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:118
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:38
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:51
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:131
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:147
+#: .\templates\panel\CustomizeMedicalTests\ManageCustomizeMedicalTests.html:127
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:173
+#: .\templates\panel\Patients\PanelShowPatients.html:61
+#: .\templates\panel\Patients\PanelShowPatients.html:123
+#: .\templates\panel\Patients\PanelShowPatients.html:188
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:169
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:166
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:150
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:87
+#: .\venv\Lib\site-packages\django\forms\formsets.py:499
+msgid "Delete"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:157
+#: .\templates\file-manager\manager.html:174
+#: .\templates\file-manager\manager.html:188
+msgid "Rename"
+msgstr ""
+
+#: .\templates\file-manager\manager.html:180
+msgid "New name"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:18
+msgid "Add Customize medical test form"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:25
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:25
+#: .\templates\panel\MedicalTests\reports\AddMedicalTests.html:25
+#: .\templates\panel\MedicalTests\reports\EditMedicalTests.html:25
+msgid "Test name"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:37
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:66
+msgid "Add Title"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:38
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:67
+msgid "Add Element"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:46
+#: .\templates\panel\MedicalTests\reports\AddMedicalTests.html:77
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:107
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:131
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:169
+#: .\templates\panel\Patients\AddPatients.html:120
+#: .\templates\panel\Visits\Home\AddPatientHomeVisit.html:86
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:147
+#: .\templates\panel\Visits\Normal\AddPatientVisit.html:64
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:135
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:144
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:166
+msgid "Add"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:96
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:45
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:125
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:313
+#: .\templates\panel\MedicalTests\reports\AddMedicalTests.html:50
+#: .\templates\panel\MedicalTests\reports\EditMedicalTests.html:51
+msgid "Test"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:97
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:46
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:126
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:315
+#: .\templates\panel\MedicalTests\reports\AddMedicalTests.html:52
+#: .\templates\panel\MedicalTests\reports\EditMedicalTests.html:53
+msgid "Unit"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:99
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:48
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:128
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:316
+#: .\templates\panel\MedicalTests\reports\AddMedicalTests.html:54
+#: .\templates\panel\MedicalTests\reports\EditMedicalTests.html:55
+msgid "Maximum"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:100
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:49
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:129
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:316
+#: .\templates\panel\MedicalTests\reports\AddMedicalTests.html:55
+#: .\templates\panel\MedicalTests\reports\EditMedicalTests.html:56
+msgid "Minimum"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\AddCustomizeMedicalTests.html:117
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:37
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:146
+msgid "Title"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:18
+msgid "Edit Customize medical test form"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\EditCustomizeMedicalTests.html:75
+#: .\templates\panel\Patients\EditPatients.html:99
+#: .\templates\panel\Visits\Home\EditPatientHomeVisit.html:87
+#: .\templates\panel\Visits\Normal\EditPatientVisit.html:64
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:168
+#: .\templates\panel\admin_permission\AddAdminPermission.html:27
+#: .\templates\panel\settings\general\edit.html:40
+msgid "Save"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\ManageCustomizeMedicalTests.html:82
+msgid "Add form"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\ManageCustomizeMedicalTests.html:92
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:121
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:101
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:101
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:94
+msgid "Added"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\ManageCustomizeMedicalTests.html:94
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:123
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:101
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:106
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:106
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:97
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:52
+msgid "Options"
+msgstr ""
+
+#: .\templates\panel\CustomizeMedicalTests\ManageCustomizeMedicalTests.html:121
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:167
+#: .\templates\panel\Patients\PanelShowPatients.html:122
+#: .\templates\panel\Patients\PanelShowPatients.html:180
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:162
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:160
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:144
+#: .\templates\panel\admin_permission\EditAdminPermission.html:30
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:80
+msgid "Edit"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:256
+msgid "Date Time"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\ReportPDF\getEmployeeComeDaysDataForAll.html:314
+#: .\templates\panel\MedicalTests\reports\AddMedicalTests.html:51
+#: .\templates\panel\MedicalTests\reports\EditMedicalTests.html:52
+msgid "Result"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\reports\AddMedicalTests.html:18
+msgid "Add medical test report"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\reports\EditMedicalTests.html:18
+msgid "Edit medical test report"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:83
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:92
+msgid "Add Test"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:96
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:120
+msgid "Test form"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:119
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:96
+#: .\templates\panel\Patients\PanelShowPatients.html:112
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:96
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:97
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:92
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:48
+msgid "Full name"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:151
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:128
+msgid "Download"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:155
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:132
+msgid "Print"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\reports\ManageMedicalTests.html:161
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:137
+#: .\templates\panel\Patients\PanelShowPatients.html:172
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:153
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:150
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:138
+msgid "View"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:41
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:60
+#: .\templates\panel\Patients\PanelShowPatients.html:41
+#: .\templates\panel\Patients\PanelShowPatients.html:60
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:41
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:60
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:41
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:60
+msgid "Search"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:45
+#: .\templates\panel\Patients\AddPatients.html:31
+#: .\templates\panel\Patients\PanelShowPatients.html:45
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:45
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:45
+msgid "first name"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:46
+#: .\templates\panel\Patients\AddPatients.html:38
+#: .\templates\panel\Patients\PanelShowPatients.html:46
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:46
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:46
+msgid "last name"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:48
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:99
+#: .\templates\panel\Patients\PanelShowPatients.html:48
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:48
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:48
+msgid "Email"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:154
+msgid "Add test report"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:158
+msgid "test form"
+msgstr ""
+
+#: .\templates\panel\MedicalTests\users\PanelShowPatients.html:163
+msgid "There is no test form"
+msgstr ""
+
+#: .\templates\panel\Patients\AddPatients.html:20
+#: .\templates\panel\Patients\PanelShowPatients.html:99
+msgid "Add Patient"
+msgstr ""
+
+#: .\templates\panel\Patients\AddPatients.html:97
+msgid "Do not add a patient to visit"
+msgstr ""
+
+#: .\templates\panel\Patients\AddPatients.html:103
+msgid "add a patient to local visit"
+msgstr ""
+
+#: .\templates\panel\Patients\AddPatients.html:109
+msgid "add a patient to home visit"
+msgstr ""
+
+#: .\templates\panel\Patients\EditPatients.html:20
+msgid "Edit Patient"
+msgstr ""
+
+#: .\templates\panel\Patients\PanelShowPatients.html:69
+msgid "Export"
+msgstr ""
+
+#: .\templates\panel\Patients\PanelShowPatients.html:118
+#: .\templates\panel\panel.html:81 .\templates\panel\panel.html:124
+#: .\templates\panel\panel.html:311
+msgid "Local visits"
+msgstr ""
+
+#: .\templates\panel\Patients\PanelShowPatients.html:119
+#: .\templates\panel\panel.html:92 .\templates\panel\panel.html:133
+#: .\templates\panel\panel.html:318
+msgid "Home visits"
+msgstr ""
+
+#: .\templates\panel\Patients\PanelShowPatients.html:120
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:88
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:88
+msgid "Add a visit"
+msgstr ""
+
+#: .\templates\panel\Patients\PanelShowPatients.html:121
+msgid "File manager"
+msgstr ""
+
+#: .\templates\panel\Patients\PanelShowPatients.html:156
+msgid "Local visit"
+msgstr ""
+
+#: .\templates\panel\Patients\PanelShowPatients.html:164
+msgid "Home visit"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\AddPatientHomeVisit.html:53
+#: .\templates\panel\Visits\Home\EditPatientHomeVisit.html:55
+#: .\templates\panel\Visits\Normal\AddPatientVisit.html:43
+#: .\templates\panel\Visits\Normal\EditPatientVisit.html:43
+msgid "The payment amount for the visit"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\AddPatientHomeVisit.html:72
+#: .\templates\panel\Visits\Home\EditPatientHomeVisit.html:73
+#: .\templates\panel\Visits\Normal\AddPatientVisit.html:50
+#: .\templates\panel\Visits\Normal\EditPatientVisit.html:50
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:42
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:42
+msgid "Note"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\EditPatientHomeVisit.html:20
+#: .\templates\panel\Visits\Normal\EditPatientVisit.html:20
+msgid "Edit Visit"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:102
+#: .\templates\panel\panel.html:142
+msgid "Distance"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:103
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:102
+#: .\templates\panel\panel.html:103
+msgid "Reports"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:104
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:103
+msgid "Add payment"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:105
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:104
+msgid "Visit"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:182
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:180
+msgid "Adding a fee for the visit"
+msgstr ""
+
+#: .\templates\panel\Visits\Home\ManagePatientHomeVisits.html:195
+#: .\templates\panel\Visits\Normal\ManagePatientVisits.html:193
+msgid "Pay"
+msgstr ""
+
+#: .\templates\panel\Visits\Normal\AddPatientVisit.html:20
+msgid "Add local visit"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:247
+msgid "Patient Information"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:327
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2456
+msgid "Time"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:329
+msgid "Date"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:334
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:70
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:70
+msgid "Reason for visit"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:339
+msgid "Essential metrics"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:342
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:78
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:79
+msgid "Pulse"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:343
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:84
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:85
+msgid "Pressure"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:344
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:90
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:91
+msgid "Oxygen"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:345
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:96
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:97
+msgid "Sugar"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:362
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:105
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:106
+msgid "Clinical examination"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:368
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:111
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:112
+msgid "Treatment"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:373
+msgid "Diagnosis"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:378
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:119
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:121
+msgid "Recommendations"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReportPDF\getEmployeeComeDaysDataForAll.html:382
+msgid "Doctor's stamp and signature"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:20
+msgid "Adding a medical report"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:138
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:139
+msgid "Custom diagnosis"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReport\AddMedicalReport.html:140
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:141
+msgid "Write diagnosis"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReport\EditMedicalReport.html:20
+msgid "Editing a medical report"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:83
+msgid "Add report"
+msgstr ""
+
+#: .\templates\panel\Visits\Reports\MedicalReport\ManageVisitMedicalReport.html:95
+msgid "Diagnosis code"
+msgstr ""
+
+#: .\templates\panel\admin_permission\AddAdminPermission.html:19
+#: .\templates\panel\admin_permission\AddAdminPermission.html:20
+#: .\templates\panel\admin_permission\EditAdminPermission.html:21
+#: .\templates\panel\admin_permission\EditAdminPermission.html:22
+msgid "Password"
+msgstr ""
+
+#: .\templates\panel\admin_permission\EditAdminPermission.html:23
+msgid ""
+"If you do not want to change the password, leave the password field blank."
+msgstr ""
+
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:36
+msgid "Add manager"
+msgstr ""
+
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:47
+msgid "username"
+msgstr ""
+
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:49
+msgid "profession"
+msgstr ""
+
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:51
+msgid "Status"
+msgstr ""
+
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:74
+msgid "active"
+msgstr ""
+
+#: .\templates\panel\admin_permission\ManageAdminPermission.html:74
+msgid "inactive"
+msgstr ""
+
+#: .\templates\panel\panel.html:55 .\templates\panel\panel.html:153
+msgid "Summary"
+msgstr ""
+
+#: .\templates\panel\panel.html:57
+msgid "Today"
+msgstr ""
+
+#: .\templates\panel\panel.html:58
+msgid "3 days"
+msgstr ""
+
+#: .\templates\panel\panel.html:59 .\templates\panel\panel.html:161
+#: .\templates\panel\panel.html:175
+msgid "week"
+msgstr ""
+
+#: .\templates\panel\panel.html:60 .\templates\panel\panel.html:162
+#: .\templates\panel\panel.html:176
+msgid "2 weeks"
+msgstr ""
+
+#: .\templates\panel\panel.html:61 .\templates\panel\panel.html:163
+#: .\templates\panel\panel.html:177
+msgid "month"
+msgstr ""
+
+#: .\templates\panel\panel.html:62 .\templates\panel\panel.html:164
+#: .\templates\panel\panel.html:178
+msgid "3 months"
+msgstr ""
+
+#: .\templates\panel\panel.html:69
+msgid "Registered patients"
+msgstr ""
+
+#: .\templates\panel\panel.html:115
+msgid "Total Payments"
+msgstr ""
+
+#: .\templates\panel\panel.html:158
+msgid "The number of visitors"
+msgstr ""
+
+#: .\templates\panel\panel.html:172
+msgid "The number of reports"
+msgstr ""
+
+#: .\templates\panel\panel.html:277
+msgid "Local reports"
+msgstr ""
+
+#: .\templates\panel\panel.html:284
+msgid "Home reports"
+msgstr ""
+
+#: .\templates\panel\settings\general\edit.html:20
+msgid "Edit hospital Profile"
+msgstr ""
+
+#: .\templates\panel_base.html:79 .\templates\parts\panel_navbar.html:39
+msgid "Home"
+msgstr ""
+
+#: .\templates\panel_base.html:82
+msgid "Refresh"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:32
+msgid "List"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:47
+msgid "Manage Patients"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:56
+msgid "Local Visit"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:65
+msgid "Home Visit"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:74
+msgid "customize medical tests"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:83
+msgid "medical test reports"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:101
+msgid "Settings"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:109
+msgid "Hospital profile"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:198
+msgid "Admin Tools"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:208
+msgid "Managers accounts"
+msgstr ""
+
+#: .\templates\parts\panel_navbar.html:221
+msgid "Logout"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:15
+msgid "Messages"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
+msgid "Site Maps"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\staticfiles\apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\syndication\apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: .\venv\Lib\site-packages\django\core\paginator.py:30
+msgid "…"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:50
+msgid "That page number is not an integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:52
+msgid "That page number is less than 1"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:54
+msgid "That page contains no results"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:22
+msgid "Enter a valid value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:104
+#: .\venv\Lib\site-packages\django\forms\fields.py:752
+msgid "Enter a valid URL."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:165
+msgid "Enter a valid integer."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:176
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: .\venv\Lib\site-packages\django\core\validators.py:259
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:267
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:279
+#: .\venv\Lib\site-packages\django\core\validators.py:287
+#: .\venv\Lib\site-packages\django\core\validators.py:316
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:296
+#: .\venv\Lib\site-packages\django\core\validators.py:317
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:308
+#: .\venv\Lib\site-packages\django\core\validators.py:315
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:351
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:357
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:392
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:401
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:410
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:420
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:438
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:461
+#: .\venv\Lib\site-packages\django\forms\fields.py:347
+#: .\venv\Lib\site-packages\django\forms\fields.py:386
+msgid "Enter a number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:463
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:468
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:473
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:544
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:605
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\base.py:1423
+#: .\venv\Lib\site-packages\django\forms\models.py:893
+msgid "and"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\base.py:1425
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\constraints.py:17
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:128
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:129
+msgid "This field cannot be null."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:130
+msgid "This field cannot be blank."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:131
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:135
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:173
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1094
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1095
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1097
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1147
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1149
+msgid "String (unlimited)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1253
+msgid "Comma-separated integers"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1354
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1358
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1493
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1362
+msgid "Date (without time)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1489
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
+"uuuuuu]][TZ] format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1497
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1502
+msgid "Date (with time)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1626
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1628
+msgid "Decimal number"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1789
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
+"uuuuuu] format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1793
+msgid "Duration"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1845
+msgid "Email address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1870
+msgid "File path"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1948
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1950
+msgid "Floating point number"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1990
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1992
+msgid "Integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2088
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2105
+msgid "Small integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2113
+msgid "IPv4 address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2144
+msgid "IP address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2237
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2238
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2240
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2291
+msgid "Positive big integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2306
+msgid "Positive integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2321
+msgid "Positive small integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2337
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2373
+msgid "Text"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2448
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2452
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2564
+msgid "URL"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2588
+msgid "Raw binary data"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2653
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2655
+msgid "Universally unique identifier"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:232
+msgid "File"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\json.py:26
+msgid "A JSON object"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\json.py:28
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:919
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:921
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1212
+msgid "One-to-one relationship"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1269
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1271
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1319
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: .\venv\Lib\site-packages\django\forms\boundfield.py:184
+msgid ":?.!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:91
+msgid "This field is required."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:298
+msgid "Enter a whole number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:467
+#: .\venv\Lib\site-packages\django\forms\fields.py:1241
+msgid "Enter a valid date."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:490
+#: .\venv\Lib\site-packages\django\forms\fields.py:1242
+msgid "Enter a valid time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:517
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:551
+msgid "Enter a valid duration."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:552
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:621
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:622
+msgid "No file was submitted."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:623
+msgid "The submitted file is empty."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:625
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:630
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:694
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:857
+#: .\venv\Lib\site-packages\django\forms\fields.py:949
+#: .\venv\Lib\site-packages\django\forms\models.py:1566
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:951
+#: .\venv\Lib\site-packages\django\forms\fields.py:1070
+#: .\venv\Lib\site-packages\django\forms\models.py:1564
+msgid "Enter a list of values."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1071
+msgid "Enter a complete value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1310
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1340
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: .\venv\Lib\site-packages\django\forms\forms.py:98
+msgid ":"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\forms.py:244
+#: .\venv\Lib\site-packages\django\forms\forms.py:328
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:63
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:67
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:72
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:484
+#: .\venv\Lib\site-packages\django\forms\formsets.py:491
+msgid "Order"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:886
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:891
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:898
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:907
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1338
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1429
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1568
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\utils.py:226
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:463
+msgid "Clear"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:464
+msgid "Currently"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:465
+msgid "Change"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:794
+msgid "Unknown"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:795
+msgid "Yes"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:796
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:874
+msgid "yes,no,maybe"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:904
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:921
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:923
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:925
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:927
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:929
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:931
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:73
+msgid "p.m."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:74
+msgid "a.m."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:79
+msgid "PM"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:80
+msgid "AM"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:152
+msgid "midnight"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:154
+msgid "noon"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:7
+msgid "Monday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:8
+msgid "Tuesday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:9
+msgid "Wednesday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:10
+msgid "Thursday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:11
+msgid "Friday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:12
+msgid "Saturday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:13
+msgid "Sunday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:16
+msgid "Mon"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:17
+msgid "Tue"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:18
+msgid "Wed"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:19
+msgid "Thu"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:20
+msgid "Fri"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:21
+msgid "Sat"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:22
+msgid "Sun"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:25
+msgid "January"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:26
+msgid "February"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:27
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:28
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:29
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:30
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:31
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:32
+msgid "August"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:33
+msgid "September"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:34
+msgid "October"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:35
+msgid "November"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:36
+msgid "December"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:39
+msgid "jan"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:40
+msgid "feb"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:41
+msgid "mar"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:42
+msgid "apr"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:43
+msgid "may"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:44
+msgid "jun"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:45
+msgid "jul"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:46
+msgid "aug"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:47
+msgid "sep"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:48
+msgid "oct"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:49
+msgid "nov"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:50
+msgid "dec"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\ipv6.py:8
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\text.py:137
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\text.py:322
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: .\venv\Lib\site-packages\django\utils\text.py:341
+#: .\venv\Lib\site-packages\django\utils\timesince.py:135
+msgid ", "
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:111
+msgid "Forbidden"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:112
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:116
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:122
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:127
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a rel=\"noreferrer"
+"\" …> for links to third-party sites."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:136
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:142
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:148
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:64
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:115
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:349
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:38
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:40
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:79
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:7
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:220
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:221
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener"
+"\">DEBUG=True</a> is in your settings file and you have not configured any "
+"URLs."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:229
+msgid "Django Documentation"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:230
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:238
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:239
+msgid "Get started with Django"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:247
+msgid "Django Community"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:248
+msgid "Connect, get help, or contribute"
+msgstr ""

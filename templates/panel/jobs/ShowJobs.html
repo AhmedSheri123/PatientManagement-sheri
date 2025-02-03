@@ -1,0 +1,289 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+
+
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+        <i class="circular users icon"></i>
+        الشركة
+    </h2>
+
+    <div class="ui list" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+
+
+        <div class="item">
+            <div class="header">اسم المنشئة</div>
+            {{company.company_name}}
+        </div>
+        <div class="item">
+            <div class="header">السجل التجاري</div>
+            {{job.company_history}}
+        </div>
+        <div class="item">
+            <div class="header">مقر المنشئة</div>
+            {{job.get_company_city_display}}
+        </div>
+        <div class="item">
+            <div class="header">حجم المنشئة</div>
+            {{job.get_company_size_display}}
+        </div>
+
+
+
+
+        <div class="item">
+            <div class="header">قطاع المنشئة</div>
+            {{job.get_company_section_display}}
+        </div>
+        <div class="item">
+            <div class="header">هل المنشئة حاصلة على شهادة المواءمة</div>
+            {{job.get_company_have_cert_display}}
+        </div>
+
+    </div>
+    <h2 class="ui center aligned icon header">
+
+        بيانات مسؤول التوظيف
+    </h2>
+
+    <div class="ui list" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+        <div class="item">
+            <div class="header">اسم مقدم الطلب</div>
+            {{company.complite_name}}
+        </div>
+
+        <div class="item">
+            <div class="header">البريد الإلكتروني</div>
+            {{job.userprofile.user.email}}
+        </div>
+        <div class="item">
+            <div class="header">מספר טלפון</div>
+            {{company.phone}}
+        </div>
+
+
+
+    </div>
+
+    <h2 class="ui center aligned icon header">
+
+        بيانات الوظيفة
+    </h2>
+
+    <div class="ui list" style="display: grid; justify-content: space-around; grid-template-columns: auto auto;">
+        <div class="item">
+            <div class="header">نوع الإعاقة غير المرغوب بتوظيفها</div>
+            {{job.unwanted_disability}}
+        </div>
+        <div class="item">
+            <div class="header">نوع الإعاقة المرغوب بتوظيفها</div>
+            {{job.wanted_disability}}
+        </div>
+        <div class="item">
+            <div class="header">المسمى الوظيفي</div>
+            {{job.job_title}}
+        </div>
+
+      <div class="item">
+            <div class="header">وصف الوظيفي</div>
+            {{job.job_desc}}
+        </div>
+
+        <div class="item">
+            <div class="header">المهارات المطلوبة</div>
+            {{job.job_skils}}
+        </div>
+
+        <div class="item">
+            <div class="header">عدد ساعات العمل</div>
+            {{job.work_hours}}
+        </div>
+
+
+
+        <div class="item">
+            <div class="header">عدد أيام الراحة الإسبوعية</div>
+            {{job.rest_days}}
+        </div>
+        <div class="item">
+            <div class="header">فئة التأمين الطبي</div>
+            {{job.medical_insurance}}
+        </div>
+        <div class="item">
+            <div class="header">عدد الشواغر المتاحة للمسمى الوظيفي</div>
+            {{job.available_jobs}}
+        </div>
+        <div class="item">
+            <div class="header">متطلبات الوظيفة الأساسية</div>
+            {{job.job_requirements}}
+        </div>
+
+
+
+        <div class="item">
+            <div class="header">مجال العمل</div>
+            {{job.work_domain}}
+        </div>
+        <div class="item">
+            <div class="header">المؤهل العلمي للمرشح</div>
+            {{job.get_cert_type_display}}
+        </div>
+        <div class="item">
+            <div class="header">التخصص المرشح للوظيفة</div>
+            {{job.major}}
+        </div>
+
+        <div class="item">
+            <div class="header">الراتب الاساسي</div>
+            {{job.basic_salary}}
+        </div>
+
+        <div class="item">
+            <div class="header">بدل السكن</div>
+            {{job.housing_allowance}}
+        </div>
+
+        <div class="item">
+            <div class="header">بدلات أخرى</div>
+            {{job.other_allowances}}
+        </div>
+
+        <div class="item">
+            <div class="header">إجمالي الراتب بعد خصم التأمينات</div>
+            {{job.total_salary}}
+        </div>
+
+        <div class="item">
+            <div class="header">מספר טלפון</div>
+            {{job.get_gender_display}}
+        </div>
+
+
+        <div class="item">
+            <div class="header">اوقات العمل</div>
+            {{job.get_worktime_display}}
+        </div>
+        <div class="item">
+            <div class="header">نوع الوظيفة</div>
+            {{job.get_job_type_display}}
+        </div>
+        <div class="item">
+            <div class="header">ما الذي ترغب بإضافته لتسهيل عملنا؟</div>
+            {{job.last_txt}}
+        </div>
+
+
+        <div class="item">
+            <div class="header">ايقونة الشركة</div>
+            {% if job.company_ico.url %}
+            <img src="{{job.company_ico.url}}" width="150" alt="ss">
+            {% else %}
+            <img src="{{job.company_ico.url}}" width="150" alt="لا يوجد">
+            {%endif%}
+        </div>
+        
+    </div>
+
+    <h2 class="ui center aligned icon header">
+
+        كود الإعلان: {{job.id_code}}
+    </h2>
+</div>
+<br><br>
+
+
+<div>
+
+<br>
+<div style="text-align: center;" dir="ltr">
+    <!-- <div class="ui buttons">
+        <button class="ui red button">رفض</button>
+        <div class="or"></div>
+        <button class="ui positive button">قبول</button>
+    </div> -->
+
+    {% comment %} <form action="" method="post">
+        {% csrf_token %}
+        <button class="ui primary button">
+            حفظ
+        </button>
+        <select class="ui dropdown" name="state">
+            {% for i in PostStateFields %}
+            <option {% if job.post_state == i.0 %} selected {% endif %} value="{{i.0}}">{{i.1}}</option>
+            {% endfor %}
+        </select>
+    </form> {% endcomment %}
+
+      <!-- <button class="ui button">
+        رفض
+      </button> -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="ui center aligned icon header">
+    <i class="circular suitcase icon"></i>
+    المتقدمين
+</h2>
+
+
+<style>
+    td, th {
+        text-align: right !important;
+    }
+    .post_state {
+        color: rgb(255, 255, 255); background-color: rgb(85, 83, 83); font-weight: bold; display: inline; padding: 10px 5px; border-radius: 4px;
+    }
+    </style>
+    
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>שם פרטי</th>
+                <th>מספר טלפון</th>
+                <th>מצב</th>
+                <th>عرض</th>
+                <th>מחיקה</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in presenters %}
+                <tr>
+                    <td data-label="Name">{{forloop.counter}}</td>
+                    <td data-label="Name">{{job.employee.userprofile.employeeprofile.name}}</td>
+                    <td data-label="Job">{{job.employee.userprofile.employeeprofile.get_gender_display}}</td>
+                    <td data-label="Job" ><div class="post_state">{{job.get_post_state_display}}</div></td>
+                    <td data-label="Job" ><a href="{% url 'ShowJobRequests' job.id %}" class="ui inverted blue button" >הצגה</a></td>
+                    <td data-label="Job" ><button href="{% url 'DeleteJobRequests' job.id %}" class="ui  red button" >حذف</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+<br>
+
+</div>
+
+
+<br>
+<hr>
+<br>
+
+{% endblock %}

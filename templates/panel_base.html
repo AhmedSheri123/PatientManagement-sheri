@@ -1,0 +1,255 @@
+{% load static %}
+{% load messenger_tags %}
+
+{% load i18n %}
+
+<!doctype html>
+<html lang="{{LANGUAGE_CODE}}" {% if LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'he' %}dir="rtl"{% endif %}>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hospital Panel</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/Semantic/semantic.min.css' %}">
+    {% if LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'he' %}
+      <link rel="stylesheet" href="{% static '/css/bootstrap/bootstrap.rtl.min.css' %}" integrity="sha384-nU14brUcp6StFntEOOEBvcJm4huWjB0OcIeQ3fltAfSmuZFrkAif0T+UtNGlKKQv" crossorigin="anonymous">
+    {% else %}
+    <link href="{% static "/css/bootstrap/bootstrap.min.css" %}" rel="stylesheet" >
+    {% endif %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="icon" sizes="192x192" href="{% static 'img/5f2059_4a678cdf9fdf4a328e637e7dc842d6d9~mv2.png' %}" type="image/png">
+
+    <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static '/Semantic/semantic.min.js' %}"></script>
+    {% block links %}
+    {% endblock %}
+</head>
+
+<body style="background-color: #f1f1f1; ">
+    
+<style>
+  table td, table th {
+    text-align: center !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.155) ;
+    border-left: 1px solid rgba(0, 0, 0, 0.155);
+
+    
+}
+.table td {
+  vertical-align: middle;
+}
+.filter-input-grid{
+  padding: 0 20px; display: flex; justify-content: flex-start; flex-wrap: wrap;
+
+}
+
+h2 {
+  color:#65007ec4 !important;
+}
+
+.filter-input-grid select, .filter-input-grid input{
+  max-width: 150px; margin-left:10px ;
+}
+
+
+.table-box {
+  display: flex;align-items: flex-start; flex-wrap: nowrap;overflow-x: scroll;
+}
+
+table {
+  border-radius: 16px !important;
+  overflow: hidden;
+
+}
+
+        @font-face {
+        font-family: 'Bahij'; /*a name to be used later*/
+        src: url('{% static 'font/Bahij_TheSansArabic-Bold.ttf' %}'); /*URL to font*/
+    }
+    
+    p, div, h1, h2, h3 {
+        font-family: 'Bahij' !important;
+    }
+</style>
+  
+    <div class="ui menu fixed-top" style="overflow:scroll; margin: 0; background-color: #212529; border-radius: 0 !important; border-bottom: solid 1px rgba(255, 255, 255, 0.163);     height: 75px!important; z-index: 1500;">
+      
+        <div class="item">
+          <button id="offcanvasScrollingBTN" style="font-size: 40px; margin: 0px 50px; " class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i style="color: white ;" class="bi bi-list" ></i></button>
+
+          
+          <a href='{% url 'PanelHome' %}' class="ui primary button">{% trans "Home" %}</a>
+        </div>
+        <div class="item">
+          <a onclick="{location.reload()}" class="ui button">{% trans "Refresh" %}</a >
+        </div>
+      </div>
+
+
+
+    <div style="display: flex; flex-wrap: nowrap;">
+
+        {% include 'parts/panel_navbar.html' %}
+        <div style=" width: 100%; overflow:scroll;height: 100vh; padding:20px; padding-top: 80px;">
+          {%block sheri%}
+          {% endblock %}
+        </div>
+        {% include 'parts/message_bar.html' %}
+    </div>
+    
+    <div class="toast-container start-0 p-3" style="position: fixed; bottom: 40px;" id="toast-box" dir="rtl">
+    </div>
+
+
+    <script src="{% static '/js/bootstrap/popper.min.js' %}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="{% static '/js/bootstrap/bootstrap.min.js' %}" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+    <script>
+      function randomGen() {
+        let min = 100000
+        let max = 1000000
+        return (Math.floor((Math.random())*(max-min+1))+min).toString();
+       }
+
+
+
+
+      const default_img_profile = `{% static 'img/default-profile-img-2.png' %}`
+      const toastBox = document.querySelector('#toast-box')
+
+
+      function showToast(toastID, username, msg, img, room_id='') {
+          if (img == '') {
+            img = default_img_profile
+          }
+          let messanger_href = ''
+          if (room_id) {
+            messanger_href = `onclick="{document.location.href ='/messenger/messageRoom/${room_id}'}" style="cursor: pointer;"`
+          }
+
+        html = `
+  
+          <!-- Then put toasts within -->
+          <div class="toast" role="alert" id="toast${toastID}" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <img src="${img}" class="rounded me-2" alt="..." width="50" style="border-radius: 100% !important;">
+              <strong class="me-auto">${username}</strong>
+              <small class="text-body-secondary">الان</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div ${messanger_href} class="toast-body">
+              ${msg}
+            </div>
+          </div>
+        `
+  
+  
+        toastBox.insertAdjacentHTML("beforeend", html)
+        $(`#toast${toastID}`).toast('show');
+  
+      };
+  
+
+
+      </script>
+    
+
+
+      <script>
+        {% if request.user.is_authenticated %}
+        const user_id = '{{request.user.id}}'
+        const notificationSound = new Audio('{% static "sounds/notification-sound.mp3" %}')
+
+
+
+
+
+    
+        {% get_ws_type 1 as ws_type %}
+        let url_noti = `{{ws_type}}://${window.location.host}/ws/notifications/${user_id}/`
+        const chatSocketNoti = new WebSocket(url_noti)
+    
+        function send_noti(query){
+          chatSocketNoti.send(
+                JSON.stringify(query)
+            )
+        }
+    
+        chatSocketNoti.onmessage = function(e){
+            let data = JSON.parse(e.data)
+            if (data.method == 'showToast') {
+
+              if (data.room_id) {
+                showToast(data.toastID, data.username, data.message, data.img, data.room_id);
+              } else {
+                showToast(data.toastID, data.username, data.message, data.img);
+              }
+              notificationSound.play()
+
+            }
+
+            if (data.count_of_not_readed_msg) {
+              SetMsgMainBadge(data.count_of_not_readed_msg)
+            }
+    
+        }
+        {% endif %}
+
+        function SetMsgMainBadge(text) {
+          let Badge = document.getElementById('msg-main-badge')
+          Badge.innerHTML = text
+        }
+
+        $(document).ready(function() {
+        {% for message in messages %}
+      showToast(randomGen(), 'نظام', '{{message|safe}}', '')
+      {% endfor %}
+        })
+    </script>
+
+    
+
+
+    <script>
+        const myOffcanvas = document.getElementById('offcanvasScrolling')
+        myOffcanvas.addEventListener('hide.bs.offcanvas', event => {
+          // do something...
+          document.getElementById('offcanvasScrolling').style.width = '0'
+        })
+
+        myOffcanvas.addEventListener('show.bs.offcanvas', event => {
+          // do something...
+          document.getElementById('offcanvasScrolling').style.width = '400px'
+        })
+
+        {% comment %} if (screen.width <=768) {
+          document.getElementById('offcanvasScrollingBTN').click();document.getElementById('offcanvasScrollingBTN').click();
+        } {% endcomment %}
+
+
+
+        function hideOffcanvas() {
+          const myOffcanvas = document.getElementById('offcanvasScrolling');
+    
+          let bsOffcanvas = bootstrap.Offcanvas.getInstance(myOffcanvas);
+    
+              if (bsOffcanvas) {
+                if (window.innerWidth < 600) {
+                  bsOffcanvas.hide();
+                }
+              } else {
+                setTimeout(hideOffcanvas, 100);
+              }
+    
+        }
+    
+         document.addEventListener('DOMContentLoaded', function () {
+    
+          hideOffcanvas()
+         })
+    </script>
+
+    
+</body>
+
+</html>

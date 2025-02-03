@@ -1,0 +1,118 @@
+<style>
+  .footer-bold {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .footer-segment {
+    margin: 25px 15px;
+
+  }
+
+
+
+
+  @media only screen and (max-width: 800px) {
+    .footer-box {
+        justify-content: flex-start !important;
+    }
+  }
+</style>
+
+<div class="border-top" style="background-color: rgb(255, 255, 255); margin-top: 70px; padding: 20px 20px;">
+
+  <div class="footer-box" style="display: flex;flex-wrap: wrap; align-items: flex-start;justify-content: space-evenly; padding: 20px 20px;">
+
+    {% comment %} <div class="footer-segment">
+      <p class="footer-bold">القوانين</p>
+      <div>
+        <li><a href="{% url 'TermsConditions' %}">الشروط</a></li>
+        <li><a href="{% url 'PrivacyPolicy' %}">الخصوصية</a></li>
+      </div>
+    </div> {% endcomment %}
+
+
+    <div class="footer-segment">
+      <p class="footer-bold">روابط ذات صلة</p>
+      <div>
+        <li><a href="http://www.qaderoon.sa/" target="_blank">موقع قادرون</a></li>
+        <li><a href="https://hrsd.gov.sa/" target="_blank">وزارة الموارد البشرية والتنمية الاجتماعية</a></li>
+        <li><a href="https://www.hrdf.org.sa/Home" target="_blank">صندوق تنمية الموارد البشرية</a></li>
+        <li><a href="/#certal" >مواءمة</a></li>
+
+
+      </div>
+    </div>
+
+
+    <div class="footer-segment">
+      <p class="footer-bold">روابط سريعة</p>
+      <div>
+        <li><a href="/#">الرئيسية</a></li>
+        <li><a href="/#AvailableJobs">الوظائف المتاحة</a></li>
+
+        <li><a href="{% url 'TermsConditions' %}">الشروط</a></li>
+        <li><a href="{% url 'PrivacyPolicy' %}">الخصوصية</a></li>
+      </div>
+    </div>
+
+    <div class="footer-segment">
+      <p class="footer-bold">تواصل معنا</p>
+      <div>
+        <li><a href="/#">نموذج التواصل</a></li>
+        <li><a href="mailto:info@qaderoon.sa">البريد الإلكتروني:  fo@qaderoon.sa</a></li>
+        <li>هاتف  0920012448</li>
+        
+        <li>فريمكس بلازا 9105 شارع إبراهيم الجفالي</li>
+        <li>جدة 23326-6764 ، المملكة العربية السعودية</li>
+
+        {% comment %} <li><a href="http://www.qaderoon.sa/" target="_blank">www.qaderoon.sa</a></li> {% endcomment %}
+
+
+
+        
+    <ul class="" >
+      <div style="width: 289px;">
+        <div  style="display: block; justify-content: space-around; align-items: center; margin-top: 10px;">
+          
+            <a class="icons-box" target="_blank" href="https://www.youtube.com/channel/UCPuoRVXTq93_CBW2JbsAsBw">
+              <i  class="bi bi-youtube"></i>
+            </a>
+          <a   class="icons-box" target="_blank" href="https://www.facebook.com/QaderoonSA">
+            <i  class="bi bi-facebook"></i>
+          </a>
+          <a   class="icons-box" target="_blank" href="https://www.instagram.com/qaderoonsa/" class="instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+
+          <a class="icons-box" target="_blank" href="https://www.linkedin.com/company/qaderoon/">
+            <i  class="bi bi-linkedin"></i>
+          </a>
+
+          <a class="icons-box" target="_blank" href="https://twitter.com/QaderoonSA">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+        </div>
+        </div>
+
+    </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="d-flex flex-wrap justify-content-between align-items-center  " style='color:black;'>
+
+
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-body-secondary">© {% now "Y" %} by Qaderoon</span>
+    </div>
+
+  </footer>
+
+</div>

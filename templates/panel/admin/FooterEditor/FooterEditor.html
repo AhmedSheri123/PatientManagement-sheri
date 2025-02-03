@@ -1,0 +1,263 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+
+<style>
+    .styled-box {
+        padding: 30px 20px !important; overflow: hidden; position: relative; background-color: #fff;  box-shadow: inset #d4d4d4 0px 0px 5px 3px; max-width: 800px; margin: auto !important; border-radius: 20px;
+    }
+
+    .styled-box .item {
+        margin-top: 30px !important;
+        margin-right: 20px !important;
+        border: solid 1px rgba(0, 0, 0, 0.288);
+        border-radius: 25px;
+        padding: 20px !important;
+    }
+
+    .styled-box .item .header {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 10px !important;
+
+    }
+
+    input {
+        background-color: #ffffff;
+        padding: 5px;
+        border-radius: 25px;
+        border: solid 1px rgb(195, 194, 194);
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+
+    .styled-box .item .header::after {
+        content: ':';
+    }
+
+    .delete-btn {
+        margin: auto;  margin-top: 10px; margin-bottom: 20px;
+    }
+
+</style>
+
+    <!-- Button trigger modal -->
+    <a href="{% url 'ResetFooter' %}" class="btn btn-primary" 
+        style="display: block; margin: 20px 0px; width: 250px;">
+        اعادة تعين التذييل
+</a>
+<form action="" method="post" class="ckeditor">
+<div class="ui container styled-box" >
+
+        {% csrf_token %}
+    <h2 class="ui center aligned icon header">
+        روابط ذات صلة
+    </h2>
+
+
+    
+    <div style="max-width: 500px; margin: auto;">
+    <button class="btn btn-outline-primary" onclick="addElements()" type="button">
+        اضافة
+        </button>
+    <div id="sec1" style="margin: auto; display: block;">
+
+        {% for i in loaded.1 %}
+        <div id="rowa{{forloop.counter}}">
+            <input id="tilte1" value="{{i.title}}" type="text" name="title1" placeholder="כתובת">
+            <input id="link1" value="{{i.link}}" type="text" name="link1" placeholder="الرابط">
+            <button id="button1" class="btn btn-danger delete-btn" onclick="{document.getElementById('rowa{{forloop.counter}}').remove()}" type="button">حذف</button></div>
+        {% endfor %}
+
+    </div>
+
+<hr>
+
+<h2 class="ui center aligned icon header">
+    روابط سريعة
+</h2>
+<button class="btn btn-outline-primary" onclick="addElements2()" type="button">
+    اضافة
+    </button>
+    <div id="sec2">
+        {% for i in loaded.2 %}
+        <div id="rowb{{forloop.counter}}">
+            <input id="tilte2" value="{{i.title}}" type="text" name="title2" placeholder="כתובת">
+            <input id="link2" value="{{i.link}}" type="text" name="link2" placeholder="الرابط">
+            <button id="button1" class="btn btn-danger delete-btn" onclick="{document.getElementById('rowb{{forloop.counter}}').remove()}" type="button">حذف</button></div>
+        {% endfor %}
+
+    </div>
+    <hr>
+
+    <h2 class="ui center aligned icon header">
+        تواصل معنا
+    </h2>
+    <button class="btn btn-outline-primary" onclick="addElements3()" type="button">
+        اضافة
+        </button>
+    <div id="sec3">
+        {% for i in loaded.3 %}
+        <div id="rowc{{forloop.counter}}">
+            <input id="tilte1" value="{{i.title}}" type="text" name="title3" placeholder="כתובת">
+            <input id="link1" value="{{i.link}}" type="text" name="link3" placeholder="الرابط">
+            <button id="button1" class="btn btn-danger delete-btn" onclick="{document.getElementById('rowc{{forloop.counter}}').remove()}" type="button">حذف</button></div>
+        {% endfor %}
+
+    </div>
+    <input type="submit" value="حفظ" class="btn btn-primary" style="margin: auto; display: block; margin-top: 20px;">
+</div>
+</div>
+</form>
+
+<br>
+<hr>
+<br>
+
+<script>
+    var counter = 1; //limits amount of transactions
+    function addElements() {
+        if (3 < 5) //only allows 4 additional transactions
+        
+        {
+            let sec1 = document.getElementById('sec1')
+            let div = document.createElement('div');
+            div.id = 'row' + counter;
+            sec1.appendChild(div);
+    
+            let input = document.createElement('input');
+            input.id='tilte'+counter;
+            input.type = 'text';
+            input.name = 'title1';
+            input.placeholder = 'عنوان';
+            div.appendChild(input);
+            
+            let input1 = document.createElement('input');
+            input1.id='link'+counter;
+            input1.type = 'text';
+            input1.name = 'link1';
+            input1.placeholder = 'الرابط';
+            div.appendChild(input1);
+                    
+            let button = document.createElement('button');
+            button.id ='button'+counter;
+            button.type = 'button';
+            button.classList.add('btn')
+            button.classList.add('btn-outline-danger')
+            button.classList.add('delete-btn')
+            button.addEventListener("click", function(e) {
+                div.remove()
+            }, false);
+            button.innerText = 'حذف'
+            div.appendChild(button);
+        }
+    
+        counter++
+        // if (counter >= 6) {
+        //     alert("You have reached the maximum transactions.")
+        // }
+    }
+
+
+
+
+    var counter2 = 1; //limits amount of transactions
+    function addElements2() {
+        if (3 < 5) //only allows 4 additional transactions
+        
+        {
+            let sec2 = document.getElementById('sec2')
+            let div = document.createElement('div');
+            div.id = 'rowb' + counter2;
+            sec2.appendChild(div);
+    
+            let input = document.createElement('input');
+            input.id='tilteb'+counter2;
+            input.type = 'text';
+            input.name = 'title2';
+            input.placeholder = 'عنوان';
+            div.appendChild(input);
+            
+            let input1 = document.createElement('input');
+            input1.id='linkb'+counter2;
+            input1.type = 'text';
+            input1.name = 'link2';
+            input1.placeholder = 'الرابط';
+            div.appendChild(input1);
+                    
+            let button = document.createElement('button');
+            button.id ='buttonb'+counter2;
+            button.type = 'button';
+            button.classList.add('btn')
+            button.classList.add('btn-outline-danger')
+            button.classList.add('delete-btn')
+
+            button.addEventListener("click", function(e) {
+                div.remove()
+            }, false);
+            button.innerText = 'حذف'
+            div.appendChild(button);
+        }
+    
+        counter2++
+        // if (counter >= 6) {
+        //     alert("You have reached the maximum transactions.")
+        // }
+    }
+
+
+
+
+
+
+    var counter3 = 1; //limits amount of transactions
+    function addElements3() {
+        if (3 < 5) //only allows 4 additional transactions
+        
+        {
+            let sec3 = document.getElementById('sec3')
+            let div = document.createElement('div');
+            div.id = 'rowc' + counter3;
+            sec3.appendChild(div);
+    
+            let input = document.createElement('input');
+            input.id='tiltec'+counter3;
+            input.type = 'text';
+            input.name = 'title3';
+            input.placeholder = 'عنوان';
+            div.appendChild(input);
+            
+            let input1 = document.createElement('input');
+            input1.id='linkc'+counter3;
+            input1.type = 'text';
+            input1.name = 'link3';
+            input1.placeholder = 'الرابط';
+            div.appendChild(input1);
+                    
+            let button = document.createElement('button');
+            button.id ='buttonc'+counter3;
+            button.type = 'button';
+            button.classList.add('btn')
+            button.classList.add('btn-outline-danger')
+            button.classList.add('delete-btn')
+
+            button.addEventListener("click", function(e) {
+                div.remove()
+            }, false);
+            button.innerText = 'حذف'
+            div.appendChild(button);
+        }
+    
+        counter3++
+        // if (counter >= 6) {
+        //     alert("You have reached the maximum transactions.")
+        // }
+    }
+</script>
+
+{% endblock %}

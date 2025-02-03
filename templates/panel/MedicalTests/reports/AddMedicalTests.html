@@ -1,0 +1,182 @@
+{% extends 'panel_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block sheri %}
+
+<div class="ui center aligned icon header">
+    <i class="circular clipboard list icon"></i>
+
+</div>
+
+<div class="mt-5">
+    <h2 class="ui center aligned icon header bg-primary text-light p-2 rounded-top m-0">
+        {% trans "Add medical test report" %}
+    </h2>
+</div>
+<div style="background-color: white;display: inline-block; width: 100%; padding: 20px;">
+
+    <form action="" method="post" id="form">
+        {% csrf_token %}
+        <label for="">{% trans "Test name" %}</label>
+        <h3 class="mb-4">{{custom_medical_test.name}}</h3>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="user md icon"></i></span>
+            {% if request.user.userprofile.profile_type == '2' or request.user.userprofile.profile_type == '0' %}
+            <input type="hidden" class="form-control" name="doctor_user" value="{{request.user.id}}">
+            <input type="text" disabled class="form-control" value="{{request.user.userprofile.get_account_alias_name_display}} - {{request.user.first_name}} {{request.user.last_name}}">
+            {% else %}
+            <select name="doctor_user" id="" class="form-control">
+                {% for i in doctors %}
+                <option value="{{i.user.id}}" {% if request.user.id == i.user.id %} selected {% endif %} >{{i.user.userprofile.get_account_alias_name_display}} - {{i.user.first_name}} {{i.user.last_name}}</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+        </div>
+
+        <input type="hidden" name="form-box-content" id="form-box-content">
+        <input type="hidden" name="elCounter" id="elCounter">
+        <input type="hidden" name="elNameCounter" id="elNameCounter">
+        <div class="form-box mb-3" id="form-box">
+            {% for data in custom_medical_test.data %}
+                
+                {% if data.data_type == 'title' %}
+                <div class="ele-box mb-3" id="ele-box{{forloop.counter}}" data-type="title">
+                    <label for="">{{data.title}}</label>
+                </div>
+                {% elif data.data_type == 'el-text' %}
+                <div class="ele-box mb-3" id="ele-box{{forloop.counter}}" data-type="el-text">
+                    <div class="input-group">
+                        <input type="text" disabled name="el_title{{forloop.counter}}" value="{{data.el_title}}" class="el-title" placeholder="{% trans "Test" %}">
+                        <input type="number" name="el_result{{data.id}}" class="el-result" placeholder="{% trans "Result" %}">
+                        <input type="text" disabled name="el_unit{{forloop.counter}}" value="{{data.el_unit}}" class="el-unit" placeholder="{% trans "Unit" %}">
+                        <div >
+                            <input type="number" disabled name="el_maximum{{forloop.counter}}" value="{{data.el_maximum}}" class="el-maximum rounded-0 rounded-end" placeholder="{% trans "Maximum" %}">
+                            <input type="number" disabled name="el_minimum{{forloop.counter}}" value="{{data.el_minimum}}" class="el-minimum rounded-0 rounded-end" placeholder="{% trans "Minimum" %}">
+                        </div>
+                    </div>
+                    
+                </div>
+    
+                {% endif %}
+    
+            {% endfor %}
+        </div>
+    </form>
+
+
+
+    <div>
+        <!-- <button class="btn btn-primary">הוספת ערך مدخل رقم</button> -->
+    </div>
+</div>
+
+<div class="ui center aligned icon header bg-white text-light p-2 rounded-bottom m-0">
+    <button type="button" onclick="doSubmit()" class="btn btn-dark mb-3">
+        <i class="bi bi-person-fill-add"></i>
+        {% trans "Add" %}</button>
+</div>
+<!-- jsDelivr :: Sortable :: Latest (https://www.jsdelivr.com/package/npm/sortablejs) -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+<style>
+    /* .ele-box {position: relative; padding-right: 30px;} */
+    .ele-box .handle {
+        position: absolute; right: 0; top: 0;
+        top: 50%;
+        transform: translate(0,-50%);
+        font-size: 21px;
+    }
+</style>
+
+<script>
+    function doSubmit(){
+
+        let content = document.querySelector('#form-box')
+        document.querySelector('#elCounter').value = elCounter
+        document.querySelector('#elNameCounter').value = elNameCounter
+        document.querySelector('#form-box-content').value = content.innerHTML
+        document.querySelector('#form').submit()
+    }
+
+
+    const formBox = document.querySelector('#form-box')
+    elCounter = 0
+    elNameCounter = 0
+
+    function getElName(){
+        elNameCounter++
+        return elNameCounter
+    }
+
+    // var sortable = Sortable.create(formBox, {
+    //     handle: '.handle', // handle's class
+    //     animation: 150
+    //     }
+    // );
+
+    function RemoveEleBox(id) {
+        document.querySelector(`#ele-box${id}`).remove()
+    }
+
+    function addInputsEl(){
+        elCounter++
+        const InputsElHTML = `
+        <div class="ele-box mb-3" id="ele-box${elCounter}" data-type="el-text">
+            <div class="input-group">
+                <input type="text" name="${getElName()}" class="el-title" placeholder="عنوان العنصر">
+                <input type="text" name="${getElName()}" class="el-unit" placeholder="الوحدة">
+                <div >
+                    <input type="number" name="${getElName()}" class="el-maximum" placeholder="الكبرى">
+                    <input type="number" name="${getElName()}" class="el-minimum" placeholder="الصغرى">
+                </div>
+                <button class="btn btn-danger" onclick="RemoveEleBox('${elCounter}')">حذف</button>
+            </div>
+            
+            <i class="bi bi-arrow-down-up handle"></i>
+        </div>
+        `
+        formBox.insertAdjacentHTML('beforeend', InputsElHTML)
+        addFormClasses()
+    }
+
+    function addTitleEl(){
+        elCounter++
+        const InputsElHTML = `
+        <div class="ele-box mb-3" id="ele-box${elCounter}" data-type="title">
+            <div class="input-group">
+                <input type="text" name="${getElName()}" class="title" placeholder="כתובת">
+                <button class="btn btn-danger" onclick="RemoveEleBox('${elCounter}')">حذف</button>
+            </div>
+            <i class="bi bi-arrow-down-up handle"></i>
+        </div>
+
+        `
+        formBox.insertAdjacentHTML('beforeend', InputsElHTML)
+        addFormClasses()
+    }
+</script>
+
+
+<script>
+    function addFormClasses(){
+        let Forminputs = document.querySelectorAll('#form input[type="text"], #form input[type="datetime-local"], #form input[type="number"], #form select, #form textarea')
+        Forminputs.forEach(element => {
+            element.classList.add('form-control')
+        });
+
+        let Formchecks = document.querySelectorAll('#form input[type="checkbox"]')
+        Formchecks.forEach(element => {
+            element.classList.add('form-check-input')
+            element.insertAdjacentHTML("afterend", '<div class="mt-3"></div>')
+        });
+    }
+    addFormClasses()
+    
+</script>
+{% endblock %}
