@@ -14,7 +14,7 @@ from django.http import FileResponse
 from .forms import AdminPermissionModelForm, UserProfileModelForm, UserModelForm
 from admin_panel.forms import HospitalsModelForm
 from django.db.models import Q
-import base64, os
+import base64, os, platform
 from io import BytesIO
 from  PIL import Image
 from django.utils import translation
@@ -878,8 +878,14 @@ def MedicalReportToPDF(request, id):
     report = PatientMedicalReportModel.objects.get(id=id)
     rendered = render_to_string('panel/Visits/Reports/MedicalReportPDF/getEmployeeComeDaysDataForAll.html', {'report':report, 'hospital_profile':hospital_profile}, request=request)
     # print(rendered)
-    path_wkhtmltopdf = r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
-    path_wkhtmltopdf_ub = '/usr/bin/wkhtmltopdf'
+    # path_wkhtmltopdf = r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
+    # path_wkhtmltopdf_ub = '/usr/bin/wkhtmltopdf'
+
+    if platform.system() == "Windows":
+        path_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+    else:
+        path_wkhtmltopdf = "/usr/bin/wkhtmltopdf"
+
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     path = f'media/reports/{request.user.username}{request.user.id}.pdf'
     pdfkit.from_string(str(rendered), str(BASE_DIR/path), configuration=config, options={"enable-local-file-access": ""})
@@ -898,8 +904,14 @@ def MedicalTestsReportToPDF(request, id):
     report = MedicalTestsModel.objects.get(id=id)
     rendered = render_to_string('panel/MedicalTests/ReportPDF/getEmployeeComeDaysDataForAll.html', {'report':report, 'hospital_profile':hospital_profile}, request=request)
     # print(rendered)
-    path_wkhtmltopdf = r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
-    path_wkhtmltopdf_ub = '/usr/bin/wkhtmltopdf'
+    # path_wkhtmltopdf = r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
+    # path_wkhtmltopdf_ub = '/usr/bin/wkhtmltopdf'
+
+    if platform.system() == "Windows":
+        path_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+    else:
+        path_wkhtmltopdf = "/usr/bin/wkhtmltopdf"
+
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     path = f'media/reports/{request.user.username}{request.user.id}.pdf'
     pdfkit.from_string(str(rendered), str(BASE_DIR/path), configuration=config, options={"enable-local-file-access": ""})
